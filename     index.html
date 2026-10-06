@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<title>Mạnh Duy</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{
+  margin:0; min-height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#fff;
+}
+body{background:#090909;overflow-x:hidden}
+
+.bg{
+  position:fixed;inset:0;
+  background:linear-gradient(#0003,#000b),url("background.jpg") center/cover no-repeat;
+  z-index:-2;
+}
+body:after{
+  content:"";position:fixed;inset:0;
+  background:rgba(0,0,0,.20);
+  backdrop-filter:blur(3px);
+  z-index:-1;
+}
+
+main{
+  width:min(100%,560px);
+  margin:auto;
+  padding:58px 18px 32px;
+}
+.profile{text-align:center}
+
+.avatar{
+  width:108px;height:108px;border-radius:50%;object-fit:cover;
+  border:3px solid #fff;
+  box-shadow:0 10px 35px #0008;
+}
+h1{margin:14px 0 4px;font-size:28px;font-weight:800}
+.sub{margin:0 0 22px;color:#ddd;font-size:13px}
+
+.music-card{
+  margin:0 auto 25px;
+  padding:15px 16px 14px;
+  border:1px solid #fff2;
+  border-radius:22px;
+  background:rgba(15,15,15,.55);
+  backdrop-filter:blur(18px);
+  box-shadow:0 10px 30px #0006;
+  text-align:left;
+}
+.music-top{display:flex;align-items:center;gap:12px}
+.music-disc{
+  width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#fff3,#fff1);
+  border:1px solid #fff3;
+  font-size:21px;
+  flex:none;
+}
+.music-disc.playing{animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.music-info{min-width:0}
+.music-title{
+  font-size:15px;font-weight:800;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.music-status{font-size:11px;color:#aaa;margin-top:3px}
+
+.music-btn{
+  margin-left:auto;width:42px;height:42px;border-radius:50%;
+  border:1px solid #fff3;background:#fff1;color:#fff;
+  font-size:18px;cursor:pointer;flex:none;
+}
+.music-btn.playing{
+  background:#fff;color:#111;
+  box-shadow:0 0 22px #fff4;
+}
+
+.progress-wrap{margin-top:13px}
+.progress{
+  position:relative;height:5px;border-radius:99px;
+  background:#fff2;overflow:hidden;cursor:pointer;
+}
+.progress-bar{
+  width:0%;height:100%;border-radius:99px;
+  background:#fff;transition:width .1s linear;
+}
+.time{
+  display:flex;justify-content:space-between;
+  margin-top:6px;color:#999;font-size:10px;
+}
+
+.links{display:grid;gap:13px}
+.link{
+  height:62px;display:flex;align-items:center;gap:14px;
+  padding:9px 16px;text-decoration:none;color:#fff;
+  background:#111b;border:1px solid #fff2;border-radius:18px;
+  backdrop-filter:blur(14px);box-shadow:0 8px 24px #0005;
+  transition:.15s;
+}
+.link:active{transform:scale(.98)}
+.icon{
+  width:40px;height:40px;border-radius:12px;background:#fff1;
+  display:grid;place-items:center;font-size:20px;font-weight:700;
+}
+.label{font-size:16px;font-weight:700}
+.arrow{margin-left:auto;font-size:23px;color:#aaa}
+
+footer{text-align:center;margin-top:27px;color:#aaa;font-size:12px}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop preload="auto" playsinline>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="bg"></div>
+
+<main>
+<section class="profile">
+  <img class="avatar" src="avatar.jpg" alt="Mạnh Duy">
+  <h1>Mạnh Duy</h1>
+  <p class="sub">Nền tảng của tôi</p>
+</section>
+
+<section class="music-card">
+  <div class="music-top">
+    <div class="music-disc" id="disc">🎵</div>
+
+    <div class="music-info">
+      <div class="music-title">🎵 Shape of You</div>
+      <div class="music-status" id="status">Chưa phát nhạc</div>
+    </div>
+
+    <button class="music-btn" id="musicBtn" aria-label="Bật hoặc tắt nhạc">▶</button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress" id="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="time">
+      <span id="current">0:00</span>
+      <span id="duration">0:00</span>
+    </div>
+  </div>
+</section>
+
+<section class="links">
+
+<a class="link" href="https://www.tiktok.com/@duymanh.0321" target="_blank" rel="noopener">
+<span class="icon">♪</span><span class="label">TikTok</span><span class="arrow">›</span>
+</a>
+
+<a class="link" href="https://www.facebook.com/share/1FiknnndBW/?mibextid=wwXIfr" target="_blank" rel="noopener">
+<span class="icon">f</span><span class="label">Facebook</span><span class="arrow">›</span>
+</a>
+
+<a class="link" href="https://t.me/manhduyiosadroi" target="_blank" rel="noopener">
+<span class="icon">✈</span><span class="label">Telegram</span><span class="arrow">›</span>
+</a>
+
+<a class="link" href="https://youtube.com/@hdmduymanh1" target="_blank" rel="noopener">
+<span class="icon">▶</span><span class="label">YouTube</span><span class="arrow">›</span>
+</a>
+
+</section>
+
+<footer>© Mạnh Duy</footer>
+</main>
+
+<script>
+const music=document.getElementById("music");
+const btn=document.getElementById("musicBtn");
+const disc=document.getElementById("disc");
+const status=document.getElementById("status");
+const bar=document.getElementById("progressBar");
+const progress=document.getElementById("progress");
+const current=document.getElementById("current");
+const duration=document.getElementById("duration");
+
+function fmt(sec){
+  if(!isFinite(sec)) return "0:00";
+  sec=Math.floor(sec);
+  return Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");
+}
+
+function setPlaying(){
+  btn.textContent="❚❚";
+  btn.classList.add("playing");
+  disc.classList.add("playing");
+  status.textContent="Đang phát • Shape of You";
+}
+
+function setPaused(){
+  btn.textContent="▶";
+  btn.classList.remove("playing");
+  disc.classList.remove("playing");
+  status.textContent="Đã tạm dừng";
+}
+
+function playMusic(){
+  music.volume=.7;
+  music.play().then(setPlaying).catch(()=>{});
+}
+
+btn.addEventListener("click",(e)=>{
+  e.stopPropagation();
+  if(music.paused) playMusic();
+  else {music.pause();setPaused();}
+});
+
+document.addEventListener("click",()=>playMusic(),{once:true});
+document.addEventListener("touchstart",()=>playMusic(),{once:true});
+
+window.addEventListener("load",playMusic);
+
+music.addEventListener("loadedmetadata",()=>{
+  duration.textContent=fmt(music.duration);
+});
+
+music.addEventListener("timeupdate",()=>{
+  current.textContent=fmt(music.currentTime);
+  if(music.duration){
+    bar.style.width=(music.currentTime/music.duration*100)+"%";
+  }
+});
+
+progress.addEventListener("click",(e)=>{
+  if(!music.duration)return;
+  const rect=progress.getBoundingClientRect();
+  const x=Math.max(0,Math.min(e.clientX-rect.left,rect.width));
+  music.currentTime=(x/rect.width)*music.duration;
+});
+
+music.addEventListener("play",setPlaying);
+music.addEventListener("pause",setPaused);
+</script>
+
+</body>
+</html>
