@@ -2,97 +2,237 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090909">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Duy Mạnh</title>
 
+<meta name="theme-color" content="#050509">
+<meta name="description" content="Duy Mạnh - Nền tảng của tôi">
+
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
 
 html,body{
-  margin:0;
+  width:100%;
   min-height:100%;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:#fff;
 }
 
 body{
-  background:#090909;
+  min-height:100vh;
   overflow-x:hidden;
+  background:#050509;
+  color:white;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+               "Segoe UI",Roboto,Arial,sans-serif;
+  position:relative;
 }
 
 /* =========================
-   BACKGROUND CHUYỂN ĐỘNG
+   BACKGROUND
 ========================= */
 
 .bg{
   position:fixed;
-  inset:-10%;
+  inset:-12%;
+  z-index:0;
 
   background:
-    linear-gradient(#0002,#0009),
-    url("background.jpg") center/cover no-repeat;
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.72)
+    ),
+    url("background.jpg") center center / cover no-repeat;
 
-  z-index:-2;
-
-  animation:bgMove 14s ease-in-out infinite alternate;
+  animation:bgMove 18s ease-in-out infinite alternate;
+  transform:translate3d(0,0,0) scale(1.06);
   will-change:transform;
 }
 
 @keyframes bgMove{
   0%{
-    transform:scale(1) translate3d(0,0,0);
+    transform:translate3d(-1.5%,-1%,0) scale(1.06);
   }
 
   50%{
-    transform:scale(1.06) translate3d(-1%,1%,0);
+    transform:translate3d(1%,1%,0) scale(1.10);
   }
 
   100%{
-    transform:scale(1.12) translate3d(1%,-1%,0);
+    transform:translate3d(-1%,1.5%,0) scale(1.07);
   }
 }
 
-/* Ánh sáng chuyển động */
+/* =========================
+   ÁNH SÁNG BAY
+========================= */
 
-body:after{
-  content:"";
+.ambient{
   position:fixed;
-  inset:-20%;
+  inset:0;
+  overflow:hidden;
+  z-index:1;
+  pointer-events:none;
+}
 
-  z-index:-1;
+.orb{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,.14),
+    rgba(150,100,255,.08),
+    transparent 70%
+  );
+
+  filter:blur(15px);
+  opacity:.7;
+  animation:orbMove 12s ease-in-out infinite alternate;
+}
+
+.orb.one{
+  top:-100px;
+  left:-80px;
+}
+
+.orb.two{
+  right:-100px;
+  bottom:5%;
+  animation-delay:-4s;
+  animation-duration:16s;
+}
+
+.orb.three{
+  width:200px;
+  height:200px;
+  left:40%;
+  top:35%;
+  animation-delay:-7s;
+  animation-duration:19s;
+}
+
+@keyframes orbMove{
+  0%{
+    transform:translate3d(-30px,-20px,0) scale(.85);
+  }
+
+  50%{
+    transform:translate3d(70px,50px,0) scale(1.15);
+  }
+
+  100%{
+    transform:translate3d(-50px,80px,0) scale(.9);
+  }
+}
+
+/* =========================
+   MƯA
+========================= */
+
+#rain{
+  position:fixed;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.drop{
+  position:absolute;
+  top:-80px;
+  width:1px;
+  height:65px;
+
+  background:linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,255,255,.55)
+  );
+
+  opacity:.35;
+  transform:rotate(12deg);
+
+  animation:rainFall linear infinite;
+}
+
+@keyframes rainFall{
+  from{
+    transform:translate3d(0,-100px,0) rotate(12deg);
+  }
+
+  to{
+    transform:translate3d(-130px,115vh,0) rotate(12deg);
+  }
+}
+
+/* =========================
+   HẠT ÁNH SÁNG
+========================= */
+
+.particles{
+  position:fixed;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.particle{
+  position:absolute;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 0 12px rgba(255,255,255,.9);
+
+  animation:particleFloat linear infinite;
+}
+
+@keyframes particleFloat{
+  0%{
+    transform:translate3d(0,110vh,0) scale(.3);
+    opacity:0;
+  }
+
+  15%{
+    opacity:.8;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    transform:translate3d(50px,-10vh,0) scale(1);
+    opacity:0;
+  }
+}
+
+/* =========================
+   LỚP TỐI
+========================= */
+
+.vignette{
+  position:fixed;
+  inset:0;
+  z-index:3;
   pointer-events:none;
 
   background:
     radial-gradient(
-      circle at 30% 30%,
-      rgba(255,255,255,.12),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 70% 70%,
-      rgba(255,255,255,.08),
-      transparent 30%
+      circle at center,
+      transparent 20%,
+      rgba(0,0,0,.22) 75%,
+      rgba(0,0,0,.65) 100%
     );
-
-  animation:lightMove 10s ease-in-out infinite alternate;
-}
-
-@keyframes lightMove{
-  0%{
-    transform:translate3d(-5%,-3%,0) scale(1);
-    opacity:.35;
-  }
-
-  50%{
-    transform:translate3d(4%,3%,0) scale(1.08);
-    opacity:.7;
-  }
-
-  100%{
-    transform:translate3d(-2%,5%,0) scale(1.15);
-    opacity:.45;
-  }
 }
 
 /* =========================
@@ -100,12 +240,23 @@ body:after{
 ========================= */
 
 main{
-  width:min(100%,560px);
-  margin:auto;
-  padding:58px 18px 32px;
-}
+  position:relative;
+  z-index:10;
 
-.profile{
+  width:min(440px,92%);
+  margin:auto;
+
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  padding:
+    max(45px,env(safe-area-inset-top))
+    0
+    max(35px,env(safe-area-inset-bottom));
+
   text-align:center;
 }
 
@@ -113,313 +264,452 @@ main{
    AVATAR
 ========================= */
 
-.avatar{
-  width:108px;
-  height:108px;
-  border-radius:50%;
-  object-fit:cover;
-
-  border:3px solid #fff;
-
-  box-shadow:
-    0 10px 35px #0008,
-    0 0 25px #fff2;
+.avatar-wrap{
+  position:relative;
+  margin-top:10px;
+  margin-bottom:18px;
 
   animation:avatarFloat 4s ease-in-out infinite;
 }
 
-@keyframes avatarFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-5px);
-  }
-}
-
-h1{
-  margin:14px 0 4px;
-  font-size:28px;
-  font-weight:800;
-}
-
-.sub{
-  margin:0 0 22px;
-  color:#ddd;
-  font-size:13px;
-}
-
-/* =========================
-   MUSIC CARD
-========================= */
-
-.music-card{
-  margin:0 auto 25px;
-
-  padding:15px 16px 14px;
-
-  border:1px solid #fff2;
-  border-radius:22px;
-
-  background:rgba(15,15,15,.55);
-
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
-  box-shadow:
-    0 10px 30px #0006,
-    inset 0 1px 0 #fff1;
-
-  text-align:left;
-
-  transition:.3s;
-}
-
-.music-card:hover{
-  transform:translateY(-2px);
-}
-
-/* =========================
-   MUSIC TOP
-========================= */
-
-.music-top{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.music-disc{
-  width:46px;
-  height:46px;
+.avatar-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-12px;
 
   border-radius:50%;
 
-  display:grid;
-  place-items:center;
+  background:conic-gradient(
+    from 0deg,
+    rgba(255,255,255,.8),
+    rgba(130,100,255,.3),
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.8)
+  );
 
-  background:
-    linear-gradient(135deg,#fff3,#fff1);
+  filter:blur(8px);
+  opacity:.7;
 
-  border:1px solid #fff3;
+  animation:avatarGlow 5s linear infinite;
+}
 
-  font-size:21px;
+.avatar{
+  position:relative;
 
-  flex:none;
+  width:108px;
+  height:108px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+
+  border:3px solid rgba(255,255,255,.9);
 
   box-shadow:
-    0 0 20px #fff1;
+    0 0 20px rgba(255,255,255,.35),
+    0 0 60px rgba(150,100,255,.35);
+
+  display:block;
 }
 
-.music-disc.playing{
-  animation:spin 4s linear infinite;
+@keyframes avatarFloat{
+  0%,100%{
+    transform:translateY(0) rotate(0deg);
+  }
+
+  50%{
+    transform:translateY(-8px) rotate(1deg);
+  }
 }
 
-@keyframes spin{
+@keyframes avatarGlow{
   to{
     transform:rotate(360deg);
   }
 }
 
-.music-info{
-  min-width:0;
-}
+/* =========================
+   TITLE
+========================= */
 
-.music-title{
-  font-size:15px;
+h1{
+  font-size:31px;
   font-weight:800;
+  letter-spacing:-.7px;
 
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  text-shadow:
+    0 0 12px rgba(255,255,255,.25),
+    0 0 35px rgba(150,100,255,.2);
+
+  animation:titleGlow 3s ease-in-out infinite alternate;
 }
 
-.music-status{
-  font-size:11px;
-  color:#aaa;
-  margin-top:3px;
+.subtitle{
+  margin-top:6px;
+  color:rgba(255,255,255,.7);
+  font-size:14px;
+  letter-spacing:.4px;
+}
+
+@keyframes titleGlow{
+  from{
+    text-shadow:
+      0 0 10px rgba(255,255,255,.15);
+  }
+
+  to{
+    text-shadow:
+      0 0 20px rgba(255,255,255,.35),
+      0 0 40px rgba(130,100,255,.25);
+  }
 }
 
 /* =========================
-   MUSIC BUTTON
+   MUSIC
 ========================= */
 
-.music-btn{
-  margin-left:auto;
+.music-card{
+  width:100%;
+  margin-top:25px;
+  padding:15px;
 
-  width:42px;
-  height:42px;
+  border-radius:22px;
+
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.28),
+    inset 0 1px rgba(255,255,255,.12);
+
+  transition:.35s;
+}
+
+.music-card.playing{
+  box-shadow:
+    0 0 25px rgba(150,100,255,.25),
+    0 15px 50px rgba(0,0,0,.3),
+    inset 0 1px rgba(255,255,255,.15);
+}
+
+.music-top{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.disc{
+  width:54px;
+  height:54px;
 
   border-radius:50%;
 
-  border:1px solid #fff3;
+  background:
+    radial-gradient(
+      circle at center,
+      #111 0 8%,
+      #eee 9% 11%,
+      #111 12% 20%,
+      #aaa 21% 23%,
+      #111 24% 100%
+    );
 
-  background:#fff1;
-  color:#fff;
+  box-shadow:
+    0 0 15px rgba(0,0,0,.5);
 
-  font-size:18px;
+  flex:none;
+}
+
+.playing .disc{
+  animation:spinDisc 3s linear infinite;
+}
+
+@keyframes spinDisc{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.song-info{
+  text-align:left;
+  flex:1;
+}
+
+.song-title{
+  font-size:16px;
+  font-weight:700;
+}
+
+.song-status{
+  font-size:12px;
+  color:rgba(255,255,255,.6);
+  margin-top:3px;
+}
+
+.music-btn{
+  width:44px;
+  height:44px;
+
+  border:none;
+  border-radius:50%;
+
+  color:white;
+  background:rgba(255,255,255,.16);
+
+  font-size:17px;
 
   cursor:pointer;
 
-  flex:none;
-
   transition:.25s;
+
+  box-shadow:
+    0 0 15px rgba(255,255,255,.08);
+}
+
+.music-btn:hover{
+  transform:scale(1.08);
+  background:rgba(255,255,255,.25);
 }
 
 .music-btn:active{
-  transform:scale(.9);
-}
-
-.music-btn.playing{
-  background:#fff;
-  color:#111;
-
-  box-shadow:
-    0 0 22px #fff4,
-    0 0 45px #fff1;
-}
-
-/* =========================
-   PROGRESS
-========================= */
-
-.progress-wrap{
-  margin-top:13px;
+  transform:scale(.88);
 }
 
 .progress{
-  position:relative;
+  height:4px;
+  width:100%;
 
-  height:5px;
+  margin-top:14px;
 
-  border-radius:99px;
+  border-radius:10px;
 
-  background:#fff2;
-
+  background:rgba(255,255,255,.12);
   overflow:hidden;
-
-  cursor:pointer;
 }
 
 .progress-bar{
   width:0%;
-
   height:100%;
 
-  border-radius:99px;
+  background:white;
 
-  background:#fff;
-
-  box-shadow:0 0 10px #fff8;
+  box-shadow:
+    0 0 10px rgba(255,255,255,.8);
 
   transition:width .1s linear;
 }
 
-.time{
-  display:flex;
-  justify-content:space-between;
-
-  margin-top:6px;
-
-  color:#999;
-  font-size:10px;
-}
-
 /* =========================
-   SOCIAL LINKS
+   LINKS
 ========================= */
 
 .links{
-  display:grid;
-  gap:13px;
+  width:100%;
+  margin-top:18px;
+
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
 .link{
-  height:62px;
+  position:relative;
+  overflow:hidden;
 
   display:flex;
   align-items:center;
-  gap:14px;
+  justify-content:center;
 
-  padding:9px 16px;
-
-  text-decoration:none;
-  color:#fff;
-
-  background:rgba(17,17,17,.68);
-
-  border:1px solid #fff2;
+  min-height:58px;
+  padding:0 18px;
 
   border-radius:18px;
+
+  color:white;
+  text-decoration:none;
+
+  background:rgba(255,255,255,.09);
+
+  border:1px solid rgba(255,255,255,.16);
 
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
 
   box-shadow:
-    0 8px 24px #0005,
-    inset 0 1px 0 #fff1;
+    0 10px 30px rgba(0,0,0,.20),
+    inset 0 1px rgba(255,255,255,.08);
+
+  font-size:15px;
+  font-weight:650;
 
   transition:
-    transform .2s,
-    background .2s,
-    box-shadow .2s;
+    transform .28s ease,
+    background .28s ease,
+    box-shadow .28s ease;
+
+  animation:buttonFloat 5s ease-in-out infinite;
+}
+
+.link:nth-child(2){
+  animation-delay:-1s;
+}
+
+.link:nth-child(3){
+  animation-delay:-2s;
+}
+
+.link:nth-child(4){
+  animation-delay:-3s;
+}
+
+/* viền sáng chạy */
+
+.link::before{
+  content:"";
+
+  position:absolute;
+  inset:-2px;
+
+  border-radius:20px;
+
+  background:linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255,255,255,.55),
+    transparent 80%
+  );
+
+  transform:translateX(-120%);
+  transition:transform .7s ease;
+
+  z-index:-1;
+}
+
+.link:hover::before{
+  transform:translateX(120%);
+}
+
+/* ánh sáng quét */
+
+.link::after{
+  content:"";
+
+  position:absolute;
+  top:0;
+  left:-80%;
+
+  width:50%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.12),
+    transparent
+  );
+
+  transform:skewX(-20deg);
+
+  animation:shine 4s ease-in-out infinite;
+}
+
+@keyframes shine{
+  0%,55%{
+    left:-80%;
+  }
+
+  75%,100%{
+    left:130%;
+  }
 }
 
 .link:hover{
-  transform:translateY(-2px);
+  transform:
+    translateY(-4px)
+    scale(1.015);
 
-  background:rgba(30,30,30,.75);
+  background:rgba(255,255,255,.15);
 
   box-shadow:
-    0 12px 30px #0007,
-    0 0 20px #fff1;
+    0 15px 40px rgba(0,0,0,.35),
+    0 0 25px rgba(255,255,255,.08);
 }
 
 .link:active{
-  transform:scale(.97);
+  transform:scale(.96);
 }
 
-.icon{
-  width:40px;
-  height:40px;
+@keyframes buttonFloat{
+  0%,100%{
+    translate:0 0;
+  }
 
-  border-radius:12px;
-
-  background:#fff1;
-
-  display:grid;
-  place-items:center;
-
-  font-size:20px;
-  font-weight:700;
-
-  transition:.25s;
+  50%{
+    translate:0 -2px;
+  }
 }
 
-.link:hover .icon{
-  background:#fff2;
-  transform:scale(1.05);
+/* =========================
+   VISITOR
+========================= */
+
+.visitor{
+  width:100%;
+
+  margin-top:18px;
+  padding:14px 18px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+
+  border-radius:17px;
+
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  color:rgba(255,255,255,.78);
+
+  font-size:13px;
 }
 
-.label{
-  font-size:16px;
-  font-weight:700;
+.visitor-dot{
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:#6dff9a;
+
+  box-shadow:
+    0 0 12px #6dff9a;
+
+  animation:livePulse 1.5s infinite;
 }
 
-.arrow{
-  margin-left:auto;
-
-  font-size:23px;
-
-  color:#aaa;
-
-  transition:.25s;
+#visitorCount{
+  color:white;
+  font-size:15px;
+  font-weight:800;
 }
 
-.link:hover .arrow{
-  transform:translateX(4px);
-  color:#fff;
+@keyframes livePulse{
+  0%,100%{
+    opacity:.5;
+    transform:scale(.8);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.2);
+  }
 }
 
 /* =========================
@@ -427,13 +717,39 @@ h1{
 ========================= */
 
 footer{
-  text-align:center;
+  margin-top:auto;
+  padding-top:28px;
 
-  margin-top:27px;
+  font-size:11px;
+  color:rgba(255,255,255,.42);
+}
 
-  color:#aaa;
+/* =========================
+   RIPPLE
+========================= */
 
-  font-size:12px;
+.ripple{
+  position:absolute;
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.35);
+
+  transform:translate(-50%,-50%) scale(0);
+
+  animation:ripple .65s ease-out forwards;
+
+  pointer-events:none;
+}
+
+@keyframes ripple{
+  to{
+    transform:translate(-50%,-50%) scale(22);
+    opacity:0;
+  }
 }
 
 /* =========================
@@ -443,12 +759,12 @@ footer{
 @media(max-width:600px){
 
   main{
-    padding-top:58px;
+    width:calc(100% - 28px);
   }
 
   .avatar{
-    width:108px;
-    height:108px;
+    width:100px;
+    height:100px;
   }
 
   h1{
@@ -456,22 +772,27 @@ footer{
   }
 
   .link{
-    height:62px;
+    min-height:57px;
   }
+
+  .drop{
+    height:55px;
+  }
+
 }
 
 /* =========================
    GIẢM CHUYỂN ĐỘNG
-   nếu iPhone bật Reduce Motion
 ========================= */
 
 @media(prefers-reduced-motion:reduce){
 
-  .bg,
-  body:after,
-  .avatar,
-  .music-disc{
-    animation:none;
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
   }
 }
 </style>
@@ -479,344 +800,523 @@ footer{
 
 <body>
 
-<audio id="music" loop preload="auto" playsinline>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
+<!-- BACKGROUND -->
 <div class="bg"></div>
+
+<!-- ÁNH SÁNG -->
+<div class="ambient">
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+</div>
+
+<!-- MƯA -->
+<div id="rain"></div>
+
+<!-- HẠT SÁNG -->
+<div class="particles" id="particles"></div>
+
+<!-- LỚP TỐI -->
+<div class="vignette"></div>
+
 
 <main>
 
-<section class="profile">
-
-  <img
-    class="avatar"
-    src="avatar.jpg"
-    alt="Duy Mạnh"
-  >
-
-  <h1>Duy Mạnh</h1>
-
-  <p class="sub">
-    Nền tảng của tôi
-  </p>
-
-</section>
-
-
-<section class="music-card">
-
-  <div class="music-top">
-
-    <div class="music-disc" id="disc">
-      🎵
-    </div>
-
-    <div class="music-info">
-
-      <div class="music-title">
-        🎵 Shape of You
-      </div>
-
-      <div class="music-status" id="status">
-        Chưa phát nhạc
-      </div>
-
-    </div>
-
-    <button
-      class="music-btn"
-      id="musicBtn"
-      aria-label="Bật hoặc tắt nhạc"
+  <!-- AVATAR -->
+  <div class="avatar-wrap">
+    <img
+      class="avatar"
+      src="avatar.jpg"
+      alt="Duy Mạnh"
     >
-      ▶
-    </button>
-
   </div>
 
 
-  <div class="progress-wrap">
+  <!-- TÊN -->
+  <h1>Duy Mạnh</h1>
 
-    <div
-      class="progress"
-      id="progress"
-    >
+  <div class="subtitle">
+    Nền tảng của tôi
+  </div>
 
+
+  <!-- MUSIC -->
+  <div class="music-card" id="musicCard">
+
+    <div class="music-top">
+
+      <div class="disc"></div>
+
+      <div class="song-info">
+        <div class="song-title">
+          🎵 Shape of You
+        </div>
+
+        <div class="song-status" id="status">
+          Nhấn để phát nhạc
+        </div>
+      </div>
+
+      <button
+        class="music-btn"
+        id="musicBtn"
+        aria-label="Phát nhạc"
+      >
+        ▶
+      </button>
+
+    </div>
+
+    <div class="progress">
       <div
         class="progress-bar"
         id="progressBar"
       ></div>
-
-    </div>
-
-    <div class="time">
-
-      <span id="current">
-        0:00
-      </span>
-
-      <span id="duration">
-        0:00
-      </span>
-
     </div>
 
   </div>
 
-</section>
+
+  <!-- LINKS -->
+  <div class="links">
+
+    <a
+      class="link"
+      href="https://www.tiktok.com/@duymanh.0321"
+      target="_blank"
+      rel="noopener"
+    >
+      🎵 TikTok
+    </a>
+
+    <a
+      class="link"
+      href="https://www.facebook.com/share/1FiknnndBW/?mibextid=wwXIfr"
+      target="_blank"
+      rel="noopener"
+    >
+      💙 Facebook
+    </a>
+
+    <a
+      class="link"
+      href="https://t.me/manhduyiosadroi"
+      target="_blank"
+      rel="noopener"
+    >
+      ✈️ Telegram
+    </a>
+
+    <a
+      class="link"
+      href="https://youtube.com/@hdmduymanh1"
+      target="_blank"
+      rel="noopener"
+    >
+      ▶️ YouTube
+    </a>
+
+  </div>
 
 
-<section class="links">
+  <!-- VISITOR -->
+  <div class="visitor">
 
-<a
-  class="link"
-  href="https://www.tiktok.com/@duymanh.0321"
-  target="_blank"
-  rel="noopener"
->
-  <span class="icon">♪</span>
-  <span class="label">TikTok</span>
-  <span class="arrow">›</span>
-</a>
+    <span class="visitor-dot"></span>
 
+    <span>
+      Đã ghé thăm
+    </span>
 
-<a
-  class="link"
-  href="https://www.facebook.com/share/1FiknnndBW/?mibextid=wwXIfr"
-  target="_blank"
-  rel="noopener"
->
-  <span class="icon">f</span>
-  <span class="label">Facebook</span>
-  <span class="arrow">›</span>
-</a>
+    <strong id="visitorCount">
+      ...
+    </strong>
+
+    <span>
+      lượt
+    </span>
+
+  </div>
 
 
-<a
-  class="link"
-  href="https://t.me/manhduyiosadroi"
-  target="_blank"
-  rel="noopener"
->
-  <span class="icon">✈</span>
-  <span class="label">Telegram</span>
-  <span class="arrow">›</span>
-</a>
-
-
-<a
-  class="link"
-  href="https://youtube.com/@hdmduymanh1"
-  target="_blank"
-  rel="noopener"
->
-  <span class="icon">▶</span>
-  <span class="label">YouTube</span>
-  <span class="arrow">›</span>
-</a>
-
-</section>
-
-
-<footer>
-  © copyright by Duy Mạnh
-</footer>
+  <footer>
+    © copyright by Duy Mạnh
+  </footer>
 
 </main>
 
 
+<!-- =========================
+     NHẠC
+========================= -->
+
+<audio
+  id="music"
+  loop
+  preload="auto"
+  playsinline
+>
+  <source
+    src="music.mp3"
+    type="audio/mpeg"
+  >
+</audio>
+
+
+<!-- =========================
+     COUNTER API
+========================= -->
+
+<script
+  src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"
+></script>
+
+
 <script>
+
+/* =========================
+   MƯA
+========================= */
+
+const rain = document.getElementById("rain");
+
+const rainAmount =
+  window.innerWidth < 600 ? 65 : 100;
+
+for(let i = 0; i < rainAmount; i++){
+
+  const drop =
+    document.createElement("span");
+
+  drop.className = "drop";
+
+  drop.style.left =
+    Math.random() * 115 + "%";
+
+  drop.style.height =
+    (35 + Math.random() * 60) + "px";
+
+  drop.style.opacity =
+    .12 + Math.random() * .45;
+
+  drop.style.animationDuration =
+    (0.65 + Math.random() * 1.15) + "s";
+
+  drop.style.animationDelay =
+    (-Math.random() * 3) + "s";
+
+  rain.appendChild(drop);
+}
+
+
+/* =========================
+   HẠT ÁNH SÁNG
+========================= */
+
+const particles =
+  document.getElementById("particles");
+
+const particleAmount =
+  window.innerWidth < 600 ? 18 : 28;
+
+for(let i = 0; i < particleAmount; i++){
+
+  const p =
+    document.createElement("span");
+
+  p.className = "particle";
+
+  p.style.left =
+    Math.random() * 100 + "%";
+
+  p.style.animationDuration =
+    (7 + Math.random() * 10) + "s";
+
+  p.style.animationDelay =
+    (-Math.random() * 12) + "s";
+
+  const size =
+    2 + Math.random() * 3;
+
+  p.style.width = size + "px";
+  p.style.height = size + "px";
+
+  particles.appendChild(p);
+}
+
+
+/* =========================
+   MUSIC
+========================= */
 
 const music =
   document.getElementById("music");
 
-const btn =
+const musicBtn =
   document.getElementById("musicBtn");
 
-const disc =
-  document.getElementById("disc");
+const musicCard =
+  document.getElementById("musicCard");
 
 const status =
   document.getElementById("status");
 
-const bar =
+const progressBar =
   document.getElementById("progressBar");
-
-const progress =
-  document.getElementById("progress");
-
-const current =
-  document.getElementById("current");
-
-const duration =
-  document.getElementById("duration");
-
-
-function fmt(sec){
-
-  if(!isFinite(sec))
-    return "0:00";
-
-  sec=Math.floor(sec);
-
-  return (
-    Math.floor(sec/60)
-    +
-    ":"
-    +
-    String(sec%60).padStart(2,"0")
-  );
-}
-
-
-function setPlaying(){
-
-  btn.textContent="❚❚";
-
-  btn.classList.add("playing");
-
-  disc.classList.add("playing");
-
-  status.textContent=
-    "Đang phát • Shape of You";
-}
-
-
-function setPaused(){
-
-  btn.textContent="▶";
-
-  btn.classList.remove("playing");
-
-  disc.classList.remove("playing");
-
-  status.textContent=
-    "Đã tạm dừng";
-}
 
 
 function playMusic(){
 
-  music.volume=.7;
+  music.volume = .7;
 
-  music
-    .play()
-    .then(setPlaying)
-    .catch(()=>{});
+  music.play()
+    .then(() => {
+
+      musicBtn.textContent = "❚❚";
+
+      status.textContent =
+        "Đang phát • Shape of You";
+
+      musicCard.classList.add("playing");
+
+    })
+    .catch(() => {
+
+      status.textContent =
+        "Nhấn ▶ để phát nhạc";
+
+    });
 }
 
 
-btn.addEventListener(
-  "click",
-  (e)=>{
+function pauseMusic(){
 
-    e.stopPropagation();
+  music.pause();
 
-    if(music.paused){
+  musicBtn.textContent = "▶";
 
-      playMusic();
+  status.textContent =
+    "Đã tạm dừng";
+
+  musicCard.classList.remove("playing");
+}
+
+
+musicBtn.addEventListener("click", () => {
+
+  if(music.paused){
+    playMusic();
+  }else{
+    pauseMusic();
+  }
+
+});
+
+
+music.addEventListener("timeupdate", () => {
+
+  if(!music.duration) return;
+
+  const percent =
+    (music.currentTime / music.duration) * 100;
+
+  progressBar.style.width =
+    percent + "%";
+
+});
+
+
+music.addEventListener("play", () => {
+
+  musicBtn.textContent = "❚❚";
+
+  status.textContent =
+    "Đang phát • Shape of You";
+
+  musicCard.classList.add("playing");
+
+});
+
+
+music.addEventListener("pause", () => {
+
+  musicBtn.textContent = "▶";
+
+  musicCard.classList.remove("playing");
+
+});
+
+
+/* click thanh progress */
+
+document
+  .querySelector(".progress")
+  .addEventListener("click", (e) => {
+
+    if(!music.duration) return;
+
+    const rect =
+      e.currentTarget.getBoundingClientRect();
+
+    const percent =
+      (e.clientX - rect.left) / rect.width;
+
+    music.currentTime =
+      percent * music.duration;
+
+  });
+
+
+/* =========================
+   RIPPLE NÚT
+========================= */
+
+document
+  .querySelectorAll(".link")
+  .forEach(link => {
+
+    link.addEventListener("click", function(e){
+
+      const rect =
+        this.getBoundingClientRect();
+
+      const ripple =
+        document.createElement("span");
+
+      ripple.className = "ripple";
+
+      ripple.style.left =
+        (e.clientX - rect.left) + "px";
+
+      ripple.style.top =
+        (e.clientY - rect.top) + "px";
+
+      this.appendChild(ripple);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 700);
+
+    });
+
+  });
+
+
+/* =========================
+   COUNTER API
+========================= */
+
+async function loadVisitorCount(){
+
+  const element =
+    document.getElementById("visitorCount");
+
+  try{
+
+    if(typeof Counter === "undefined"){
+
+      element.textContent = "—";
+
+      return;
+    }
+
+    const counter =
+      new Counter({
+        workspace: "duymanh999-github-io"
+      });
+
+    const result =
+      await counter.up("page-views");
+
+    if(
+      result &&
+      typeof result.value !== "undefined"
+    ){
+
+      element.textContent =
+        Number(result.value)
+          .toLocaleString("vi-VN");
 
     }else{
 
-      music.pause();
-
-      setPaused();
+      element.textContent = "—";
 
     }
 
+  }catch(error){
+
+    console.log(
+      "Visitor counter:",
+      error
+    );
+
+    element.textContent = "—";
+
   }
-);
+
+}
+
+loadVisitorCount();
 
 
-document.addEventListener(
-  "click",
-  ()=>playMusic(),
-  {once:true}
-);
+/* =========================
+   TỰ PHÁT KHI NGƯỜI DÙNG
+   CHẠM VÀO TRANG
+========================= */
+
+let firstInteraction = false;
+
+function firstPlay(){
+
+  if(firstInteraction) return;
+
+  firstInteraction = true;
+
+  playMusic();
+
+  document.removeEventListener(
+    "touchstart",
+    firstPlay
+  );
+
+  document.removeEventListener(
+    "click",
+    firstPlay
+  );
+
+}
 
 
 document.addEventListener(
   "touchstart",
-  ()=>playMusic(),
-  {once:true}
+  firstPlay,
+  {passive:true}
 );
 
+document.addEventListener(
+  "click",
+  firstPlay
+);
+
+
+/* thử autoplay */
 
 window.addEventListener(
   "load",
-  playMusic
-);
+  () => {
 
+    setTimeout(() => {
 
-music.addEventListener(
-  "loadedmetadata",
-  ()=>{
+      music.volume = .7;
 
-    duration.textContent=
-      fmt(music.duration);
+      music.play()
+        .catch(() => {
+          // iPhone có thể chặn autoplay
+        });
 
-  }
-);
-
-
-music.addEventListener(
-  "timeupdate",
-  ()=>{
-
-    current.textContent=
-      fmt(music.currentTime);
-
-    if(music.duration){
-
-      bar.style.width=
-        (music.currentTime /
-        music.duration *
-        100)
-        +
-        "%";
-
-    }
+    }, 700);
 
   }
-);
-
-
-progress.addEventListener(
-  "click",
-  (e)=>{
-
-    if(!music.duration)
-      return;
-
-    const rect=
-      progress.getBoundingClientRect();
-
-    const x=
-      Math.max(
-        0,
-        Math.min(
-          e.clientX-rect.left,
-          rect.width
-        )
-      );
-
-    music.currentTime=
-      (x/rect.width) *
-      music.duration;
-
-  }
-);
-
-
-music.addEventListener(
-  "play",
-  setPlaying
-);
-
-
-music.addEventListener(
-  "pause",
-  setPaused
 );
 
 </script>
