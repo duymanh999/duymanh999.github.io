@@ -26,9 +26,9 @@ body{
   min-height:100vh;
   overflow-x:hidden;
   background:#050509;
-  color:white;
+  color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
-               "Segoe UI",Roboto,Arial,sans-serif;
+  "Segoe UI",Roboto,Arial,sans-serif;
   position:relative;
 }
 
@@ -69,7 +69,7 @@ body{
 }
 
 /* =========================
-   ÁNH SÁNG BAY
+   ÁNH SÁNG
 ========================= */
 
 .ambient{
@@ -95,6 +95,7 @@ body{
 
   filter:blur(15px);
   opacity:.7;
+
   animation:orbMove 12s ease-in-out infinite alternate;
 }
 
@@ -174,7 +175,7 @@ body{
 }
 
 /* =========================
-   HẠT ÁNH SÁNG
+   HẠT SÁNG
 ========================= */
 
 .particles{
@@ -190,8 +191,11 @@ body{
   width:4px;
   height:4px;
   border-radius:50%;
-  background:white;
-  box-shadow:0 0 12px rgba(255,255,255,.9);
+
+  background:#fff;
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,.9);
 
   animation:particleFloat linear infinite;
 }
@@ -329,10 +333,15 @@ main{
 }
 
 /* =========================
-   TITLE
+   TÊN
 ========================= */
 
 h1{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+
   font-size:31px;
   font-weight:800;
   letter-spacing:-.7px;
@@ -344,9 +353,43 @@ h1{
   animation:titleGlow 3s ease-in-out infinite alternate;
 }
 
+/* DẤU TÍCH XANH */
+
+.verified{
+  width:27px;
+  height:27px;
+
+  display:block;
+  flex:none;
+
+  filter:
+    drop-shadow(0 0 5px rgba(0,140,255,.8))
+    drop-shadow(0 0 13px rgba(0,140,255,.5));
+
+  animation:verifiedGlow 2s ease-in-out infinite;
+}
+
+@keyframes verifiedGlow{
+  0%,100%{
+    transform:scale(1);
+    filter:
+      drop-shadow(0 0 5px rgba(0,140,255,.75))
+      drop-shadow(0 0 12px rgba(0,140,255,.35));
+  }
+
+  50%{
+    transform:scale(1.08);
+    filter:
+      drop-shadow(0 0 9px rgba(0,150,255,1))
+      drop-shadow(0 0 20px rgba(0,140,255,.6));
+  }
+}
+
 .subtitle{
   margin-top:6px;
+
   color:rgba(255,255,255,.7);
+
   font-size:14px;
   letter-spacing:.4px;
 }
@@ -487,6 +530,7 @@ h1{
   border-radius:10px;
 
   background:rgba(255,255,255,.12);
+
   overflow:hidden;
 }
 
@@ -565,7 +609,7 @@ h1{
   animation-delay:-3s;
 }
 
-/* viền sáng chạy */
+/* VIỀN SÁNG */
 
 .link::before{
   content:"";
@@ -592,7 +636,7 @@ h1{
   transform:translateX(120%);
 }
 
-/* ánh sáng quét */
+/* ÁNH SÁNG QUÉT */
 
 .link::after{
   content:"";
@@ -653,6 +697,34 @@ h1{
 }
 
 /* =========================
+   ICON MẠNG XÃ HỘI
+========================= */
+
+.social-icon{
+  width:38px;
+  height:38px;
+
+  margin-right:11px;
+
+  flex:none;
+
+  transition:
+    transform .3s ease,
+    filter .3s ease;
+}
+
+.link:hover .social-icon{
+  transform:scale(1.13) rotate(-3deg);
+
+  filter:
+    drop-shadow(0 0 8px rgba(255,255,255,.55));
+}
+
+.link:active .social-icon{
+  transform:scale(.9);
+}
+
+/* =========================
    VISITOR
 ========================= */
 
@@ -670,6 +742,7 @@ h1{
   border-radius:17px;
 
   background:rgba(255,255,255,.07);
+
   border:1px solid rgba(255,255,255,.12);
 
   backdrop-filter:blur(14px);
@@ -771,6 +844,16 @@ footer{
     font-size:28px;
   }
 
+  .verified{
+    width:24px;
+    height:24px;
+  }
+
+  .social-icon{
+    width:36px;
+    height:36px;
+  }
+
   .link{
     min-height:57px;
   }
@@ -778,7 +861,6 @@ footer{
   .drop{
     height:55px;
   }
-
 }
 
 /* =========================
@@ -813,7 +895,7 @@ footer{
 <!-- MƯA -->
 <div id="rain"></div>
 
-<!-- HẠT SÁNG -->
+<!-- HẠT ÁNH SÁNG -->
 <div class="particles" id="particles"></div>
 
 <!-- LỚP TỐI -->
@@ -832,8 +914,83 @@ footer{
   </div>
 
 
-  <!-- TÊN -->
-  <h1>Duy Mạnh</h1>
+  <!-- TÊN + DẤU TÍCH XANH -->
+  <h1>
+
+    Duy Mạnh
+
+    <!-- DẤU TÍCH XANH -->
+    <svg
+      class="verified"
+      viewBox="0 0 100 100"
+      aria-label="Đã xác minh"
+    >
+
+      <defs>
+
+        <linearGradient
+          id="verifiedBlue"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="1"
+        >
+          <stop
+            offset="0%"
+            stop-color="#1689ff"
+          />
+
+          <stop
+            offset="100%"
+            stop-color="#006bea"
+          />
+        </linearGradient>
+
+      </defs>
+
+      <!-- HUY HIỆU -->
+      <path
+        fill="url(#verifiedBlue)"
+        d="
+        M50 2
+        C57 2 61 10 67 10
+        C74 10 79 5 84 9
+        C89 13 87 21 93 26
+        C98 30 96 38 99 44
+        C102 51 95 56 96 63
+        C97 70 91 74 91 81
+        C91 88 83 90 79 94
+        C74 98 67 94 61 97
+        C55 101 49 96 43 98
+        C37 100 32 93 25 94
+        C18 95 16 87 10 84
+        C5 81 9 72 5 67
+        C1 61 6 55 3 49
+        C0 42 8 38 7 31
+        C6 24 14 22 17 16
+        C20 10 28 12 34 8
+        C40 4 44 2 50 2
+        Z
+        "
+      />
+
+      <!-- DẤU CHECK -->
+      <path
+        d="
+        M25 50
+        L43 68
+        L77 32
+        "
+        fill="none"
+        stroke="#fff"
+        stroke-width="13"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+    </svg>
+
+  </h1>
 
   <div class="subtitle">
     Nền tảng của tôi
@@ -848,13 +1005,18 @@ footer{
       <div class="disc"></div>
 
       <div class="song-info">
+
         <div class="song-title">
           🎵 Shape of You
         </div>
 
-        <div class="song-status" id="status">
+        <div
+          class="song-status"
+          id="status"
+        >
           Nhấn để phát nhạc
         </div>
+
       </div>
 
       <button
@@ -868,17 +1030,25 @@ footer{
     </div>
 
     <div class="progress">
+
       <div
         class="progress-bar"
         id="progressBar"
       ></div>
+
     </div>
 
   </div>
 
 
-  <!-- LINKS -->
+  <!-- =========================
+       LINKS
+  ========================= -->
+
   <div class="links">
+
+
+    <!-- TIKTOK -->
 
     <a
       class="link"
@@ -886,8 +1056,65 @@ footer{
       target="_blank"
       rel="noopener"
     >
-      🎵 TikTok
+
+      <svg
+        class="social-icon"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+      >
+
+        <circle
+          cx="50"
+          cy="50"
+          r="49"
+          fill="#050505"
+        />
+
+        <!-- bóng cyan -->
+        <path
+          d="M57 24v38.5c0 10-7 16-16 16-8 0-14-5-14-12
+          0-8 7-13 16-13 2 0 4 .3 6 1V43
+          c-8 2-14 7-18 13"
+          fill="none"
+          stroke="#25F4EE"
+          stroke-width="8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <!-- bóng đỏ -->
+        <path
+          d="M62 20c2 8 7 13 15 15"
+          fill="none"
+          stroke="#FE2C55"
+          stroke-width="8"
+          stroke-linecap="round"
+        />
+
+        <!-- nốt trắng -->
+        <path
+          d="M61 17v39c0 11-7 18-17 18
+          -8 0-14-5-14-12
+          0-8 7-13 16-13
+          3 0 5 .5 7 1.5V17z"
+          fill="#fff"
+        />
+
+        <path
+          d="M61 17v39c0 11-7 18-17 18"
+          fill="none"
+          stroke="#25F4EE"
+          stroke-width="3"
+        />
+
+      </svg>
+
+      TikTok
+
     </a>
+
+
+    <!-- FACEBOOK -->
 
     <a
       class="link"
@@ -895,8 +1122,51 @@ footer{
       target="_blank"
       rel="noopener"
     >
-      💙 Facebook
+
+      <svg
+        class="social-icon"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+      >
+
+        <circle
+          cx="50"
+          cy="50"
+          r="49"
+          fill="#1877F2"
+        />
+
+        <path
+          d="
+          M57 88
+          V55
+          H68
+          L70 43
+          H57
+          V35
+          C57 31 59 28 65 28
+          H71
+          V17
+          C68 17 64 16 59 16
+          C47 16 40 23 40 36
+          V43
+          H29
+          V55
+          H40
+          V88
+          Z
+          "
+          fill="#fff"
+        />
+
+      </svg>
+
+      Facebook
+
     </a>
+
+
+    <!-- TELEGRAM -->
 
     <a
       class="link"
@@ -904,8 +1174,49 @@ footer{
       target="_blank"
       rel="noopener"
     >
-      ✈️ Telegram
+
+      <svg
+        class="social-icon"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+      >
+
+        <circle
+          cx="50"
+          cy="50"
+          r="49"
+          fill="#2AABEE"
+        />
+
+        <path
+          d="
+          M19 48
+          L76 26
+          C79 25 81 27 80 30
+          L70 76
+          C69 80 66 81 63 79
+          L47 67
+          L39 75
+          C37 77 35 76 35 73
+          L36 62
+          L67 35
+          C68 34 67 33 65 34
+          L28 57
+          L20 53
+          C17 52 17 49 19 48
+          Z
+          "
+          fill="#fff"
+        />
+
+      </svg>
+
+      Telegram
+
     </a>
+
+
+    <!-- YOUTUBE -->
 
     <a
       class="link"
@@ -913,13 +1224,45 @@ footer{
       target="_blank"
       rel="noopener"
     >
-      ▶️ YouTube
+
+      <svg
+        class="social-icon"
+        viewBox="0 0 100 100"
+        aria-hidden="true"
+      >
+
+        <circle
+          cx="50"
+          cy="50"
+          r="49"
+          fill="#FF0000"
+        />
+
+        <rect
+          x="20"
+          y="32"
+          width="60"
+          height="36"
+          rx="11"
+          fill="#fff"
+        />
+
+        <path
+          d="M45 40 L45 60 L64 50 Z"
+          fill="#FF0000"
+        />
+
+      </svg>
+
+      YouTube
+
     </a>
 
   </div>
 
 
   <!-- VISITOR -->
+
   <div class="visitor">
 
     <span class="visitor-dot"></span>
@@ -967,9 +1310,7 @@ footer{
      COUNTER API
 ========================= -->
 
-<script
-  src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
 
 
 <script>
@@ -978,7 +1319,8 @@ footer{
    MƯA
 ========================= */
 
-const rain = document.getElementById("rain");
+const rain =
+  document.getElementById("rain");
 
 const rainAmount =
   window.innerWidth < 600 ? 65 : 100;
@@ -1038,8 +1380,11 @@ for(let i = 0; i < particleAmount; i++){
   const size =
     2 + Math.random() * 3;
 
-  p.style.width = size + "px";
-  p.style.height = size + "px";
+  p.style.width =
+    size + "px";
+
+  p.style.height =
+    size + "px";
 
   particles.appendChild(p);
 }
@@ -1086,6 +1431,7 @@ function playMusic(){
         "Nhấn ▶ để phát nhạc";
 
     });
+
 }
 
 
@@ -1099,72 +1445,91 @@ function pauseMusic(){
     "Đã tạm dừng";
 
   musicCard.classList.remove("playing");
+
 }
 
 
-musicBtn.addEventListener("click", () => {
+musicBtn.addEventListener(
+  "click",
+  () => {
 
-  if(music.paused){
-    playMusic();
-  }else{
-    pauseMusic();
+    if(music.paused){
+      playMusic();
+    }else{
+      pauseMusic();
+    }
+
   }
-
-});
-
-
-music.addEventListener("timeupdate", () => {
-
-  if(!music.duration) return;
-
-  const percent =
-    (music.currentTime / music.duration) * 100;
-
-  progressBar.style.width =
-    percent + "%";
-
-});
+);
 
 
-music.addEventListener("play", () => {
-
-  musicBtn.textContent = "❚❚";
-
-  status.textContent =
-    "Đang phát • Shape of You";
-
-  musicCard.classList.add("playing");
-
-});
-
-
-music.addEventListener("pause", () => {
-
-  musicBtn.textContent = "▶";
-
-  musicCard.classList.remove("playing");
-
-});
-
-
-/* click thanh progress */
-
-document
-  .querySelector(".progress")
-  .addEventListener("click", (e) => {
+music.addEventListener(
+  "timeupdate",
+  () => {
 
     if(!music.duration) return;
 
-    const rect =
-      e.currentTarget.getBoundingClientRect();
-
     const percent =
-      (e.clientX - rect.left) / rect.width;
+      (music.currentTime / music.duration) * 100;
 
-    music.currentTime =
-      percent * music.duration;
+    progressBar.style.width =
+      percent + "%";
 
-  });
+  }
+);
+
+
+music.addEventListener(
+  "play",
+  () => {
+
+    musicBtn.textContent = "❚❚";
+
+    status.textContent =
+      "Đang phát • Shape of You";
+
+    musicCard.classList.add("playing");
+
+  }
+);
+
+
+music.addEventListener(
+  "pause",
+  () => {
+
+    musicBtn.textContent = "▶";
+
+    musicCard.classList.remove("playing");
+
+  }
+);
+
+
+/* =========================
+   THANH NHẠC
+========================= */
+
+document
+  .querySelector(".progress")
+  .addEventListener(
+    "click",
+    (e) => {
+
+      if(!music.duration) return;
+
+      const rect =
+        e.currentTarget.getBoundingClientRect();
+
+      const percent =
+        (e.clientX - rect.left) /
+        rect.width;
+
+      music.currentTime =
+        percent * music.duration;
+
+    }
+  );
 
 
 /* =========================
@@ -1175,41 +1540,47 @@ document
   .querySelectorAll(".link")
   .forEach(link => {
 
-    link.addEventListener("click", function(e){
+    link.addEventListener(
+      "click",
+      function(e){
 
-      const rect =
-        this.getBoundingClientRect();
+        const rect =
+          this.getBoundingClientRect();
 
-      const ripple =
-        document.createElement("span");
+        const ripple =
+          document.createElement("span");
 
-      ripple.className = "ripple";
+        ripple.className = "ripple";
 
-      ripple.style.left =
-        (e.clientX - rect.left) + "px";
+        ripple.style.left =
+          (e.clientX - rect.left) + "px";
 
-      ripple.style.top =
-        (e.clientY - rect.top) + "px";
+        ripple.style.top =
+          (e.clientY - rect.top) + "px";
 
-      this.appendChild(ripple);
+        this.appendChild(ripple);
 
-      setTimeout(() => {
-        ripple.remove();
-      }, 700);
+        setTimeout(
+          () => ripple.remove(),
+          700
+        );
 
-    });
+      }
+    );
 
   });
 
 
 /* =========================
-   COUNTER API
+   LƯỢT TRUY CẬP
 ========================= */
 
 async function loadVisitorCount(){
 
   const element =
-    document.getElementById("visitorCount");
+    document.getElementById(
+      "visitorCount"
+    );
 
   try{
 
@@ -1218,15 +1589,19 @@ async function loadVisitorCount(){
       element.textContent = "—";
 
       return;
+
     }
 
     const counter =
       new Counter({
-        workspace: "duymanh999-github-io"
+        workspace:
+          "duymanh999-github-io"
       });
 
     const result =
-      await counter.up("page-views");
+      await counter.up(
+        "page-views"
+      );
 
     if(
       result &&
@@ -1235,7 +1610,7 @@ async function loadVisitorCount(){
 
       element.textContent =
         Number(result.value)
-          .toLocaleString("vi-VN");
+        .toLocaleString("vi-VN");
 
     }else{
 
@@ -1260,11 +1635,11 @@ loadVisitorCount();
 
 
 /* =========================
-   TỰ PHÁT KHI NGƯỜI DÙNG
-   CHẠM VÀO TRANG
+   TỰ PHÁT NHẠC
 ========================= */
 
-let firstInteraction = false;
+let firstInteraction =
+  false;
 
 function firstPlay(){
 
@@ -1299,22 +1674,27 @@ document.addEventListener(
 );
 
 
-/* thử autoplay */
+/* =========================
+   AUTOPLAY
+========================= */
 
 window.addEventListener(
   "load",
   () => {
 
-    setTimeout(() => {
+    setTimeout(
+      () => {
 
-      music.volume = .7;
+        music.volume = .7;
 
-      music.play()
-        .catch(() => {
-          // iPhone có thể chặn autoplay
-        });
+        music.play()
+          .catch(() => {
+            /* iPhone có thể chặn autoplay */
+          });
 
-    }, 700);
+      },
+      700
+    );
 
   }
 );
