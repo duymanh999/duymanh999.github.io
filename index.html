@@ -353,7 +353,9 @@ h1{
   animation:titleGlow 3s ease-in-out infinite alternate;
 }
 
-/* DẤU TÍCH XANH */
+/* =========================
+   DẤU TÍCH XANH
+========================= */
 
 .verified{
   width:27px;
@@ -609,8 +611,6 @@ h1{
   animation-delay:-3s;
 }
 
-/* VIỀN SÁNG */
-
 .link::before{
   content:"";
 
@@ -635,8 +635,6 @@ h1{
 .link:hover::before{
   transform:translateX(120%);
 }
-
-/* ÁNH SÁNG QUÉT */
 
 .link::after{
   content:"";
@@ -948,7 +946,6 @@ footer{
 
       </defs>
 
-      <!-- HUY HIỆU -->
       <path
         fill="url(#verifiedBlue)"
         d="
@@ -974,7 +971,6 @@ footer{
         "
       />
 
-      <!-- DẤU CHECK -->
       <path
         d="
         M25 50
@@ -1070,7 +1066,6 @@ footer{
           fill="#050505"
         />
 
-        <!-- bóng cyan -->
         <path
           d="M57 24v38.5c0 10-7 16-16 16-8 0-14-5-14-12
           0-8 7-13 16-13 2 0 4 .3 6 1V43
@@ -1082,7 +1077,6 @@ footer{
           stroke-linejoin="round"
         />
 
-        <!-- bóng đỏ -->
         <path
           d="M62 20c2 8 7 13 15 15"
           fill="none"
@@ -1091,7 +1085,6 @@ footer{
           stroke-linecap="round"
         />
 
-        <!-- nốt trắng -->
         <path
           d="M61 17v39c0 11-7 18-17 18
           -8 0-14-5-14-12
@@ -1272,7 +1265,7 @@ footer{
     </span>
 
     <strong id="visitorCount">
-      ...
+      157.000
     </strong>
 
     <span>
@@ -1573,6 +1566,7 @@ document
 
 /* =========================
    LƯỢT TRUY CẬP
+   BẮT ĐẦU TỪ 157.000
 ========================= */
 
 async function loadVisitorCount(){
@@ -1582,15 +1576,30 @@ async function loadVisitorCount(){
       "visitorCount"
     );
 
+  const START_COUNT = 157000;
+
   try{
 
     if(typeof Counter === "undefined"){
 
-      element.textContent = "—";
+      element.textContent =
+        START_COUNT.toLocaleString("vi-VN");
 
       return;
 
     }
+
+    /*
+      Dùng một counter mới riêng cho mốc 157K.
+      Lượt đầu tiên của counter = 1
+      => hiển thị 157.000
+
+      Lượt tiếp theo = 2
+      => hiển thị 157.001
+
+      Lượt tiếp theo = 3
+      => hiển thị 157.002
+    */
 
     const counter =
       new Counter({
@@ -1600,23 +1609,23 @@ async function loadVisitorCount(){
 
     const result =
       await counter.up(
-        "page-views"
+        "page-views-157k"
       );
 
-    if(
-      result &&
-      typeof result.value !== "undefined"
-    ){
+    const current =
+      Number(
+        result &&
+        typeof result.value !== "undefined"
+          ? result.value
+          : 1
+      );
 
-      element.textContent =
-        Number(result.value)
-        .toLocaleString("vi-VN");
+    const total =
+      START_COUNT +
+      Math.max(0,current - 1);
 
-    }else{
-
-      element.textContent = "—";
-
-    }
+    element.textContent =
+      total.toLocaleString("vi-VN");
 
   }catch(error){
 
@@ -1625,7 +1634,8 @@ async function loadVisitorCount(){
       error
     );
 
-    element.textContent = "—";
+    element.textContent =
+      START_COUNT.toLocaleString("vi-VN");
 
   }
 
