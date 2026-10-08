@@ -58,11 +58,9 @@ body{
   0%{
     transform:translate3d(-1.5%,-1%,0) scale(1.06);
   }
-
   50%{
     transform:translate3d(1%,1%,0) scale(1.10);
   }
-
   100%{
     transform:translate3d(-1%,1.5%,0) scale(1.07);
   }
@@ -124,11 +122,9 @@ body{
   0%{
     transform:translate3d(-30px,-20px,0) scale(.85);
   }
-
   50%{
     transform:translate3d(70px,50px,0) scale(1.15);
   }
-
   100%{
     transform:translate3d(-50px,80px,0) scale(.9);
   }
@@ -168,7 +164,6 @@ body{
   from{
     transform:translate3d(0,-100px,0) rotate(12deg);
   }
-
   to{
     transform:translate3d(-130px,115vh,0) rotate(12deg);
   }
@@ -191,7 +186,6 @@ body{
   width:4px;
   height:4px;
   border-radius:50%;
-
   background:#fff;
 
   box-shadow:
@@ -205,15 +199,12 @@ body{
     transform:translate3d(0,110vh,0) scale(.3);
     opacity:0;
   }
-
   15%{
     opacity:.8;
   }
-
   50%{
     opacity:1;
   }
-
   100%{
     transform:translate3d(50px,-10vh,0) scale(1);
     opacity:0;
@@ -304,7 +295,6 @@ main{
   height:108px;
 
   border-radius:50%;
-
   object-fit:cover;
 
   border:3px solid rgba(255,255,255,.9);
@@ -320,7 +310,6 @@ main{
   0%,100%{
     transform:translateY(0) rotate(0deg);
   }
-
   50%{
     transform:translateY(-8px) rotate(1deg);
   }
@@ -352,10 +341,6 @@ h1{
 
   animation:titleGlow 3s ease-in-out infinite alternate;
 }
-
-/* =========================
-   DẤU TÍCH XANH
-========================= */
 
 .verified{
   width:27px;
@@ -389,9 +374,7 @@ h1{
 
 .subtitle{
   margin-top:6px;
-
   color:rgba(255,255,255,.7);
-
   font-size:14px;
   letter-spacing:.4px;
 }
@@ -401,7 +384,6 @@ h1{
     text-shadow:
       0 0 10px rgba(255,255,255,.15);
   }
-
   to{
     text-shadow:
       0 0 20px rgba(255,255,255,.35),
@@ -449,7 +431,6 @@ h1{
 .disc{
   width:54px;
   height:54px;
-
   border-radius:50%;
 
   background:
@@ -505,7 +486,6 @@ h1{
   background:rgba(255,255,255,.16);
 
   font-size:17px;
-
   cursor:pointer;
 
   transition:.25s;
@@ -611,6 +591,10 @@ h1{
   animation-delay:-3s;
 }
 
+.link:nth-child(5){
+  animation-delay:-4s;
+}
+
 .link::before{
   content:"";
 
@@ -695,7 +679,7 @@ h1{
 }
 
 /* =========================
-   ICON MẠNG XÃ HỘI
+   ICON
 ========================= */
 
 .social-icon{
@@ -720,6 +704,189 @@ h1{
 
 .link:active .social-icon{
   transform:scale(.9);
+}
+
+/* =========================
+   DONATE
+========================= */
+
+.donate-link{
+  cursor:pointer;
+  user-select:none;
+}
+
+.donate-heart{
+  font-size:27px;
+  margin-right:11px;
+
+  filter:
+    drop-shadow(0 0 7px rgba(255,80,120,.8));
+
+  animation:heartBeat 1.8s ease-in-out infinite;
+}
+
+@keyframes heartBeat{
+  0%,100%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.15);
+  }
+}
+
+/* =========================
+   DONATE MODAL
+========================= */
+
+.donate-modal{
+  position:fixed;
+  inset:0;
+
+  z-index:9999;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  background:rgba(0,0,0,.75);
+
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+
+  opacity:0;
+}
+
+.donate-modal.show{
+  display:flex;
+  opacity:1;
+}
+
+.donate-box{
+  position:relative;
+
+  width:min(360px,92vw);
+
+  padding:25px 20px 22px;
+
+  border-radius:28px;
+
+  text-align:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.18),
+      rgba(255,255,255,.07)
+    );
+
+  border:1px solid rgba(255,255,255,.25);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.55),
+    inset 0 1px rgba(255,255,255,.2);
+
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+
+  transform:scale(.85);
+
+  transition:
+    transform .35s
+    cubic-bezier(.2,.8,.2,1);
+}
+
+.donate-modal.show .donate-box{
+  transform:scale(1);
+}
+
+.donate-title{
+  font-size:21px;
+  font-weight:800;
+
+  color:#fff;
+
+  text-shadow:
+    0 0 15px rgba(255,255,255,.25);
+
+  margin-bottom:7px;
+}
+
+.donate-subtitle{
+  font-size:13px;
+  color:rgba(255,255,255,.65);
+
+  margin-bottom:18px;
+}
+
+.qr-wrap{
+  width:100%;
+
+  padding:12px;
+
+  border-radius:20px;
+
+  background:#fff;
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.35),
+    0 0 30px rgba(255,255,255,.12);
+}
+
+.qr-wrap img{
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  border-radius:10px;
+}
+
+.donate-note{
+  margin-top:16px;
+
+  font-size:13px;
+  font-weight:600;
+
+  color:rgba(255,255,255,.75);
+}
+
+.donate-close{
+  position:absolute;
+
+  top:10px;
+  right:10px;
+
+  width:38px;
+  height:38px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(255,255,255,.12);
+
+  color:#fff;
+
+  font-size:27px;
+  line-height:35px;
+
+  cursor:pointer;
+
+  z-index:5;
+
+  transition:.25s;
+}
+
+.donate-close:hover{
+  background:rgba(255,255,255,.22);
+  transform:rotate(90deg);
+}
+
+.donate-close:active{
+  transform:scale(.85) rotate(90deg);
 }
 
 /* =========================
@@ -861,10 +1028,6 @@ footer{
   }
 }
 
-/* =========================
-   GIẢM CHUYỂN ĐỘNG
-========================= */
-
 @media(prefers-reduced-motion:reduce){
 
   *,
@@ -880,29 +1043,24 @@ footer{
 
 <body>
 
-<!-- BACKGROUND -->
 <div class="bg"></div>
 
-<!-- ÁNH SÁNG -->
 <div class="ambient">
   <div class="orb one"></div>
   <div class="orb two"></div>
   <div class="orb three"></div>
 </div>
 
-<!-- MƯA -->
 <div id="rain"></div>
 
-<!-- HẠT ÁNH SÁNG -->
 <div class="particles" id="particles"></div>
 
-<!-- LỚP TỐI -->
 <div class="vignette"></div>
-
 
 <main>
 
   <!-- AVATAR -->
+
   <div class="avatar-wrap">
     <img
       class="avatar"
@@ -912,12 +1070,12 @@ footer{
   </div>
 
 
-  <!-- TÊN + DẤU TÍCH XANH -->
+  <!-- TÊN -->
+
   <h1>
 
     Duy Mạnh
 
-    <!-- DẤU TÍCH XANH -->
     <svg
       class="verified"
       viewBox="0 0 100 100"
@@ -933,6 +1091,7 @@ footer{
           x2="1"
           y2="1"
         >
+
           <stop
             offset="0%"
             stop-color="#1689ff"
@@ -942,6 +1101,7 @@ footer{
             offset="100%"
             stop-color="#006bea"
           />
+
         </linearGradient>
 
       </defs>
@@ -994,6 +1154,7 @@ footer{
 
 
   <!-- MUSIC -->
+
   <div class="music-card" id="musicCard">
 
     <div class="music-top">
@@ -1037,12 +1198,9 @@ footer{
   </div>
 
 
-  <!-- =========================
-       LINKS
-  ========================= -->
+  <!-- LINKS -->
 
   <div class="links">
-
 
     <!-- TIKTOK -->
 
@@ -1251,6 +1409,24 @@ footer{
 
     </a>
 
+
+    <!-- =========================
+         DONATE
+    ========================= -->
+
+    <div
+      class="link donate-link"
+      onclick="openDonate()"
+    >
+
+      <div class="donate-heart">
+        💖
+      </div>
+
+      Donate
+
+    </div>
+
   </div>
 
 
@@ -1283,6 +1459,54 @@ footer{
 
 
 <!-- =========================
+     DONATE QR POPUP
+========================= -->
+
+<div
+  class="donate-modal"
+  id="donateModal"
+  onclick="closeDonate(event)"
+>
+
+  <div
+    class="donate-box"
+    onclick="event.stopPropagation()"
+  >
+
+    <button
+      class="donate-close"
+      onclick="closeDonate()"
+    >
+      ×
+    </button>
+
+    <div class="donate-title">
+      💖 Donate cho Duy Mạnh
+    </div>
+
+    <div class="donate-subtitle">
+      Cảm ơn bạn đã ủng hộ mình ❤️
+    </div>
+
+    <div class="qr-wrap">
+
+      <img
+        src="qr-donate.png"
+        alt="QR Donate"
+      >
+
+    </div>
+
+    <div class="donate-note">
+      📱 Quét mã QR để ủng hộ
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
      NHẠC
 ========================= -->
 
@@ -1292,16 +1516,16 @@ footer{
   preload="auto"
   playsinline
 >
+
   <source
     src="music.mp3"
     type="audio/mpeg"
   >
+
 </audio>
 
 
-<!-- =========================
-     COUNTER API
-========================= -->
+<!-- COUNTER API -->
 
 <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
 
@@ -1318,27 +1542,27 @@ const rain =
 const rainAmount =
   window.innerWidth < 600 ? 65 : 100;
 
-for(let i = 0; i < rainAmount; i++){
+for(let i=0;i<rainAmount;i++){
 
   const drop =
     document.createElement("span");
 
-  drop.className = "drop";
+  drop.className="drop";
 
   drop.style.left =
-    Math.random() * 115 + "%";
+    Math.random()*115+"%";
 
   drop.style.height =
-    (35 + Math.random() * 60) + "px";
+    (35+Math.random()*60)+"px";
 
   drop.style.opacity =
-    .12 + Math.random() * .45;
+    .12+Math.random()*.45;
 
   drop.style.animationDuration =
-    (0.65 + Math.random() * 1.15) + "s";
+    (.65+Math.random()*1.15)+"s";
 
   drop.style.animationDelay =
-    (-Math.random() * 3) + "s";
+    (-Math.random()*3)+"s";
 
   rain.appendChild(drop);
 }
@@ -1354,30 +1578,27 @@ const particles =
 const particleAmount =
   window.innerWidth < 600 ? 18 : 28;
 
-for(let i = 0; i < particleAmount; i++){
+for(let i=0;i<particleAmount;i++){
 
   const p =
     document.createElement("span");
 
-  p.className = "particle";
+  p.className="particle";
 
   p.style.left =
-    Math.random() * 100 + "%";
+    Math.random()*100+"%";
 
   p.style.animationDuration =
-    (7 + Math.random() * 10) + "s";
+    (7+Math.random()*10)+"s";
 
   p.style.animationDelay =
-    (-Math.random() * 12) + "s";
+    (-Math.random()*12)+"s";
 
   const size =
-    2 + Math.random() * 3;
+    2+Math.random()*3;
 
-  p.style.width =
-    size + "px";
-
-  p.style.height =
-    size + "px";
+  p.style.width=size+"px";
+  p.style.height=size+"px";
 
   particles.appendChild(p);
 }
@@ -1405,12 +1626,12 @@ const progressBar =
 
 function playMusic(){
 
-  music.volume = .7;
+  music.volume=.7;
 
   music.play()
-    .then(() => {
+    .then(()=>{
 
-      musicBtn.textContent = "❚❚";
+      musicBtn.textContent="❚❚";
 
       status.textContent =
         "Đang phát • Shape of You";
@@ -1418,7 +1639,7 @@ function playMusic(){
       musicCard.classList.add("playing");
 
     })
-    .catch(() => {
+    .catch(()=>{
 
       status.textContent =
         "Nhấn ▶ để phát nhạc";
@@ -1432,10 +1653,9 @@ function pauseMusic(){
 
   music.pause();
 
-  musicBtn.textContent = "▶";
+  musicBtn.textContent="▶";
 
-  status.textContent =
-    "Đã tạm dừng";
+  status.textContent="Đã tạm dừng";
 
   musicCard.classList.remove("playing");
 
@@ -1444,7 +1664,7 @@ function pauseMusic(){
 
 musicBtn.addEventListener(
   "click",
-  () => {
+  ()=>{
 
     if(music.paused){
       playMusic();
@@ -1458,15 +1678,16 @@ musicBtn.addEventListener(
 
 music.addEventListener(
   "timeupdate",
-  () => {
+  ()=>{
 
-    if(!music.duration) return;
+    if(!music.duration)return;
 
     const percent =
-      (music.currentTime / music.duration) * 100;
+      music.currentTime/
+      music.duration*100;
 
     progressBar.style.width =
-      percent + "%";
+      percent+"%";
 
   }
 );
@@ -1474,9 +1695,9 @@ music.addEventListener(
 
 music.addEventListener(
   "play",
-  () => {
+  ()=>{
 
-    musicBtn.textContent = "❚❚";
+    musicBtn.textContent="❚❚";
 
     status.textContent =
       "Đang phát • Shape of You";
@@ -1489,9 +1710,9 @@ music.addEventListener(
 
 music.addEventListener(
   "pause",
-  () => {
+  ()=>{
 
-    musicBtn.textContent = "▶";
+    musicBtn.textContent="▶";
 
     musicCard.classList.remove("playing");
 
@@ -1504,69 +1725,68 @@ music.addEventListener(
 ========================= */
 
 document
-  .querySelector(".progress")
-  .addEventListener(
-    "click",
-    (e) => {
+.querySelector(".progress")
+.addEventListener(
+  "click",
+  e=>{
 
-      if(!music.duration) return;
+    if(!music.duration)return;
+
+    const rect =
+      e.currentTarget.getBoundingClientRect();
+
+    const percent =
+      (e.clientX-rect.left)/
+      rect.width;
+
+    music.currentTime =
+      percent*music.duration;
+
+  }
+);
+
+
+/* =========================
+   RIPPLE
+========================= */
+
+document
+.querySelectorAll(".link")
+.forEach(link=>{
+
+  link.addEventListener(
+    "click",
+    function(e){
 
       const rect =
-        e.currentTarget.getBoundingClientRect();
+        this.getBoundingClientRect();
 
-      const percent =
-        (e.clientX - rect.left) /
-        rect.width;
+      const ripple =
+        document.createElement("span");
 
-      music.currentTime =
-        percent * music.duration;
+      ripple.className="ripple";
+
+      ripple.style.left =
+        (e.clientX-rect.left)+"px";
+
+      ripple.style.top =
+        (e.clientY-rect.top)+"px";
+
+      this.appendChild(ripple);
+
+      setTimeout(
+        ()=>ripple.remove(),
+        700
+      );
 
     }
   );
 
-
-/* =========================
-   RIPPLE NÚT
-========================= */
-
-document
-  .querySelectorAll(".link")
-  .forEach(link => {
-
-    link.addEventListener(
-      "click",
-      function(e){
-
-        const rect =
-          this.getBoundingClientRect();
-
-        const ripple =
-          document.createElement("span");
-
-        ripple.className = "ripple";
-
-        ripple.style.left =
-          (e.clientX - rect.left) + "px";
-
-        ripple.style.top =
-          (e.clientY - rect.top) + "px";
-
-        this.appendChild(ripple);
-
-        setTimeout(
-          () => ripple.remove(),
-          700
-        );
-
-      }
-    );
-
-  });
+});
 
 
 /* =========================
-   LƯỢT TRUY CẬP
-   BẮT ĐẦU TỪ 157.000
+   VISITOR
 ========================= */
 
 async function loadVisitorCount(){
@@ -1576,11 +1796,11 @@ async function loadVisitorCount(){
       "visitorCount"
     );
 
-  const START_COUNT = 157000;
+  const START_COUNT=157000;
 
   try{
 
-    if(typeof Counter === "undefined"){
+    if(typeof Counter==="undefined"){
 
       element.textContent =
         START_COUNT.toLocaleString("vi-VN");
@@ -1588,18 +1808,6 @@ async function loadVisitorCount(){
       return;
 
     }
-
-    /*
-      Dùng một counter mới riêng cho mốc 157K.
-      Lượt đầu tiên của counter = 1
-      => hiển thị 157.000
-
-      Lượt tiếp theo = 2
-      => hiển thị 157.001
-
-      Lượt tiếp theo = 3
-      => hiển thị 157.002
-    */
 
     const counter =
       new Counter({
@@ -1615,14 +1823,14 @@ async function loadVisitorCount(){
     const current =
       Number(
         result &&
-        typeof result.value !== "undefined"
+        typeof result.value!=="undefined"
           ? result.value
           : 1
       );
 
     const total =
-      START_COUNT +
-      Math.max(0,current - 1);
+      START_COUNT+
+      Math.max(0,current-1);
 
     element.textContent =
       total.toLocaleString("vi-VN");
@@ -1645,17 +1853,70 @@ loadVisitorCount();
 
 
 /* =========================
+   DONATE QR
+========================= */
+
+const donateModal =
+  document.getElementById("donateModal");
+
+
+function openDonate(){
+
+  donateModal.classList.add("show");
+
+  document.body.style.overflow="hidden";
+
+}
+
+
+function closeDonate(event){
+
+  if(
+    event &&
+    event.target!==donateModal
+  ){
+    return;
+  }
+
+  donateModal.classList.remove("show");
+
+  document.body.style.overflow="";
+
+}
+
+
+/* =========================
+   ĐÓNG QR BẰNG ESC
+========================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key==="Escape"){
+
+      donateModal.classList.remove("show");
+
+      document.body.style.overflow="";
+
+    }
+
+  }
+);
+
+
+/* =========================
    TỰ PHÁT NHẠC
 ========================= */
 
-let firstInteraction =
-  false;
+let firstInteraction=false;
+
 
 function firstPlay(){
 
-  if(firstInteraction) return;
+  if(firstInteraction)return;
 
-  firstInteraction = true;
+  firstInteraction=true;
 
   playMusic();
 
@@ -1690,17 +1951,15 @@ document.addEventListener(
 
 window.addEventListener(
   "load",
-  () => {
+  ()=>{
 
     setTimeout(
-      () => {
+      ()=>{
 
-        music.volume = .7;
+        music.volume=.7;
 
         music.play()
-          .catch(() => {
-            /* iPhone có thể chặn autoplay */
-          });
+          .catch(()=>{});
 
       },
       700
