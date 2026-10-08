@@ -707,186 +707,150 @@ h1{
 }
 
 /* =========================
-   DONATE
+   DONATE QR HIỂN THỊ TRỰC TIẾP
 ========================= */
 
-.donate-link{
-  cursor:pointer;
-  user-select:none;
-}
-
-.donate-heart{
-  font-size:27px;
-  margin-right:11px;
-
-  filter:
-    drop-shadow(0 0 7px rgba(255,80,120,.8));
-
-  animation:heartBeat 1.8s ease-in-out infinite;
-}
-
-@keyframes heartBeat{
-  0%,100%{
-    transform:scale(1);
-  }
-
-  50%{
-    transform:scale(1.15);
-  }
-}
-
-/* =========================
-   DONATE MODAL
-========================= */
-
-.donate-modal{
-  position:fixed;
-  inset:0;
-
-  z-index:9999;
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  background:rgba(0,0,0,.75);
-
-  backdrop-filter:blur(15px);
-  -webkit-backdrop-filter:blur(15px);
-
-  opacity:0;
-}
-
-.donate-modal.show{
-  display:flex;
-  opacity:1;
-}
-
-.donate-box{
+.donate-card{
   position:relative;
 
-  width:min(360px,92vw);
-
-  padding:25px 20px 22px;
-
-  border-radius:28px;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.18),
-      rgba(255,255,255,.07)
-    );
-
-  border:1px solid rgba(255,255,255,.25);
-
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.55),
-    inset 0 1px rgba(255,255,255,.2);
-
-  backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
-
-  transform:scale(.85);
-
-  transition:
-    transform .35s
-    cubic-bezier(.2,.8,.2,1);
-}
-
-.donate-modal.show .donate-box{
-  transform:scale(1);
-}
-
-.donate-title{
-  font-size:21px;
-  font-weight:800;
-
-  color:#fff;
-
-  text-shadow:
-    0 0 15px rgba(255,255,255,.25);
-
-  margin-bottom:7px;
-}
-
-.donate-subtitle{
-  font-size:13px;
-  color:rgba(255,255,255,.65);
-
-  margin-bottom:18px;
-}
-
-.qr-wrap{
   width:100%;
 
-  padding:12px;
+  padding:15px;
+
+  display:flex;
+  align-items:center;
+
+  gap:16px;
 
   border-radius:20px;
 
-  background:#fff;
+  background:#050505;
+
+  border:2px solid rgba(255,255,255,.9);
 
   box-shadow:
-    0 10px 35px rgba(0,0,0,.35),
-    0 0 30px rgba(255,255,255,.12);
+    0 12px 35px rgba(0,0,0,.35),
+    0 0 25px rgba(255,255,255,.06);
+
+  animation:buttonFloat 5s ease-in-out infinite;
+
+  overflow:hidden;
 }
 
-.qr-wrap img{
+.donate-card::before{
+  content:"";
+
+  position:absolute;
+  inset:-2px;
+
+  border-radius:22px;
+
+  background:linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255,255,255,.35),
+    transparent 80%
+  );
+
+  transform:translateX(-120%);
+
+  animation:donateShine 5s ease-in-out infinite;
+
+  pointer-events:none;
+}
+
+@keyframes donateShine{
+
+  0%,55%{
+    transform:translateX(-120%);
+  }
+
+  75%,100%{
+    transform:translateX(120%);
+  }
+
+}
+
+.donate-qr{
+  position:relative;
+  z-index:1;
+
+  width:125px;
+  height:125px;
+
+  flex:none;
+
+  padding:7px;
+
+  background:#fff;
+
+  border-radius:15px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+    0 0 20px rgba(255,255,255,.15),
+    0 8px 25px rgba(0,0,0,.45);
+}
+
+.donate-qr img{
+  width:100%;
+  height:100%;
+
+  object-fit:contain;
+
   display:block;
 
-  width:100%;
-  height:auto;
+  border-radius:9px;
+}
 
-  border-radius:10px;
+.donate-info{
+  position:relative;
+  z-index:1;
+
+  flex:1;
+
+  min-width:0;
+
+  text-align:left;
+}
+
+.donate-title{
+  color:#fff;
+
+  font-size:18px;
+  font-weight:800;
+
+  line-height:1.25;
+
+  margin-bottom:7px;
+
+  text-shadow:
+    0 0 12px rgba(255,255,255,.25);
+}
+
+.donate-subtitle{
+  color:rgba(255,255,255,.72);
+
+  font-size:13px;
+
+  line-height:1.45;
+
+  margin-bottom:9px;
 }
 
 .donate-note{
-  margin-top:16px;
-
-  font-size:13px;
-  font-weight:600;
-
-  color:rgba(255,255,255,.75);
-}
-
-.donate-close{
-  position:absolute;
-
-  top:10px;
-  right:10px;
-
-  width:38px;
-  height:38px;
-
-  border:none;
-  border-radius:50%;
-
-  background:rgba(255,255,255,.12);
-
   color:#fff;
 
-  font-size:27px;
-  line-height:35px;
+  font-size:12px;
 
-  cursor:pointer;
+  font-weight:600;
 
-  z-index:5;
+  line-height:1.4;
 
-  transition:.25s;
-}
-
-.donate-close:hover{
-  background:rgba(255,255,255,.22);
-  transform:rotate(90deg);
-}
-
-.donate-close:active{
-  transform:scale(.85) rotate(90deg);
+  opacity:.85;
 }
 
 /* =========================
@@ -1025,6 +989,66 @@ footer{
 
   .drop{
     height:55px;
+  }
+
+  /* DONATE MOBILE */
+
+  .donate-card{
+    padding:12px;
+
+    gap:12px;
+
+    border-radius:18px;
+  }
+
+  .donate-qr{
+    width:105px;
+    height:105px;
+
+    padding:6px;
+
+    border-radius:13px;
+  }
+
+  .donate-title{
+    font-size:15px;
+
+    margin-bottom:5px;
+  }
+
+  .donate-subtitle{
+    font-size:11.5px;
+
+    margin-bottom:6px;
+  }
+
+  .donate-note{
+    font-size:10.5px;
+  }
+}
+
+@media(max-width:370px){
+
+  .donate-card{
+    gap:9px;
+    padding:10px;
+  }
+
+  .donate-qr{
+    width:90px;
+    height:90px;
+  }
+
+  .donate-title{
+    font-size:14px;
+  }
+
+  .donate-subtitle{
+    font-size:10.5px;
+  }
+
+  .donate-note{
+    font-size:10px;
   }
 }
 
@@ -1409,21 +1433,37 @@ footer{
 
     </a>
 
+  </div>
 
-    <!-- =========================
-         DONATE
-    ========================= -->
 
-    <div
-      class="link donate-link"
-      onclick="openDonate()"
-    >
+  <!-- =========================
+       DONATE HIỂN THỊ TRỰC TIẾP
+  ========================= -->
 
-      <div class="donate-heart">
-        💖
+  <div class="donate-card">
+
+    <div class="donate-qr">
+
+      <img
+        src="qr-donate.png"
+        alt="QR Donate"
+      >
+
+    </div>
+
+    <div class="donate-info">
+
+      <div class="donate-title">
+        💖 Donate cho Duy Mạnh
       </div>
 
-      Donate
+      <div class="donate-subtitle">
+        Cảm ơn bạn đã ủng hộ mình ❤️
+      </div>
+
+      <div class="donate-note">
+        📱 Quét mã QR để ủng hộ
+      </div>
 
     </div>
 
@@ -1456,54 +1496,6 @@ footer{
   </footer>
 
 </main>
-
-
-<!-- =========================
-     DONATE QR POPUP
-========================= -->
-
-<div
-  class="donate-modal"
-  id="donateModal"
-  onclick="closeDonate(event)"
->
-
-  <div
-    class="donate-box"
-    onclick="event.stopPropagation()"
-  >
-
-    <button
-      class="donate-close"
-      onclick="closeDonate()"
-    >
-      ×
-    </button>
-
-    <div class="donate-title">
-      💖 Donate cho Duy Mạnh
-    </div>
-
-    <div class="donate-subtitle">
-      Cảm ơn bạn đã ủng hộ mình ❤️
-    </div>
-
-    <div class="qr-wrap">
-
-      <img
-        src="qr-donate.png"
-        alt="QR Donate"
-      >
-
-    </div>
-
-    <div class="donate-note">
-      📱 Quét mã QR để ủng hộ
-    </div>
-
-  </div>
-
-</div>
 
 
 <!-- =========================
@@ -1850,59 +1842,6 @@ async function loadVisitorCount(){
 }
 
 loadVisitorCount();
-
-
-/* =========================
-   DONATE QR
-========================= */
-
-const donateModal =
-  document.getElementById("donateModal");
-
-
-function openDonate(){
-
-  donateModal.classList.add("show");
-
-  document.body.style.overflow="hidden";
-
-}
-
-
-function closeDonate(event){
-
-  if(
-    event &&
-    event.target!==donateModal
-  ){
-    return;
-  }
-
-  donateModal.classList.remove("show");
-
-  document.body.style.overflow="";
-
-}
-
-
-/* =========================
-   ĐÓNG QR BẰNG ESC
-========================= */
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(e.key==="Escape"){
-
-      donateModal.classList.remove("show");
-
-      document.body.style.overflow="";
-
-    }
-
-  }
-);
 
 
 /* =========================
