@@ -96,6 +96,22 @@ THE SOFTWARE.
 
 
 <style>.fish-top-actions{display:flex;align-items:center;gap:16px}.fish-nav{position:relative}.fish-menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}.fish-menu{position:absolute;right:0;top:50px;width:180px;z-index:50;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 35px #0008}.fish-menu[hidden]{display:none}.fish-menu a{display:block;padding:12px;border-radius:7px}.fish-menu a:hover{background:#302b40}@media(max-width:500px){.fish-top-actions .platform{display:none}.brand{font-size:10px;letter-spacing:1px}}</style><script defer src="./fish-menu.js"></script>
+<script id="mduy-3d-hd-bootstrap">
+(() => {
+  // Request a sharper WebGL context before the 3D viewer creates it. Export logic is untouched.
+  const originalGetContext = HTMLCanvasElement.prototype.getContext;
+  HTMLCanvasElement.prototype.getContext = function(type, attrs) {
+    if (typeof type === 'string' && /^(webgl2?|experimental-webgl)$/.test(type)) {
+      attrs = Object.assign({}, attrs || {}, {
+        antialias: true,
+        powerPreference: 'high-performance',
+        preserveDrawingBuffer: true
+      });
+    }
+    return originalGetContext.call(this, type, attrs);
+  };
+})();
+</script>
 <script defer src="./fish-export-points.js"></script><link rel="stylesheet" href="./category-icons.css"><link rel="stylesheet" href="./item-picker.css"><script defer src="./item-picker.js?v=20261011-1347"></script>
 <style id="mduy-3d-controls-css">
 /* ===== MDUY 3D PRO CONTROLS ===== */
@@ -114,6 +130,31 @@ THE SOFTWARE.
 @media(max-width:640px){.mduy-3d-hud{top:52px;right:10px;gap:5px;padding:5px;border-radius:14px;max-width:calc(100% - 20px);overflow-x:auto}.mduy-3d-btn{height:32px;min-width:32px;padding:0 8px}.mduy-3d-btn span{display:none}.mduy-3d-label{left:12px;bottom:12px;font-size:8px}.mduy-3d-grid{background-size:34px 34px}}
 </style>
 
+<style id="mduy-3d-sharp-clean-css">
+/* ===== MDUY 3D SHARP / CLEAN ===== */
+#viewport {
+  height: 580px !important;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(circle at 50% 34%, #314d83 0%, #18264c 30%, #0a1228 67%, #050816 100%) !important;
+}
+#viewport canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  image-rendering: auto !important;
+  filter: none !important;
+  transform: none !important;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+/* Remove the floating control bar so the character is the focus. Its DOM/JS remains intact. */
+#mduy-3d-hud, #mduy-3d-grid, .mduy-3d-label { display: none !important; }
+.watermark { opacity: .035 !important; }
+.stage-head { z-index: 4; }
+@media(max-width:640px){ #viewport { height: 500px !important; } }
+@media(max-width:440px){ #viewport { height: 430px !important; } }
+</style>
 </head>
 <body>
   <div class="shell">
@@ -570,6 +611,27 @@ self.onmessage=async event=>{
 })();
 </script>
 
+<script id="mduy-3d-sharp-runtime">
+(() => {
+  const tune = () => {
+    const canvas = document.querySelector('#viewport canvas');
+    if (!canvas) return;
+    canvas.style.filter = 'none';
+    canvas.style.transform = 'none';
+    canvas.style.imageRendering = 'auto';
+    canvas.style.backfaceVisibility = 'hidden';
+    canvas.style.webkitBackfaceVisibility = 'hidden';
+  };
+  const viewport = document.getElementById('viewport');
+  if (viewport) {
+    new MutationObserver(tune).observe(viewport, {childList:true, subtree:true});
+    new ResizeObserver(tune).observe(viewport);
+  }
+  window.addEventListener('resize', tune, {passive:true});
+  window.addEventListener('orientationchange', () => setTimeout(tune, 250), {passive:true});
+  setTimeout(tune, 350);
+})();
+</script>
 <script id="mduy-3d-controls-js">
 (() => {
   const init=()=>{
@@ -589,8 +651,8 @@ self.onmessage=async event=>{
     let scale=1, lightIndex=0;
     const applyZoom=()=>{
       const canvas=viewport.querySelector('canvas');
-      if(canvas){canvas.style.transform=`scale(${scale})`;canvas.style.transformOrigin='50% 53%';}
-      mode.textContent=`3D LIVE · ${Math.round(scale*100)}%`;
+      if(canvas){canvas.style.transform='none';canvas.style.transformOrigin='50% 53%';}
+      mode.textContent='3D LIVE';
     };
     auto.addEventListener('click',()=>{
       rotate?.click();
