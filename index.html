@@ -260,7 +260,9 @@ function fishPatchVoiceRaw(raw){
   view.setFloat32(durationPos,FISH_VOICE_DURATION,true);
   const pathAt=find(path,at+4+nb.length);
   if(pathAt<0)throw Error('Không tìm thấy resource của AudioClip '+name+'.');
-  const sizePos=pathAt+path.length+1+8;
+  const offsetPos=pathAt+path.length+1;
+  view.setBigUint64(offsetPos,0n,true);
+  const sizePos=offsetPos+8;
   view.setBigUint64(sizePos,BigInt(FISH_VOICE_WAV_SIZE),true);
  }
  return raw;
@@ -356,7 +358,7 @@ self.onmessage=async event=>{
   const bundle=await pack(base,patch,compressed,p=>postMessage({id,progress:p}));postMessage({id,progress:80});
   const [os,game]=version.split('-');
   const folder=os==='android'?(game==='max'?'com.dts.freefiremax':'com.dts.freefireth')+'/files/contentcache/Optional/android/optionalavatarres/gameassetbundles/':'Documents/contentcache/Optional/ios/optionalavatarres/gameassetbundles/';
-  const zip=fflate.zipSync({[folder+base.bundleName]:bundle,['Bản quyền mod thuộc về Mạnh Duy.TXT']:decode('QuG6o24gcXV54buBbiBtb2QgdGh14buBIE3huqFuaCBEdXk=')},{level:0});
+  const zip=fflate.zipSync({[folder+base.bundleName]:bundle,['Bản quyền mod thuộc về Mạnh Duy.TXT']:decode('QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIE3huqFuaCBEdXk=')},{level:0});
   postMessage({id,result:zip.buffer},[zip.buffer]);
  }catch(error){postMessage({id,error:error.message||String(error)});}
 };
@@ -389,7 +391,7 @@ self.onmessage=async event=>{
  window.alokCancelExport=()=>{for(const w of workers.values())w.terminate();workers.clear();for(const task of pending.values())task.reject(new DOMException('Đã hủy tạo file','AbortError'));pending.clear();running.clear();};
  window.alokExport = (selection,version,progress) => {
   const assets=window.alokWardrobe.assets;const voice='fish'; if(assets.characterId==='ignis'&&assets.itemCatalog.top[selection.top]?.id==='top-sasuke')return window.ignisIG38Export(assets,selection,version,progress);
-  if(assets.characterId!=='alok' && (!assets.voiceProfile?.enabled||voice==='alok') && Object.keys(selection).every(k=>assets.itemCatalog[k]?.[selection[k]]?.default)){
+  if((!assets.voiceProfile?.enabled||voice==='alok') && Object.keys(selection).every(k=>assets.itemCatalog[k]?.[selection[k]]?.default)){
    const original=assets.originals[version];if(!original||!assets.downloads[original.url])return Promise.reject(Error('Thiếu file gốc của nhân vật và phiên bản này.'));
    const binary=atob(assets.downloads[original.url]);const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));progress?.(100);return Promise.resolve(bytes);
   }
@@ -427,7 +429,7 @@ self.onmessage=async event=>{
 <script id="alok-download-package">(() => {
  const prefixes={'android-normal':'MDUY MOD FF ALOK THỨC TỈNH ADR FFTH','android-max':'MDUY MOD FF ALOK THỨC TỈNH ADR FFM','ios-normal':'MDUY MOD FF ALOK THỨC TỈNH IOS FFTH','ios-max':'MDUY MOD FF ALOK THỨC TỈNH IOS FFM'};
  const copyrightName="Bản quyền mod thuộc về Mạnh Duy.TXT";
- const copyrightBytes=Uint8Array.from(atob("QuG6o24gcXV54buBbiBtb2QgdGh14buBIE3huqFuaCBEdXk="),c=>c.charCodeAt(0));
+ const copyrightBytes=Uint8Array.from(atob("QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIE3huqFuaCBEdXk="),c=>c.charCodeAt(0));
  const usedCodes=new Set();
  let lastCode;try{lastCode=localStorage.getItem("alok-last-export-code");}catch{}
  window.alokPackageDownload=(bytes,version)=>{
@@ -487,5 +489,23 @@ self.onmessage=async event=>{
 
 
 
-<style>#mod-progress{position:fixed;inset:0;z-index:10000;background:#08080baa;display:grid;place-items:center;padding:20px}#mod-progress[hidden]{display:none}.mod-progress-card{width:min(480px,100%);background:#242431;border:1px solid #b29aff;border-radius:20px;padding:26px;color:#fff}.mod-progress-heading{display:flex;justify-content:space-between;gap:20px;font-weight:700;font-size:20px}.mod-progress-card progress{width:100%;accent-color:#c5ec78;margin:20px 0 10px}.mod-progress-card p{color:#b8b8c5}.mod-progress-card button{padding:10px 20px;border:1px solid #777;border-radius:10px;background:#333341;color:#fff;cursor:pointer}</style><div id="mod-progress" hidden role="dialog" aria-modal="true" aria-labelledby="mod-progress-title"><div class="mod-progress-card"><div class="mod-progress-heading"><span id="mod-progress-title">Đang tạo file mod</span><span id="mod-progress-percent">0%</span></div><progress id="mod-progress-bar" max="100" value="0"></progress><p id="mod-progress-step" aria-live="polite">Đang chuẩn bị trang phục…</p><button type="button" id="mod-cancel">Hủy tạo file</button></div></div></body>
+<style>#mod-progress{position:fixed;inset:0;z-index:10000;background:#08080baa;display:grid;place-items:center;padding:20px}#mod-progress[hidden]{display:none}.mod-progress-card{width:min(480px,100%);background:#242431;border:1px solid #b29aff;border-radius:20px;padding:26px;color:#fff}.mod-progress-heading{display:flex;justify-content:space-between;gap:20px;font-weight:700;font-size:20px}.mod-progress-card progress{width:100%;accent-color:#c5ec78;margin:20px 0 10px}.mod-progress-card p{color:#b8b8c5}.mod-progress-card button{padding:10px 20px;border:1px solid #777;border-radius:10px;background:#333341;color:#fff;cursor:pointer}</style><div id="mod-progress" hidden role="dialog" aria-modal="true" aria-labelledby="mod-progress-title"><div class="mod-progress-card"><div class="mod-progress-heading"><span id="mod-progress-title">Đang tạo file mod</span><span id="mod-progress-percent">0%</span></div><progress id="mod-progress-bar" max="100" value="0"></progress><p id="mod-progress-step" aria-live="polite">Đang chuẩn bị trang phục…</p><button type="button" id="mod-cancel">Hủy tạo file</button></div></div><script>
+(() => {
+  const fixCopyright = () => {
+    const el = document.getElementById('selection-summary');
+    if (!el) return;
+    if (el.textContent.includes('Bản quyền FISH MOD Z')) {
+      el.textContent = el.textContent.replaceAll('Bản quyền FISH MOD Z', 'Bản quyền Mạnh Duy');
+    }
+  };
+  const start = () => {
+    fixCopyright();
+    const el = document.getElementById('selection-summary');
+    if (el) new MutationObserver(fixCopyright).observe(el, {childList:true, characterData:true, subtree:true});
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
+  else start();
+})();
+</script>
+</body>
 </html>
