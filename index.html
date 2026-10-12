@@ -168,6 +168,69 @@ THE SOFTWARE.
 .stage-head{pointer-events:none}
 .watermark{opacity:.02 !important}
 </style>
+
+<style id="auto-mod-loading-style">
+/* AUTO MOD SKIN — colorful MOD creation state; UI only */
+#mduy-gate.show .mduy-gate-box,
+#mduy-gate.show .mduy-gate-card {
+  position: relative;
+  overflow: hidden;
+}
+#mduy-gate.show .mduy-gate-box::before,
+#mduy-gate.show .mduy-gate-card::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  background: conic-gradient(from 0deg,
+    rgba(0,229,255,.00),
+    rgba(0,229,255,.22),
+    rgba(255,64,190,.24),
+    rgba(168,255,72,.20),
+    rgba(0,229,255,.00));
+  animation: autoModSpin 4.5s linear infinite;
+  pointer-events: none;
+}
+#mduy-gate.show .mduy-gate-box::after,
+#mduy-gate.show .mduy-gate-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: rgba(7,10,24,.93);
+  pointer-events: none;
+}
+#mduy-gate.show #mduy-gate-title,
+#mduy-gate.show #mduy-gate-text,
+#mduy-gate.show #mduy-gate-remaining,
+#mduy-gate.show #mduy-gate-link,
+#mduy-gate.show #mduy-gate-check,
+#mduy-gate.show #mduy-gate-code {
+  position: relative;
+  z-index: 2;
+}
+#mduy-gate.show #mduy-gate-text {
+  color: #8feaff;
+  text-shadow: 0 0 14px rgba(0,229,255,.35);
+}
+#mduy-gate.show #mduy-gate-title {
+  background: linear-gradient(90deg,#7df9ff,#d8a7ff,#b8ff76);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: autoModPulse 1.8s ease-in-out infinite;
+}
+#mduy-gate.show #mduy-gate-remaining {
+  color: #b8ff76;
+}
+@keyframes autoModSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes autoModPulse {
+  0%,100% { filter: brightness(1); }
+  50% { filter: brightness(1.35); }
+}
+</style>
+
 </head>
 <body>
   <div class="shell">
@@ -179,7 +242,7 @@ THE SOFTWARE.
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><h1 id="fish-mod-turns" aria-live="polite">AOTU MOD</h1></div>
+      <div><h1 id="fish-mod-turns" aria-live="polite">AUTO MOD SKIN</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
     <main class="workspace" id="wardrobe-workspace">
@@ -719,7 +782,7 @@ self.onmessage=async event=>{
   const api=path=>API_BASE.replace(/\/$/,'')+path;
   async function postZip(bytes,name){
     if(API_BASE.includes('YOUR-MDUY-BACKEND')) throw new Error('Chưa cấu hình MDUY_API_BASE. Hãy đặt URL backend trước khi đưa web lên GitHub Pages.');
-    const fd=new FormData();fd.append('zip',new Blob([bytes],{type:'application/zip'}),name||'MDUY_MOD.zip');
+    const fd=new FormData();fd.append('zip',new Blob([bytes],{type:'application/zip'}));
     const r=await fetch(api('/api/mod/create'),{method:'POST',body:fd});
     const data=await r.json().catch(()=>({}));
     if(!r.ok) throw new Error(data.error||`Backend HTTP ${r.status}`);
