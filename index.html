@@ -69,8 +69,7 @@ THE SOFTWARE.
 
 
 
-<style>.fish-top-actions{display:flex;align-items:center;gap:16px}.fish-nav{position:relative}.fish-menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}.fish-menu{position:absolute;right:0;top:50px;width:180px;z-index:50;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 35px #0008}.fish-menu[hidden]{display:none}.fish-menu a{display:block;padding:12px;border-radius:7px}.fish-menu a:hover{background:#302b40}@media(max-width:500px){.fish-top-actions .platform{display:none}.brand{font-size:10px;letter-spacing:1px}}</style><script defer src="./fish-menu.js"></script>
-<script defer src="./fish-export-points.js"></script><link rel="stylesheet" href="./category-icons.css"><link rel="stylesheet" href="./item-picker.css"><script defer src="./item-picker.js?v=20261011-1347"></script></head>
+<style>.fish-top-actions{display:flex;align-items:center;gap:16px}.fish-nav{position:relative}.fish-menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}.fish-menu{position:absolute;right:0;top:50px;width:180px;z-index:50;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 35px #0008}.fish-menu[hidden]{display:none}.fish-menu a{display:block;padding:12px;border-radius:7px}.fish-menu a:hover{background:#302b40}@media(max-width:500px){.fish-top-actions .platform{display:none}.brand{font-size:10px;letter-spacing:1px}}</style><script defer src="./fish-menu.js"></script><script defer src="./fish-export-points.js"></script><link rel="stylesheet" href="./category-icons.css"><link rel="stylesheet" href="./item-picker.css"><script defer src="./item-picker.js?v=20261011-1347"></script></head>
 <body>
   <div class="shell">
     <header class="topbar">
@@ -487,23 +486,5 @@ self.onmessage=async event=>{
 
 
 
-<style>#mod-progress{position:fixed;inset:0;z-index:10000;background:#08080baa;display:grid;place-items:center;padding:20px}#mod-progress[hidden]{display:none}.mod-progress-card{width:min(480px,100%);background:#242431;border:1px solid #b29aff;border-radius:20px;padding:26px;color:#fff}.mod-progress-heading{display:flex;justify-content:space-between;gap:20px;font-weight:700;font-size:20px}.mod-progress-card progress{width:100%;accent-color:#c5ec78;margin:20px 0 10px}.mod-progress-card p{color:#b8b8c5}.mod-progress-card button{padding:10px 20px;border:1px solid #777;border-radius:10px;background:#333341;color:#fff;cursor:pointer}</style><div id="mod-progress" hidden role="dialog" aria-modal="true" aria-labelledby="mod-progress-title"><div class="mod-progress-card"><div class="mod-progress-heading"><span id="mod-progress-title">Đang tạo file mod</span><span id="mod-progress-percent">0%</span></div><progress id="mod-progress-bar" max="100" value="0"></progress><p id="mod-progress-step" aria-live="polite">Đang chuẩn bị trang phục…</p><button type="button" id="mod-cancel">Hủy tạo file</button></div></div><script>
-(() => {
-  const fixCopyright = () => {
-    const el = document.getElementById('selection-summary');
-    if (!el) return;
-    if (el.textContent.includes('Bản quyền FISH MOD Z')) {
-      el.textContent = el.textContent.replaceAll('Bản quyền FISH MOD Z', 'Bản quyền Mạnh Duy');
-    }
-  };
-  const start = () => {
-    fixCopyright();
-    const el = document.getElementById('selection-summary');
-    if (el) new MutationObserver(fixCopyright).observe(el, {childList:true, characterData:true, subtree:true});
-  };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
-  else start();
-})();
-</script>
-</body>
+<style>#mod-progress{position:fixed;inset:0;z-index:10000;background:#08080baa;display:grid;place-items:center;padding:20px}#mod-progress[hidden]{display:none}.mod-progress-card{width:min(480px,100%);background:#242431;border:1px solid #b29aff;border-radius:20px;padding:26px;color:#fff}.mod-progress-heading{display:flex;justify-content:space-between;gap:20px;font-weight:700;font-size:20px}.mod-progress-card progress{width:100%;accent-color:#c5ec78;margin:20px 0 10px}.mod-progress-card p{color:#b8b8c5}.mod-progress-card button{padding:10px 20px;border:1px solid #777;border-radius:10px;background:#333341;color:#fff;cursor:pointer}</style><div id="mod-progress" hidden role="dialog" aria-modal="true" aria-labelledby="mod-progress-title"><div class="mod-progress-card"><div class="mod-progress-heading"><span id="mod-progress-title">Đang tạo file mod</span><span id="mod-progress-percent">0%</span></div><progress id="mod-progress-bar" max="100" value="0"></progress><p id="mod-progress-step" aria-live="polite">Đang chuẩn bị trang phục…</p><button type="button" id="mod-cancel">Hủy tạo file</button></div></div></body>
 </html>
