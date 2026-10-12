@@ -69,7 +69,8 @@ THE SOFTWARE.
 
 
 
-<style>.fish-top-actions{display:flex;align-items:center;gap:16px}.fish-nav{position:relative}.fish-menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}.fish-menu{position:absolute;right:0;top:50px;width:180px;z-index:50;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 35px #0008}.fish-menu[hidden]{display:none}.fish-menu a{display:block;padding:12px;border-radius:7px}.fish-menu a:hover{background:#302b40}@media(max-width:500px){.fish-top-actions .platform{display:none}.brand{font-size:10px;letter-spacing:1px}}</style><script defer src="./fish-menu.js"></script><script defer src="./fish-export-points.js"></script><link rel="stylesheet" href="./category-icons.css"><link rel="stylesheet" href="./item-picker.css"><script defer src="./item-picker.js?v=20261011-1347"></script></head>
+<style>.fish-top-actions{display:flex;align-items:center;gap:16px}.fish-nav{position:relative}.fish-menu-toggle{display:grid;place-items:center;width:42px;height:42px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text)}.fish-menu{position:absolute;right:0;top:50px;width:180px;z-index:50;padding:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 35px #0008}.fish-menu[hidden]{display:none}.fish-menu a{display:block;padding:12px;border-radius:7px}.fish-menu a:hover{background:#302b40}@media(max-width:500px){.fish-top-actions .platform{display:none}.brand{font-size:10px;letter-spacing:1px}}</style><script defer src="./fish-menu.js"></script>
+<script defer src="./fish-export-points.js"></script><link rel="stylesheet" href="./category-icons.css"><link rel="stylesheet" href="./item-picker.css"><script defer src="./item-picker.js?v=20261011-1347"></script></head>
 <body>
   <div class="shell">
     <header class="topbar">
@@ -355,7 +356,7 @@ self.onmessage=async event=>{
   const bundle=await pack(base,patch,compressed,p=>postMessage({id,progress:p}));postMessage({id,progress:80});
   const [os,game]=version.split('-');
   const folder=os==='android'?(game==='max'?'com.dts.freefiremax':'com.dts.freefireth')+'/files/contentcache/Optional/android/optionalavatarres/gameassetbundles/':'Documents/contentcache/Optional/ios/optionalavatarres/gameassetbundles/';
-  const zip=fflate.zipSync({[folder+base.bundleName]:bundle,['Bản quyền mod thuộc về Mạnh Duy.TXT']:decode('QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIE3huqFuaCBEdXk=')},{level:0});
+  const zip=fflate.zipSync({[folder+base.bundleName]:bundle,['Bản quyền mod thuộc về Mạnh Duy.TXT']:decode('QuG6o24gcXV54buBbiBtb2QgdGh14buBIE3huqFuaCBEdXk=')},{level:0});
   postMessage({id,result:zip.buffer},[zip.buffer]);
  }catch(error){postMessage({id,error:error.message||String(error)});}
 };
@@ -388,7 +389,7 @@ self.onmessage=async event=>{
  window.alokCancelExport=()=>{for(const w of workers.values())w.terminate();workers.clear();for(const task of pending.values())task.reject(new DOMException('Đã hủy tạo file','AbortError'));pending.clear();running.clear();};
  window.alokExport = (selection,version,progress) => {
   const assets=window.alokWardrobe.assets;const voice='fish'; if(assets.characterId==='ignis'&&assets.itemCatalog.top[selection.top]?.id==='top-sasuke')return window.ignisIG38Export(assets,selection,version,progress);
-  if((!assets.voiceProfile?.enabled||voice==='alok') && Object.keys(selection).every(k=>assets.itemCatalog[k]?.[selection[k]]?.default)){
+  if(assets.characterId!=='alok' && (!assets.voiceProfile?.enabled||voice==='alok') && Object.keys(selection).every(k=>assets.itemCatalog[k]?.[selection[k]]?.default)){
    const original=assets.originals[version];if(!original||!assets.downloads[original.url])return Promise.reject(Error('Thiếu file gốc của nhân vật và phiên bản này.'));
    const binary=atob(assets.downloads[original.url]);const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));progress?.(100);return Promise.resolve(bytes);
   }
@@ -426,7 +427,7 @@ self.onmessage=async event=>{
 <script id="alok-download-package">(() => {
  const prefixes={'android-normal':'MDUY MOD FF ALOK THỨC TỈNH ADR FFTH','android-max':'MDUY MOD FF ALOK THỨC TỈNH ADR FFM','ios-normal':'MDUY MOD FF ALOK THỨC TỈNH IOS FFTH','ios-max':'MDUY MOD FF ALOK THỨC TỈNH IOS FFM'};
  const copyrightName="Bản quyền mod thuộc về Mạnh Duy.TXT";
- const copyrightBytes=Uint8Array.from(atob("QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIE3huqFuaCBEdXk="),c=>c.charCodeAt(0));
+ const copyrightBytes=Uint8Array.from(atob("QuG6o24gcXV54buBbiBtb2QgdGh14buBIE3huqFuaCBEdXk="),c=>c.charCodeAt(0));
  const usedCodes=new Set();
  let lastCode;try{lastCode=localStorage.getItem("alok-last-export-code");}catch{}
  window.alokPackageDownload=(bytes,version)=>{
