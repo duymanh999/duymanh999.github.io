@@ -168,6 +168,12 @@ THE SOFTWARE.
 .stage-head{pointer-events:none}
 .watermark{opacity:.02 !important}
 </style>
+
+<style id="mduy-lock-css">
+#mduy-lock{position:fixed;inset:0;z-index:20000;background:#030513d9;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:grid;place-items:center;padding:18px}
+#mduy-lock[hidden]{display:none}.mduy-lock-card{width:min(460px,100%);border:1px solid #5967a5;border-radius:22px;padding:22px;background:linear-gradient(145deg,#111833,#28122f);box-shadow:0 25px 90px #000b,0 0 45px #8f6bff35;color:#fff}.mduy-lock-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.mduy-lock-head h2{margin:0;font-size:24px}.mduy-lock-kicker{margin:0 0 5px;color:#62eaff;font-size:10px;font-weight:900;letter-spacing:2px}.mduy-lock-head button{border:1px solid #4a5790;background:#151b37;color:#fff;border-radius:10px;width:36px;height:36px;font-size:24px;line-height:1}.mduy-lock-card>p{color:#bfc8e8;font-size:13px;line-height:1.65}.mduy-lock-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #343f70;background:#0d1430aa;border-radius:13px;margin-top:9px}.mduy-lock-step>span{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#ff5fcf,#716cff);font-weight:900}.mduy-lock-step strong,.mduy-lock-step small{display:block}.mduy-lock-step small{color:#929dc5;margin-top:3px;font-size:11px}.mduy-lock-primary,.mduy-lock-secondary{width:100%;margin-top:15px;border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}.mduy-lock-primary{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);color:#07101d;box-shadow:0 0 25px #45e7ff44}.mduy-lock-secondary{background:#202846;border:1px solid #56649c;color:#fff}.mduy-lock-status{text-align:center;min-height:18px;margin-bottom:0!important}.mduy-lock-status.error{color:#ff8da9}.mduy-lock-status.ok{color:#8dffd7}.mduy-lock-password{margin:13px 0 0;padding:12px;border:1px dashed #5cecff;border-radius:11px;text-align:center;font:900 20px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:2px;color:#fff;background:#071526}
+</style>
+
 </head>
 <body>
   <div class="shell">
@@ -233,12 +239,23 @@ THE SOFTWARE.
         <div class="mix-tools"><button id="randomize" type="button">⇄ Phối ngẫu nhiên</button><button id="reset" type="button">Bộ mặc định</button></div>
         <div class="download-area">
           <p class="selection-caption">Bộ đang chọn</p><p class="selection-summary" id="selection-summary" aria-live="polite"></p>
-          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Đang tải dữ liệu…</span></button>
+          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Tạo MOD</span></button>
           <button class="download" id="download-all" type="button" disabled style="margin-top:10px"><span id="download-all-label">Tạo 4 phiên bản</span></button>
           <p id="status" class="status" role="status" aria-live="polite">Lựa chọn của bạn được lưu trên trình duyệt này.</p>
         </div>
       </section>
     </main>
+    <div id="mduy-lock" hidden role="dialog" aria-modal="true" aria-labelledby="mduy-lock-title">
+      <div class="mduy-lock-card">
+        <div class="mduy-lock-head"><div><p class="mduy-lock-kicker">MDUY MOD FF</p><h2 id="mduy-lock-title">MOD đã sẵn sàng</h2></div><button id="mduy-lock-close" type="button" aria-label="Đóng">×</button></div>
+        <p id="mduy-lock-text">File sẽ được khóa bằng mật khẩu riêng. Bấm bên dưới để lấy mật khẩu.</p>
+        <div class="mduy-lock-step"><span>1</span><div><strong>Đi qua Link4m</strong><small>Mở link kiếm tiền để nhận quyền lấy mật khẩu.</small></div></div>
+        <div class="mduy-lock-step"><span>2</span><div><strong>Nhận mật khẩu</strong><small>Mỗi file có mật khẩu ngẫu nhiên riêng.</small></div></div>
+        <button id="mduy-get-password" class="mduy-lock-primary" type="button">LẤY MẬT KHẨU</button>
+        <button id="mduy-download-locked" class="mduy-lock-secondary" type="button" hidden>TẢI ZIP ĐÃ KHÓA</button>
+        <p id="mduy-lock-status" class="mduy-lock-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
     <noscript><p class="noscript">Bật JavaScript để chọn trang phục và tải file.</p></noscript>
     <footer><span>Dữ liệu Alok cho Android và iOS · Free Fire thường / MAX.</span><span>MDUY MOD FF · 4 phiên bản.</span></footer>
   </div>
@@ -686,5 +703,108 @@ self.onmessage=async event=>{
   setTimeout(apply,2500);
 })();
 </script>
+
+<script id="mduy-link4m-lock-runtime">
+(() => {
+  const BACKEND = 'https://mduy-mod-backend.onrender.com';
+  const $ = id => document.getElementById(id);
+  const modal=$('mduy-lock'), getBtn=$('mduy-get-password'), dlBtn=$('mduy-download-locked'), closeBtn=$('mduy-lock-close'), status=$('mduy-lock-status');
+  let pendingJob=null, pendingName='MDUY-MOD.zip';
+  const show=(v=true)=>{if(!modal)return;modal.hidden=!v;if(v)status.textContent='';};
+  const setStatus=(text,kind='')=>{if(!status)return;status.className='mduy-lock-status '+kind;status.textContent=text;};
+  closeBtn?.addEventListener('click',()=>show(false));
+  modal?.addEventListener('click',e=>{if(e.target===modal)show(false);});
+
+  const selectionFromForm=()=>Object.fromEntries(['hair','top','bottom','shoes','mask','face','action'].map(k=>[k,$(k)?.value||'']));
+  const bytesToBase64=(bytes)=>{
+    let binary='';const chunk=0x8000;
+    for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+    return btoa(binary);
+  };
+  const saveFile=(bytes,name)=>{const blob=bytes instanceof Blob?bytes:new Blob([bytes],{type:'application/zip'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);};
+  const packageOne=async(version,bytes)=>window.alokPackageDownload(bytes,version);
+
+  async function createLocked(packaged){
+    const zipBase64=bytesToBase64(packaged.bytes);
+    const r=await fetch(BACKEND+'/api/mod/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({zipBase64,filename:packaged.name})});
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok)throw Error(data.error||'Backend không tạo được MOD.');
+    if(!data.id||!data.shortUrl)throw Error('Backend chưa trả về Link4m.');
+    return {id:data.id,shortUrl:data.shortUrl,name:packaged.name,downloadUrl:`${BACKEND}/api/mod/download/${encodeURIComponent(data.id)}`};
+  }
+
+  async function begin(packaged){
+    show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';getBtn.hidden=false;dlBtn.hidden=true;
+    $('mduy-lock-title').textContent='MOD đã sẵn sàng';
+    $('mduy-lock-text').textContent='ZIP đã được khóa bằng mật khẩu riêng. Bấm bên dưới để đi qua Link4m và nhận mật khẩu.';
+    setStatus('Đang tạo ZIP khóa…');
+    try{
+      pendingJob=await createLocked(packaged);
+      setStatus('Đã khóa ZIP. Bấm “LẤY MẬT KHẨU” để mở Link4m.','ok');
+    }catch(e){setStatus(e.message||'Không tạo được MOD.','error');pendingJob=null;}
+  }
+
+  getBtn?.addEventListener('click',()=>{
+    if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
+    sessionStorage.setItem('mduy_pending_job',pendingJob.id);
+    sessionStorage.setItem('mduy_pending_download',pendingJob.downloadUrl);
+    window.location.href=pendingJob.shortUrl;
+  });
+
+  dlBtn?.addEventListener('click',async()=>{
+    const url=dlBtn.dataset.url;if(!url||dlBtn.disabled)return;
+    dlBtn.disabled=true;setStatus('Đang tải ZIP đã khóa…');
+    try{const r=await fetch(url);if(!r.ok)throw Error('Không tải được ZIP.');saveFile(await r.blob(),pendingName||'MDUY-MOD.zip');setStatus('Đã tải ZIP. Mở bằng 7-Zip/WinRAR và nhập mật khẩu.','ok');}
+    catch(e){setStatus(e.message||'Không tải được ZIP.','error');}finally{dlBtn.disabled=false;}
+  });
+
+  async function makeAndLock(btn){
+    const version=$('version')?.value||'android-normal';
+    const progress=$('mod-progress'),bar=$('mod-progress-bar'),percent=$('mod-progress-percent'),step=$('mod-progress-step');
+    progress.hidden=false;bar.value=0;percent.textContent='0%';step.textContent='Đang chuẩn bị dữ liệu…';
+    try{
+      await window.alokEnsureExport(p=>{bar.value=p;percent.textContent=p+'%';step.textContent='Đang ghép dữ liệu MOD… '+p+'%';});
+      if(btn.id==='download-all'){
+        step.textContent='Đang tạo 4 phiên bản…';
+        const all=await window.alokExportAll(selectionFromForm(),p=>{bar.value=p;percent.textContent=p+'%';});
+        const bundle={};
+        const versionMap={'Android_FF_THUONG.zip':'android-normal','Android_FF_MAX.zip':'android-max','iOS_FF_THUONG.zip':'ios-normal','iOS_FF_MAX.zip':'ios-max'};
+        for(const [name,data] of Object.entries(all)){
+          const packaged=await packageOne(versionMap[name]||name.replace(/\.zip$/,''),data);
+          bundle[packaged.name]=packaged.bytes;
+        }
+        const outer=fflate.zipSync(bundle,{level:0});
+        await begin({bytes:outer,name:'MDUY MOD FF ALOK 4 PHIEN BAN.zip'});
+      }else{
+        step.textContent='Đang tạo MOD…';
+        const bytes=await window.alokExport(selectionFromForm(),version,p=>{bar.value=p;percent.textContent=p+'%';});
+        const packaged=await packageOne(version,bytes);
+        await begin(packaged);
+      }
+    }catch(err){if(err?.name!=='AbortError'){setStatus(err.message||'Không tạo được file.','error');}}
+    finally{progress.hidden=true;}
+  }
+
+  function install(){
+    document.addEventListener('click',async e=>{
+      const btn=e.target.closest?.('#download,#download-all');if(!btn||btn.disabled)return;
+      e.preventDefault();e.stopImmediatePropagation();
+      await makeAndLock(btn);
+    },true);
+  }
+
+  // The backend currently sends Link4m directly to /claim/:id.
+  // This helper lets the user reopen the generated ZIP after claiming the password.
+  function showReturnHint(){
+    const id=sessionStorage.getItem('mduy_pending_job');
+    if(!id)return;
+    pendingJob={id,downloadUrl:sessionStorage.getItem('mduy_pending_download')||`${BACKEND}/api/mod/download/${encodeURIComponent(id)}`};
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{install();showReturnHint();},{once:true});
+  else{install();showReturnHint();}
+})();
+</script>
+
 </body>
 </html>
