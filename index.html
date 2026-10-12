@@ -42,6 +42,32 @@
 
 
 </style>
+<style>
+/* ===== MDUY NEON RAINBOW UI — visual-only layer ===== */
+:root{color-scheme:dark;--bg:#070914;--panel:#11152a;--line:#343b68;--muted:#aeb7dc;--text:#f7f8ff;--accent:#9b7cff;--green:#78ffd6;--pink:#ff5fcf;--cyan:#45e7ff;--yellow:#ffe66d}
+html{background:#070914}body{background:radial-gradient(circle at 10% 0%,#2a105d 0,transparent 28%),radial-gradient(circle at 90% 10%,#004e66 0,transparent 26%),radial-gradient(circle at 50% 100%,#4d0b45 0,transparent 34%),#070914;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:conic-gradient(from 0deg,#ff4fd8,#6c63ff,#38e8ff,#67ffb0,#ffe66d,#ff4fd8);filter:blur(100px);opacity:.13;animation:mduyAura 18s linear infinite}
+@keyframes mduyAura{to{transform:rotate(360deg)}}
+.shell{position:relative}.topbar{border-bottom:1px solid #5963a0;background:linear-gradient(90deg,#11152ad9,#201238d9,#081e31d9);box-shadow:0 12px 35px #0007,0 0 35px #6d5cff20;backdrop-filter:blur(18px)}
+.brandmark{background:linear-gradient(135deg,#ff5fcf,#8f6bff 45%,#42eaff);box-shadow:0 0 18px #a16cffaa,0 0 40px #ff52d744;color:#fff;animation:mduyPulse 2.5s ease-in-out infinite}
+@keyframes md<|DELIM_Zj|>uyPulse{50%{box-shadow:0 0 28px #42eaffaa,0 0 55px #ff52d755;transform:translateY(-1px)}}
+.platform .dot{background:#59ffd2;box-shadow:0 0 10px #59ffd2,0 0 22px #59ffd2}.eyebrow{color:#ff72da;text-shadow:0 0 15px #ff4fcf}.intro{position:relative}.intro:after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:linear-gradient(90deg,transparent,#ff5fcf,#45e7ff,#ffe66d,transparent);opacity:.65}
+h1{background:linear-gradient(90deg,#fff,#ffb8f0 30%,#9ef5ff 65%,#fff2a4);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px #7b6cff44}.count{color:#b9c4f5}
+.workspace{gap:24px}.stage,.panel,.version-card{border-color:#4b5794;background:linear-gradient(145deg,#151a34ee,#0c1023ee);box-shadow:0 18px 60px #0009,0 0 0 1px #ffffff05 inset,0 0 35px #6d5cff18;backdrop-filter:blur(16px)}
+.stage{overflow:hidden}.stage:before,.panel:before,.version-card:before{content:"";position:absolute;pointer-events:none}.stage{position:sticky}.stage:before{inset:0;background:linear-gradient(120deg,transparent 20%,#fff10%,transparent 45%);transform:translateX(-120%);animation:mduyShine 7s ease-in-out infinite}@keyframes md<|DELIM_Zj|>uyShine{55%,100%{transform:translateX(120%)}}
+#viewport{background:radial-gradient(circle at 50% 43%,#533b78 0,#24264d 28%,#111a37 58%,#090d20 100%);box-shadow:inset 0 0 80px #000b,inset 0 0 25px #6d5cff44}.stage-head{filter:drop-shadow(0 0 12px #000)}.character-name{color:#fff;text-shadow:0 0 14px #ff5fcf,0 0 28px #45e7ff}.badge{border-color:#45e7ff;color:#bdf8ff;background:#45e7ff12;box-shadow:0 0 15px #45e7ff33}
+.watermark{color:#ffffff0a;text-shadow:0 0 30px #45e7ff55,0 0 55px #ff5fcf33;animation:mduyWatermark 5s ease-in-out infinite}@keyframes md<|DELIM_Zj|>uyWatermark{50%{transform:translateX(-50%) scale(1.04);opacity:.9}}
+.stage-footer{border-top-color:#3b467c;background:linear-gradient(90deg,#0d1227aa,#171032aa,#081d2aaa)}.small-button,.mix-tools button{background:linear-gradient(135deg,#171c38,#292044);border-color:#515b9b;box-shadow:0 0 14px #6d5cff14;transition:.2s ease}.small-button:hover,.mix-tools button:hover{transform:translateY(-2px);border-color:#8c7dff;box-shadow:0 0 18px #8c7dff55,0 0 35px #45e7ff18}
+.panel-title{color:#fff;text-shadow:0 0 15px #8f6bff66}.preset{background:linear-gradient(135deg,#171c38,#24183c);border-color:#414d86;box-shadow:0 8px 22px #0004}.preset:hover{background:linear-gradient(135deg,#25234e,#3a1948);border-color:#ff5fcf;box-shadow:0 0 20px #ff5fcf33;transform:translateY(-2px)}.preset[aria-pressed="true"]{border-color:#45e7ff;background:linear-gradient(135deg,#25204e,#153b4c);box-shadow:0 0 22px #45e7ff2e,inset 0 0 20px #ff5fcf10}.preset-num{color:#45e7ff}
+.form-divider{background:linear-gradient(90deg,transparent,#5361a0,transparent)}.form-row label{color:#c6cff4}.row-icon{filter:drop-shadow(0 0 6px #8f6bff99)}
+select,.fixed-value{background:linear-gradient(135deg,#11172f,#251a3c);border-color:#4a5790;box-shadow:inset 0 0 15px #6d5cff0c,0 0 12px #0005}select:hover,select:focus{border-color:#45e7ff;box-shadow:0 0 18px #45e7ff2e,inset 0 0 18px #45e7ff10}.select-wrap:after{color:#ff6fd7;text-shadow:0 0 10px #ff5fcf}
+.download{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);background-size:220% 100%;color:#08101e;box-shadow:0 0 22px #45e7ff55,0 0 45px #ff5fcf22;animation:mduyButton 4s ease infinite}.download:hover{background-position:100% 0;filter:brightness(1.12);box-shadow:0 0 28px #45e7ff77,0 0 55px #ff5fcf44;transform:translateY(-2px)}.download:disabled{background:#313852;color:#8790ad;box-shadow:none;animation:none}.download-all{background:linear-gradient(100deg,#ffe66d,#ff9d5c,#ff5fcf,#9b7cff)!important;color:#17101e!important}
+.download-area{border-top-color:#45518b}.selection-caption{color:#63eaff}.selection-summary{color:#dce3ff}.status{color:#9ba8d7}.status.error{color:#ff8eac}
+.version-card{background:linear-gradient(145deg,#121733,#1b1230)}.version-card h2{background:linear-gradient(90deg,#fff,#ff7adf,#65ecff);-webkit-background-clip:text;background-clip:text;color:transparent}.choice-card,.package-card{background:linear-gradient(135deg,#12182f,#211535);border-color:#354274;box-shadow:0 8px 25px #0005}.choice-card:hover,.package-card:hover{border-color:#45e7ff;box-shadow:0 0 20px #45e7ff2b,0 12px 28px #0007}.choice-card.active{border-color:#ff70d8;background:linear-gradient(135deg,#26204d,#173d4a);box-shadow:0 0 22px #ff5fcf3b,inset 0 0 0 1px #fff6}.step-number{background:linear-gradient(135deg,#ff5fcf,#716cff);box-shadow:0 0 15px #8f6bff66}.back-version{color:#8defff}
+#mod-progress{background:#030513cc;backdrop-filter:blur(10px)}.mod-progress-card{background:linear-gradient(145deg,#171c3a,#281331);border-color:#ff5fcf;box-shadow:0 0 40px #8f6bff55,0 0 80px #ff5fcf22}.mod-progress-card progress{accent-color:#45e7ff}.mod-progress-card button{background:linear-gradient(135deg,#292347,#152f45);border-color:#5967a5}
+footer{color:#7f8bb8}footer a:hover{color:#63eaff}
+@media(prefers-reduced-motion:reduce){body:before,.brandmark,.stage:before,.watermark,.download{animation:none!important}}
+</style>
 <!-- Three.js (MIT)
 The MIT License
 
@@ -81,7 +107,7 @@ THE SOFTWARE.
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">Đang tải lượt mod…</h1></div>
+      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">MDUY MOD FF ✦ ALOK</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
     <main class="workspace" id="wardrobe-workspace">
