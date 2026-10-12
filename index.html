@@ -168,69 +168,6 @@ THE SOFTWARE.
 .stage-head{pointer-events:none}
 .watermark{opacity:.02 !important}
 </style>
-
-<style id="auto-mod-loading-style">
-/* AUTO MOD SKIN — colorful MOD creation state; UI only */
-#mduy-gate.show .mduy-gate-box,
-#mduy-gate.show .mduy-gate-card {
-  position: relative;
-  overflow: hidden;
-}
-#mduy-gate.show .mduy-gate-box::before,
-#mduy-gate.show .mduy-gate-card::before {
-  content: "";
-  position: absolute;
-  inset: -45%;
-  background: conic-gradient(from 0deg,
-    rgba(0,229,255,.00),
-    rgba(0,229,255,.22),
-    rgba(255,64,190,.24),
-    rgba(168,255,72,.20),
-    rgba(0,229,255,.00));
-  animation: autoModSpin 4.5s linear infinite;
-  pointer-events: none;
-}
-#mduy-gate.show .mduy-gate-box::after,
-#mduy-gate.show .mduy-gate-card::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  background: rgba(7,10,24,.93);
-  pointer-events: none;
-}
-#mduy-gate.show #mduy-gate-title,
-#mduy-gate.show #mduy-gate-text,
-#mduy-gate.show #mduy-gate-remaining,
-#mduy-gate.show #mduy-gate-link,
-#mduy-gate.show #mduy-gate-check,
-#mduy-gate.show #mduy-gate-code {
-  position: relative;
-  z-index: 2;
-}
-#mduy-gate.show #mduy-gate-text {
-  color: #8feaff;
-  text-shadow: 0 0 14px rgba(0,229,255,.35);
-}
-#mduy-gate.show #mduy-gate-title {
-  background: linear-gradient(90deg,#7df9ff,#d8a7ff,#b8ff76);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: autoModPulse 1.8s ease-in-out infinite;
-}
-#mduy-gate.show #mduy-gate-remaining {
-  color: #b8ff76;
-}
-@keyframes autoModSpin {
-  to { transform: rotate(360deg); }
-}
-@keyframes autoModPulse {
-  0%,100% { filter: brightness(1); }
-  50% { filter: brightness(1.35); }
-}
-</style>
-
 </head>
 <body>
   <div class="shell">
@@ -242,7 +179,7 @@ THE SOFTWARE.
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><h1 id="fish-mod-turns" aria-live="polite">AUTO MOD SKIN</h1></div>
+      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">MDUY MOD FF ✦ ALOK</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
     <main class="workspace" id="wardrobe-workspace">
@@ -296,7 +233,7 @@ THE SOFTWARE.
         <div class="mix-tools"><button id="randomize" type="button">⇄ Phối ngẫu nhiên</button><button id="reset" type="button">Bộ mặc định</button></div>
         <div class="download-area">
           <p class="selection-caption">Bộ đang chọn</p><p class="selection-summary" id="selection-summary" aria-live="polite"></p>
-          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">TẠO FILE NGAY</span></button>
+          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Đang tải dữ liệu…</span></button>
           <button class="download" id="download-all" type="button" disabled style="margin-top:10px"><span id="download-all-label">Tạo 4 phiên bản</span></button>
           <p id="status" class="status" role="status" aria-live="polite">Lựa chọn của bạn được lưu trên trình duyệt này.</p>
         </div>
@@ -599,7 +536,7 @@ self.onmessage=async event=>{
 })();
 </script>
 <script id="alok-download-package">(() => {
- const prefixes={'android-normal':'MDUY_MOD_FF_ALOK_THUC_TINH_ADR_FFTH','android-max':'MDUY_MOD_FF_ALOK_THUC_TINH_ADR_FFM','ios-normal':'MDUY_MOD_FF_ALOK_THUC_TINH_IOS_FFTH','ios-max':'MDUY_MOD_FF_ALOK_THUC_TINH_IOS_FFM'};
+ const prefixes={'android-normal':'MDUY MOD FF ALOK THỨC TỈNH ADR FFTH','android-max':'MDUY MOD FF ALOK THỨC TỈNH ADR FFM','ios-normal':'MDUY MOD FF ALOK THỨC TỈNH IOS FFTH','ios-max':'MDUY MOD FF ALOK THỨC TỈNH IOS FFM'};
  const copyrightName="Bản quyền mod thuộc về Mạnh Duy.TXT";
  const copyrightBytes=Uint8Array.from(atob("QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIE3huqFuaCBEdXk="),c=>c.charCodeAt(0));
  const usedCodes=new Set();
@@ -782,7 +719,7 @@ self.onmessage=async event=>{
   const api=path=>API_BASE.replace(/\/$/,'')+path;
   async function postZip(bytes,name){
     if(API_BASE.includes('YOUR-MDUY-BACKEND')) throw new Error('Chưa cấu hình MDUY_API_BASE. Hãy đặt URL backend trước khi đưa web lên GitHub Pages.');
-    const fd=new FormData();fd.append('zip',new Blob([bytes],{type:'application/zip'}));
+    const fd=new FormData();fd.append('zip',new Blob([bytes],{type:'application/zip'}),name||'MDUY_MOD.zip');
     const r=await fetch(api('/api/mod/create'),{method:'POST',body:fd});
     const data=await r.json().catch(()=>({}));
     if(!r.ok) throw new Error(data.error||`Backend HTTP ${r.status}`);
@@ -1265,148 +1202,6 @@ footer{
   image-rendering:auto!important;
 }
 </style>
-
-
-<style id="mduy-ui-v2">
-/* MDUY UI V2 — layout only. AudioClip / Link4m / MOD engine untouched. */
-
-/* 1) 3D frame slightly smaller */
-#viewport{
-  height:560px !important;
-  min-height:0 !important;
-}
-@media(max-width:1024px){
-  #viewport{height:500px !important;}
-}
-@media(max-width:640px){
-  #viewport{height:430px !important;}
-}
-@media(max-width:440px){
-  #viewport{height:390px !important;}
-}
-
-/* 2) Make the wardrobe/select panel a little smaller */
-.workspace{
-  grid-template-columns:minmax(0,1.25fr) minmax(320px,.55fr) !important;
-  gap:12px !important;
-}
-.panel{
-  max-width:430px;
-  justify-self:end;
-}
-#wardrobe-form{
-  padding:10px !important;
-}
-#wardrobe-form > label,
-#wardrobe-form .field,
-#wardrobe-form .picker-field{
-  padding:7px 9px !important;
-  margin-bottom:6px !important;
-}
-#wardrobe-form select{
-  min-height:36px !important;
-  font-size:12px !important;
-}
-
-/* 3) Selection buttons smaller */
-.item-picker button,
-.picker button,
-.stage button,
-.mduy-3d-btn{
-  min-height:34px !important;
-  padding:6px 9px !important;
-  font-size:11px !important;
-}
-
-/* 4) Remove the three-line / hamburger-looking control in the top-right.
-   Keep the actual app controls and export buttons untouched. */
-.topbar .menu,
-.topbar .hamburger,
-.topbar .mobile-menu,
-.topbar [aria-label*="menu" i],
-.topbar [title*="menu" i]{
-  display:none !important;
-}
-
-/* Also hide the known floating 3D HUD if present; JS stays intact. */
-#mduy-3d-hud{
-  display:none !important;
-}
-
-/* 5) Remove the MDUY MOD FF (/ WARDROBE) heading text visually.
-   Do not remove DOM or alter any logic. */
-.brand{
-  font-size:0 !important;
-}
-.brand .brandmark{
-  font-size:12px !important;
-}
-.brand .brand-text,
-.brand .brand-name,
-.brand .brand-title,
-.brand .brand-subtitle{
-  display:none !important;
-}
-
-/* 6) Slightly tighter panel header */
-.panel-title{
-  padding:13px 15px !important;
-}
-
-/* 7) Keep mobile single-column behavior */
-@media(max-width:1024px){
-  .workspace{
-    grid-template-columns:1fr !important;
-  }
-  .panel{
-    max-width:none !important;
-    width:100% !important;
-    justify-self:stretch !important;
-  }
-}
-</style>
-
-
-<style id="aotu-text-ui-only">
-  #wardrobe-intro .count{margin-left:auto}
-  #fish-mod-turns{letter-spacing:.02em}
-  #selection-summary{white-space:pre-line!important;}
-</style>
-<script id="aotu-text-ui-only-script">
-(() => {
-  const labels = {hair:'Tóc',top:'Áo',bottom:'Quần',shoes:'Chân',mask:'Nạ',face:'Mặt',action:'Hành động'};
-  function formatSummary(){
-    const el=document.getElementById('selection-summary');
-    if(!el) return;
-    const values=[];
-    for(const key of Object.keys(labels)){
-      const select=document.getElementById(key);
-      if(!select) continue;
-      const option=select.options[select.selectedIndex];
-      const name=(option?.textContent||'').trim();
-      if(name) values.push(labels[key]+': '+name.replace(/\s+/g,' ').trim());
-    }
-    if(values.length){
-      const copyright='Bản Quyền Mạnh Duy';
-      el.textContent=values.join('\n')+'\n'+copyright;
-    }
-  }
-  function fixDownloadLabel(){
-    const el=document.getElementById('download-label');
-    if(!el) return;
-    const t=(el.textContent||'').trim();
-    if(t.includes('TẠO FILE MOD') || t.includes('Tạo file mod') || t.includes('Đang tải dữ liệu')) el.textContent='TẠO FILE NGAY';
-  }
-  function apply(){formatSummary();fixDownloadLabel();}
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true}); else apply();
-  document.addEventListener('change', e => { if(e.target?.matches?.('#hair,#top,#bottom,#shoes,#mask,#face,#action')) setTimeout(formatSummary,0); });
-  const target=document.getElementById('selection-summary');
-  if(target) new MutationObserver(() => setTimeout(formatSummary,0)).observe(target,{childList:true,characterData:true,subtree:true});
-  const dl=document.getElementById('download-label');
-  if(dl) new MutationObserver(fixDownloadLabel).observe(dl,{childList:true,characterData:true,subtree:true});
-  setInterval(apply,500);
-})();
-</script>
 
 </body>
 </html>
