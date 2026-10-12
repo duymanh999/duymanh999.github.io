@@ -493,18 +493,25 @@ self.onmessage=async event=>{
 (() => {
   const fixCopyright = () => {
     const el = document.getElementById('selection-summary');
-    if (!el) return;
-    if (el.textContent.includes('Bản quyền FISH MOD Z')) {
-      el.textContent = el.textContent.replaceAll('Bản quyền FISH MOD Z', 'Bản quyền Mạnh Duy');
+    if (el && el.textContent.includes('Bản quyền FISH MOD Z')) {
+      el.textContent = el.textContent.replaceAll('Bản quyền FISH MOD Z', 'Bản Quyền Mạnh Duy');
     }
   };
-  const start = () => {
+  const watch = () => {
     fixCopyright();
     const el = document.getElementById('selection-summary');
-    if (el) new MutationObserver(fixCopyright).observe(el, {childList:true, characterData:true, subtree:true});
+    if (el && !el.dataset.manhduyCopyrightWatch) {
+      el.dataset.manhduyCopyrightWatch = '1';
+      new MutationObserver(fixCopyright).observe(el, {childList:true, characterData:true, subtree:true});
+    }
   };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
-  else start();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', watch, {once:true});
+  } else {
+    watch();
+  }
+  // Keep correcting the label if the app rewrites the summary after a selection change.
+  setInterval(watch, 250);
 })();
 </script>
 </body>
