@@ -21,15 +21,54 @@
     .watermark{position:absolute;top:15%;left:50%;transform:translateX(-50%);font-size:100px;font-weight:900;letter-spacing:14px;color:#ffffff05;pointer-events:none;white-space:nowrap}
     #fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none}.preview-message{position:absolute;inset:0;display:grid;place-content:center;padding:35px;text-align:center;color:var(--muted);font-size:13px;pointer-events:none}.preview-message.hidden{display:none}
     .stage-footer{padding:15px 22px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.hint{margin:0;color:var(--muted);font-size:11px;max-width:270px}.view-tools{display:flex;gap:7px;flex-shrink:0}.small-button{background:#252530;border:1px solid #3c3b47;border-radius:8px;min-width:36px;padding:7px 10px;font-size:12px;white-space:nowrap}
-    .panel{border:1px solid var(--line);border-radius:20px;padding:24px;background:var(--panel)}.panel-title{margin:0 0 16px;font-size:16px;letter-spacing:-.3px}.presets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:26px}
+    .panel{border:1px solid var(--line);border-radius:20px;padding:24px;background:var(--panel)}.panel-title{margin:0 0 16px;font-size:16px;letter-spacing:-.3px}.presets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:26px}.mix-tools{display:none!important}
     .preset{border:1px solid #41404b;background:#24232d;border-radius:12px;text-align:left;padding:12px 14px;transition:background .18s,border-color .18s}.preset:hover{background:#302b3c}.preset[aria-pressed="true"]{border-color:var(--accent);background:#b29aff14}.preset-num{color:var(--muted);font-size:10px;letter-spacing:1.6px;margin-bottom:5px;display:block}.preset-name{font-size:13px;font-weight:650;display:block}.preset-detail{font-size:10px;color:var(--muted);display:block;margin-top:3px}
     .form-row{display:grid;grid-template-columns:91px 1fr;align-items:center;gap:12px;margin:11px 0}.form-row label,.fixed-label{font-size:12px;color:var(--muted)}.row-icon{display:inline-block;width:22px;color:#d2c5f0;font-size:14px}.select-wrap{position:relative}.select-wrap::after{content:'⌄';position:absolute;right:15px;top:8px;pointer-events:none;color:var(--accent)}
     select{width:100%;appearance:none;background:#272631;border:1px solid #44424e;border-radius:10px;padding:10px 36px 10px 13px;color:var(--text);font-size:13px;cursor:pointer;min-height:42px}.fixed-value{background:#202029;border:1px solid #2e2d39;border-radius:10px;padding:10px 13px;font-size:13px;min-height:42px;display:flex;justify-content:space-between;align-items:center}.fixed-value .single{font-size:10px;color:#777684}
     .form-divider{height:1px;background:var(--line);margin:20px 0}.action-note{margin:7px 0 0 103px;font-size:11px;line-height:1.6;color:var(--muted)}.mix-tools{display:flex;gap:8px;margin-top:20px}.mix-tools button{border:1px solid #41404b;border-radius:9px;background:transparent;padding:8px 12px;font-size:12px;flex:1}.mix-tools button:hover{background:#2b2935}
     .download-area{margin-top:21px;border-top:1px solid var(--line);padding-top:20px}.selection-caption{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1.3px;margin:0 0 6px}.selection-summary{font-size:12px;color:#d1c7e4;margin:0 0 16px;min-height:36px;line-height:1.7}.download{display:flex;width:100%;gap:10px;justify-content:center;align-items:center;background:var(--green);color:#202618;border:0;border-radius:11px;padding:13px 14px;font-weight:750;font-size:13px}.download:hover{background:#d5faa1}.download:disabled{background:#434b36;color:#a2aa96}.download svg{width:17px;height:17px}.status{font-size:11px;text-align:center;color:var(--muted);margin:10px 0 0;min-height:17px}.status.error{color:#ffaaaa}
     footer{color:#777684;padding:28px 0 30px;font-size:10px;display:flex;justify-content:space-between;gap:15px}footer a{text-decoration:underline}.noscript{padding:20px;color:#ffaaaa}
-    @media(max-width:860px){.shell{width:calc(100% - 36px)}.workspace{grid-template-columns:1fr}.stage{position:relative;top:0}#viewport{height:470px}.intro{padding:26px 0 22px}.topbar{height:72px}.panel{padding:22px}.hint{max-width:240px}h1{font-size:29px}}
-    @media(max-width:440px){.shell{width:calc(100% - 24px)}.platform{font-size:10px}.brand{font-size:11px;letter-spacing:1px}.brandmark{width:30px;height:30px}.count{display:none}#viewport{height:375px}.watermark{font-size:72px}.stage-head{top:17px;left:20px;right:20px}.stage-footer{padding:13px 16px}.hint{max-width:200px;font-size:10px}.small-button{padding:7px 8px}.panel{padding:18px}.form-row{grid-template-columns:78px 1fr;gap:8px}.action-note{margin-left:86px}.presets{gap:8px}.preset{padding:11px}.preset-detail{font-size:9px}footer{flex-direction:column;gap:5px}}
+    @media(max-width:1024px){
+      .shell{width:calc(100% - 36px)}
+      .workspace{grid-template-columns:minmax(0,1fr);gap:18px}
+      .workspace>.stage,.workspace>.panel{width:100%;min-width:0}
+      .stage{position:relative;top:auto}
+      #viewport{height:500px}
+      .intro{padding:26px 0 22px}
+      .topbar{height:72px}
+      .panel{padding:22px}
+      .hint{max-width:240px}
+      h1{font-size:29px}
+    }
+    @media(max-width:640px){
+      .shell{width:calc(100% - 24px)}
+      .workspace{gap:14px}
+      #viewport{height:500px}
+      .panel{padding:16px}
+      .form-row{grid-template-columns:minmax(86px,96px) minmax(0,1fr);gap:8px}
+      .form-row label{min-width:0;display:flex;align-items:center;gap:5px}
+      .row-icon{width:22px;height:22px;flex:0 0 22px}
+      select{min-width:0;width:100%;font-size:13px;padding-left:11px;padding-right:32px}
+      .action-note{margin-left:104px}
+      .presets{gap:8px}
+      .preset{padding:11px}
+      .preset-detail{font-size:9px}
+      .stage-head{top:17px;left:20px;right:20px}
+      .stage-footer{padding:13px 16px}
+      .hint{max-width:200px;font-size:10px}
+      .small-button{padding:7px 8px}
+      .watermark{font-size:72px}
+      footer{flex-direction:column;gap:5px}
+    }
+    @media(max-width:440px){
+      .platform{font-size:10px}
+      .brand{font-size:11px;letter-spacing:1px}
+      .brandmark{width:30px;height:30px}
+      .count{display:none}
+      #viewport{height:500px}
+      .form-row{grid-template-columns:84px minmax(0,1fr)}
+      .action-note{margin-left:92px}
+    }
     @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
   
     /* ===== Bộ chọn phiên bản ===== */
@@ -53,6 +92,14 @@ body:before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;
 @keyframes md<|DELIM_Zj|>uyPulse{50%{box-shadow:0 0 28px #42eaffaa,0 0 55px #ff52d755;transform:translateY(-1px)}}
 .platform .dot{background:#59ffd2;box-shadow:0 0 10px #59ffd2,0 0 22px #59ffd2}.eyebrow{color:#ff72da;text-shadow:0 0 15px #ff4fcf}.intro{position:relative}.intro:after{content:"";position:absolute;left:0;right:0;bottom:8px;height:1px;background:linear-gradient(90deg,transparent,#ff5fcf,#45e7ff,#ffe66d,transparent);opacity:.65}
 h1{background:linear-gradient(90deg,#fff,#ffb8f0 30%,#9ef5ff 65%,#fff2a4);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 24px #7b6cff44}.count{color:#b9c4f5}
+/* ===== MDUY RESPONSIVE SAFETY FIX ===== */
+.workspace{min-width:0}
+.workspace>.stage,.workspace>.panel{min-width:0}
+@media(max-width:1024px){
+  .workspace{grid-template-columns:minmax(0,1fr)!important}
+  .workspace>.stage,.workspace>.panel{grid-column:1!important}
+  .stage{position:relative!important;top:auto!important}
+}
 .workspace{gap:24px}.stage,.panel,.version-card{border-color:#4b5794;background:linear-gradient(145deg,#151a34ee,#0c1023ee);box-shadow:0 18px 60px #0009,0 0 0 1px #ffffff05 inset,0 0 35px #6d5cff18;backdrop-filter:blur(16px)}
 .stage{overflow:hidden}.stage:before,.panel:before,.version-card:before{content:"";position:absolute;pointer-events:none}.stage{position:sticky}.stage:before{inset:0;background:linear-gradient(120deg,transparent 20%,#fff10%,transparent 45%);transform:translateX(-120%);animation:mduyShine 7s ease-in-out infinite}@keyframes md<|DELIM_Zj|>uyShine{55%,100%{transform:translateX(120%)}}
 #viewport{background:radial-gradient(circle at 50% 43%,#533b78 0,#24264d 28%,#111a37 58%,#090d20 100%);box-shadow:inset 0 0 80px #000b,inset 0 0 25px #6d5cff44}.stage-head{filter:drop-shadow(0 0 12px #000)}.character-name{color:#fff;text-shadow:0 0 14px #ff5fcf,0 0 28px #45e7ff}.badge{border-color:#45e7ff;color:#bdf8ff;background:#45e7ff12;box-shadow:0 0 15px #45e7ff33}
@@ -168,6 +215,13 @@ THE SOFTWARE.
 .stage-head{pointer-events:none}
 .watermark{opacity:.02 !important}
 </style>
+
+
+<style id="mduy-lock-css">
+#mduy-lock{position:fixed;inset:0;z-index:20000;background:#030513d9;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:grid;place-items:center;padding:18px}
+#mduy-lock[hidden]{display:none}.mduy-lock-card{width:min(460px,100%);border:1px solid #5967a5;border-radius:22px;padding:22px;background:linear-gradient(145deg,#111833,#28122f);box-shadow:0 25px 90px #000b,0 0 45px #8f6bff35;color:#fff}.mduy-lock-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.mduy-lock-head h2{margin:0;font-size:24px}.mduy-lock-kicker{margin:0 0 5px;color:#62eaff;font-size:10px;font-weight:900;letter-spacing:2px}.mduy-lock-head button{border:1px solid #4a5790;background:#151b37;color:#fff;border-radius:10px;width:36px;height:36px;font-size:24px;line-height:1}.mduy-lock-card>p{color:#bfc8e8;font-size:13px;line-height:1.65}.mduy-lock-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #343f70;background:#0d1430aa;border-radius:13px;margin-top:9px}.mduy-lock-step>span{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#ff5fcf,#716cff);font-weight:900}.mduy-lock-step strong,.mduy-lock-step small{display:block}.mduy-lock-step small{color:#929dc5;margin-top:3px;font-size:11px}.mduy-lock-primary,.mduy-lock-secondary{width:100%;margin-top:15px;border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}.mduy-lock-primary{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);color:#07101d;box-shadow:0 0 25px #45e7ff44}.mduy-lock-secondary{background:#202846;border:1px solid #56649c;color:#fff}.mduy-lock-status{text-align:center;min-height:18px;margin-bottom:0!important}.mduy-lock-status.error{color:#ff8da9}.mduy-lock-status.ok{color:#8dffd7}.mduy-lock-password{margin:13px 0 0;padding:12px;border:1px dashed #5cecff;border-radius:11px;text-align:center;font:900 20px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:2px;color:#fff;background:#071526}
+</style>
+
 </head>
 <body>
   <div class="shell">
@@ -233,12 +287,23 @@ THE SOFTWARE.
         <div class="mix-tools"><button id="randomize" type="button">⇄ Phối ngẫu nhiên</button><button id="reset" type="button">Bộ mặc định</button></div>
         <div class="download-area">
           <p class="selection-caption">Bộ đang chọn</p><p class="selection-summary" id="selection-summary" aria-live="polite"></p>
-          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Đang tải dữ liệu…</span></button>
+          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Tạo MOD</span></button>
           <button class="download" id="download-all" type="button" disabled style="margin-top:10px"><span id="download-all-label">Tạo 4 phiên bản</span></button>
           <p id="status" class="status" role="status" aria-live="polite">Lựa chọn của bạn được lưu trên trình duyệt này.</p>
         </div>
       </section>
     </main>
+    <div id="mduy-lock" hidden role="dialog" aria-modal="true" aria-labelledby="mduy-lock-title">
+      <div class="mduy-lock-card">
+        <div class="mduy-lock-head"><div><p class="mduy-lock-kicker">MDUY MOD FF</p><h2 id="mduy-lock-title">MOD đã sẵn sàng</h2></div><button id="mduy-lock-close" type="button" aria-label="Đóng">×</button></div>
+        <p id="mduy-lock-text">ZIP đã được tạo. Bấm bên dưới để đi qua Link4m, sau đó tải file.</p>
+        <div class="mduy-lock-step"><span>1</span><div><strong>Đi qua Link4m</strong><small>Hoàn tất Link4m để tới trang tải ZIP.</small></div></div>
+        <div class="mduy-lock-step"><span>2</span><div><strong>Tải ZIP</strong><small>Không cần mật khẩu.</small></div></div>
+        <button id="mduy-get-password" class="mduy-lock-primary" type="button">ĐI QUA LINK4M</button>
+        <button id="mduy-download-locked" class="mduy-lock-secondary" type="button" hidden>TẢI ZIP</button>
+        <p id="mduy-lock-status" class="mduy-lock-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
     <noscript><p class="noscript">Bật JavaScript để chọn trang phục và tải file.</p></noscript>
     <footer><span>Dữ liệu Alok cho Android và iOS · Free Fire thường / MAX.</span><span>MDUY MOD FF · 4 phiên bản.</span></footer>
   </div>
@@ -598,7 +663,55 @@ self.onmessage=async event=>{
 
 
 
-<style>#mod-progress{position:fixed;inset:0;z-index:10000;background:#08080baa;display:grid;place-items:center;padding:20px}#mod-progress[hidden]{display:none}.mod-progress-card{width:min(480px,100%);background:#242431;border:1px solid #b29aff;border-radius:20px;padding:26px;color:#fff}.mod-progress-heading{display:flex;justify-content:space-between;gap:20px;font-weight:700;font-size:20px}.mod-progress-card progress{width:100%;accent-color:#c5ec78;margin:20px 0 10px}.mod-progress-card p{color:#b8b8c5}.mod-progress-card button{padding:10px 20px;border:1px solid #777;border-radius:10px;background:#333341;color:#fff;cursor:pointer}</style><div id="mod-progress" hidden role="dialog" aria-modal="true" aria-labelledby="mod-progress-title"><div class="mod-progress-card"><div class="mod-progress-heading"><span id="mod-progress-title">Đang tạo file mod</span><span id="mod-progress-percent">0%</span></div><progress id="mod-progress-bar" max="100" value="0"></progress><p id="mod-progress-step" aria-live="polite">Đang chuẩn bị trang phục…</p><button type="button" id="mod-cancel">Hủy tạo file</button></div></div><script>
+<style id="mduy-progress-pro-css">
+#mod-progress{position:fixed;inset:0;z-index:10000;background:rgba(2,5,18,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:grid;place-items:center;padding:18px}
+#mod-progress[hidden]{display:none}
+.mod-progress-card{--progress:0%;position:relative;width:min(470px,100%);overflow:hidden;border:1px solid #6675c9;border-radius:26px;padding:24px;background:linear-gradient(145deg,rgba(12,20,48,.98),rgba(39,14,51,.98));box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 55px rgba(82,112,255,.2);color:#fff}
+.mod-progress-card:before{content:"";position:absolute;inset:-45%;pointer-events:none;background:conic-gradient(from 90deg,transparent,#45e7ff22,#ff5fcf28,transparent 45%);animation:mduyProgressAura 5s linear infinite}
+.mod-progress-card>*{position:relative;z-index:1}
+@keyframes mduyProgressAura{to{transform:rotate(360deg)}}
+.mod-progress-top{display:flex;align-items:center;gap:13px;margin-bottom:18px}
+.mod-progress-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(135deg,#45e7ff,#7b6cff 55%,#ff5fcf);box-shadow:0 0 28px rgba(69,231,255,.28);font-size:23px}
+.mod-progress-title-wrap{min-width:0}
+.mod-progress-kicker{margin:0 0 2px;color:#63efff;font-size:9px;font-weight:900;letter-spacing:2px}
+.mod-progress-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;font-weight:900;font-size:19px}
+#mod-progress-percent{font-variant-numeric:tabular-nums;color:#9effe1;font-size:16px}
+.mod-progress-track{height:10px;padding:2px;border:1px solid #4b5b9d;border-radius:999px;background:#080e23;box-shadow:inset 0 2px 8px #0008}
+.mod-progress-card progress{display:block;width:100%;height:100%;margin:0;border:0;border-radius:999px;overflow:hidden;background:transparent;appearance:none}
+.mod-progress-card progress::-webkit-progress-bar{background:transparent}
+.mod-progress-card progress::-webkit-progress-value{border-radius:999px;background:linear-gradient(90deg,#59ffd2,#45e7ff 42%,#8d7aff 72%,#ff5fcf);box-shadow:0 0 16px #45e7ff66}
+.mod-progress-card progress::-moz-progress-bar{border-radius:999px;background:linear-gradient(90deg,#59ffd2,#45e7ff 42%,#8d7aff 72%,#ff5fcf);box-shadow:0 0 16px #45e7ff66}
+.mod-progress-status{display:flex;align-items:center;gap:9px;margin:14px 0 16px;color:#c9d4f5;font-size:12px;line-height:1.5;min-height:34px}
+.mod-progress-spinner{width:17px;height:17px;flex:0 0 17px;border:2px solid #5365a5;border-top-color:#63efff;border-right-color:#ff6fda;border-radius:50%;animation:mduySpin .8s linear infinite}
+@keyframes mduySpin{to{transform:rotate(360deg)}}
+.mod-progress-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:18px}
+.mod-progress-step-chip{height:5px;border-radius:999px;background:#252d50;box-shadow:inset 0 0 0 1px #3d4978}
+.mod-progress-step-chip.active{background:linear-gradient(90deg,#45e7ff,#8d7aff);box-shadow:0 0 12px #45e7ff55}
+.mod-progress-card button{width:100%;padding:12px 18px;border:1px solid #5364a0;border-radius:12px;background:#151d3a;color:#eaf1ff;font-weight:800;cursor:pointer;transition:.18s}
+.mod-progress-card button:hover{border-color:#62eaff;background:#1b2750;transform:translateY(-1px)}
+.mod-progress-note{margin:10px 0 0!important;text-align:center;color:#7785b6!important;font-size:10px!important}
+</style>
+<div id="mod-progress" hidden role="dialog" aria-modal="true" aria-labelledby="mod-progress-title">
+  <div class="mod-progress-card">
+    <div class="mod-progress-top">
+      <div class="mod-progress-icon">✦</div>
+      <div class="mod-progress-title-wrap">
+        <p class="mod-progress-kicker">MDUY MOD FF</p>
+        <div class="mod-progress-heading">
+          <span id="mod-progress-title">Đang tạo file mod</span>
+          <span id="mod-progress-percent">0%</span>
+        </div>
+      </div>
+    </div>
+    <div class="mod-progress-track"><progress id="mod-progress-bar" max="100" value="0"></progress></div>
+    <div class="mod-progress-status"><span class="mod-progress-spinner"></span><p id="mod-progress-step" aria-live="polite">Đang chuẩn bị trang phục…</p></div>
+    <div class="mod-progress-steps" aria-hidden="true">
+      <span class="mod-progress-step-chip active"></span><span class="mod-progress-step-chip"></span><span class="mod-progress-step-chip"></span>
+    </div>
+    <button type="button" id="mod-cancel">HỦY TẠO FILE</button>
+    <p class="mod-progress-note">Vui lòng giữ nguyên trang này trong lúc hệ thống ghép dữ liệu.</p>
+  </div>
+</div><script>
 (() => {
   const fixCopyright = () => {
     const el = document.getElementById('selection-summary');
@@ -687,521 +800,98 @@ self.onmessage=async event=>{
 })();
 </script>
 
-<!-- MDUY monetization gate: set this to your backend URL before publishing. -->
-<style id="mduy-gate-style">
-#mduy-gate{position:fixed;inset:0;z-index:20000;background:rgba(3,5,18,.82);backdrop-filter:blur(12px);display:none;place-items:center;padding:18px}
-#mduy-gate.show{display:grid}.mduy-gate-card{width:min(460px,100%);padding:24px;border:1px solid #5867c7;border-radius:22px;background:linear-gradient(145deg,#121a36,#24132f);box-shadow:0 0 50px #6b5cff33;color:#fff}.mduy-gate-card h3{margin:0 0 8px;font-size:21px}.mduy-gate-card p{color:#b9c3e8;line-height:1.55}.mduy-gate-actions{display:grid;gap:10px;margin-top:18px}.mduy-gate-actions button,.mduy-gate-actions a{border:1px solid #5967b7;border-radius:12px;padding:13px;text-align:center;font-weight:800;text-decoration:none}.mduy-gate-primary{background:linear-gradient(100deg,#59e7ff,#9a7cff,#ff5fcf);color:#07111d}.mduy-gate-muted{background:#161c37;color:#dce4ff}.mduy-gate-code{display:none;margin-top:14px;padding:14px;border-radius:12px;background:#0a1025;border:1px solid #45e7ff55}.mduy-gate-code strong{display:block;font-size:20px;letter-spacing:2px;word-break:break-all;color:#65ffd0}.mduy-gate-small{font-size:12px!important}.mduy-gate-error{color:#ff8eac!important}.mduy-gate-count{font-weight:800;color:#65ffd0}
-</style>
-<div id="mduy-gate" aria-hidden="true">
-  <div class="mduy-gate-card">
-    <h3 id="mduy-gate-title">🔐 Khóa ZIP MDUY</h3>
-    <p id="mduy-gate-text">Đang đóng gói và khóa file bằng mật khẩu riêng…</p>
-    <div class="mduy-gate-actions">
-      <a id="mduy-gate-link" class="mduy-gate-primary" href="#" target="_blank" rel="noopener" style="display:none">🔗 VƯỢT LINK ĐỂ LẤY MẬT KHẨU</a>
-      <button id="mduy-gate-check" class="mduy-gate-muted" type="button" style="display:none">✅ Tôi đã vượt link — lấy mật khẩu</button>
-      <button id="mduy-gate-close" class="mduy-gate-muted" type="button">Đóng</button>
-    </div>
-    <div id="mduy-gate-code" class="mduy-gate-code"><span>Mật khẩu giải nén:</span><strong id="mduy-password"></strong></div>
-    <p id="mduy-gate-remaining" class="mduy-gate-small"></p>
-  </div>
-</div>
-<script id="mduy-monetization-gate">
+<script id="mduy-link4m-lock-runtime">
 (() => {
-  // IMPORTANT: do not put the Link4m token here. It belongs only on the backend.
-  // Change this URL to your deployed backend, e.g. https://api.yourdomain.com
-  const API_BASE = window.MDUY_API_BASE || 'https://YOUR-MDUY-BACKEND.example.com';
-  const gate=document.getElementById('mduy-gate'), title=document.getElementById('mduy-gate-title'), text=document.getElementById('mduy-gate-text'), link=document.getElementById('mduy-gate-link'), check=document.getElementById('mduy-gate-check'), close=document.getElementById('mduy-gate-close'), code=document.getElementById('mduy-gate-code'), pass=document.getElementById('mduy-password'), remain=document.getElementById('mduy-gate-remaining');
-  if(!gate)return;
-  let currentJob=null, busy=false;
-  const show=()=>{gate.classList.add('show');gate.setAttribute('aria-hidden','false')};
-  const hide=()=>{gate.classList.remove('show');gate.setAttribute('aria-hidden','true')};
-  close.onclick=hide;
-  const api=path=>API_BASE.replace(/\/$/,'')+path;
-  async function postZip(bytes,name){
-    if(API_BASE.includes('YOUR-MDUY-BACKEND')) throw new Error('Chưa cấu hình MDUY_API_BASE. Hãy đặt URL backend trước khi đưa web lên GitHub Pages.');
-    const fd=new FormData();fd.append('zip',new Blob([bytes],{type:'application/zip'}),name||'MDUY_MOD.zip');
-    const r=await fetch(api('/api/mod/create'),{method:'POST',body:fd});
-    const data=await r.json().catch(()=>({}));
-    if(!r.ok) throw new Error(data.error||`Backend HTTP ${r.status}`);
-    return data;
-  }
-  async function claim(jobId){
-    const r=await fetch(api('/api/mod/claim/'+encodeURIComponent(jobId)),{cache:'no-store'});
-    const data=await r.json().catch(()=>({}));
-    if(!r.ok) throw new Error(data.error||`Backend HTTP ${r.status}`);
-    return data;
-  }
-  async function protectSingle(){
-    const selection={};['hair','top','bottom','shoes','mask','face','action'].forEach(k=>{const el=document.getElementById(k);if(el)selection[k]=el.value});
-    const version=document.getElementById('version')?.value||window.currentAlokVersion||'android-normal';
-    const bytes=await window.alokExport(selection,version,p=>{text.textContent=`Đang tạo ZIP… ${Math.round(p)}%`});
-    const packaged=window.alokPackageDownload(bytes,version);
-    return postZip(packaged.bytes,packaged.name);
-  }
-  async function protectAll(){
-    const selection={};['hair','top','bottom','shoes','mask','face','action'].forEach(k=>{const el=document.getElementById(k);if(el)selection[k]=el.value});
-    const all=await window.alokExportAll(selection,p=>{text.textContent=`Đang tạo 4 phiên bản… ${Math.round(p)}%`});
-    const entries={};
-    // The backend receives a single ZIP containing the four generated ZIPs.
-    // Build that container with the existing fflate instance.
-    for(const [name,bytes] of Object.entries(all)) entries[name]=bytes;
-    const outer=fflate.zipSync(entries,{level:0});
-    return postZip(outer,'MDUY_MOD_FF_4_PHIEN_BAN.zip');
-  }
-  async function start(kind){
-    if(busy)return;busy=true;show();link.style.display='none';check.style.display='none';code.style.display='none';pass.textContent='';title.textContent='🔐 Đang khóa ZIP';text.textContent='Đang chuẩn bị…';remain.textContent='';
-    try{
-      const data=kind==='all'?await protectAll():await protectSingle();
-      currentJob=data.jobId;title.textContent='🔗 Bước cuối: vượt link';text.textContent='Hãy bấm nút bên dưới, hoàn thành Link4m rồi quay lại đây.';link.href=data.shortUrl;link.style.display='block';check.style.display='block';remain.textContent=`Còn ${data.remaining} lượt tạo MOD hôm nay.`;
-    }catch(e){title.textContent='❌ Không thể tạo file';text.textContent=e.message||String(e);text.classList.add('mduy-gate-error');}
-    finally{busy=false}
-  }
-  check.onclick=async()=>{
-    if(!currentJob)return;check.disabled=true;text.classList.remove('mduy-gate-error');text.textContent='Đang xác nhận…';
-    try{const data=await claim(currentJob);title.textContent='🔑 Mật khẩu ZIP';text.textContent='Đã xác nhận. Dùng mật khẩu bên dưới để giải nén.';pass.textContent=data.password;code.style.display='block';check.style.display='none';
-      const download=document.createElement('a');download.href=api('/api/mod/download/'+encodeURIComponent(currentJob));download.textContent='⬇️ Tải ZIP đã khóa';download.className='mduy-gate-primary';download.style.display='block';download.style.marginTop='10px';download.target='_blank';download.rel='noopener';code.appendChild(download);
-    }catch(e){text.textContent=e.message||'Chưa xác nhận. Hãy hoàn thành link rồi thử lại.';text.classList.add('mduy-gate-error');}
-    finally{check.disabled=false}
+  const BACKEND = 'https://mduy-mod-backend.onrender.com';
+  const $ = id => document.getElementById(id);
+  const modal=$('mduy-lock'), getBtn=$('mduy-get-password'), dlBtn=$('mduy-download-locked'), closeBtn=$('mduy-lock-close'), status=$('mduy-lock-status');
+  let pendingJob=null, pendingName='MDUY-MOD.zip';
+
+  const show=(v=true)=>{if(!modal)return;modal.hidden=!v;if(v)status.textContent='';};
+  const setStatus=(text,kind='')=>{if(!status)return;status.className='mduy-lock-status '+kind;status.textContent=text;};
+  closeBtn?.addEventListener('click',()=>show(false));
+  modal?.addEventListener('click',e=>{if(e.target===modal)show(false);});
+
+  const selectionFromForm=()=>Object.fromEntries(['hair','top','bottom','shoes','mask','face','action'].map(k=>[k,$(k)?.value||'']));
+  const bytesToBase64=(bytes)=>{
+    let binary='';const chunk=0x8000;
+    for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+    return btoa(binary);
   };
-  // Capture phase stops the original direct-download handler, so ZIPs always go through the gate.
-  document.addEventListener('click',e=>{const b=e.target.closest?.('#download');if(b){e.preventDefault();e.stopImmediatePropagation();start('single')}},true);
-  document.addEventListener('click',e=>{const b=e.target.closest?.('#download-all');if(b){e.preventDefault();e.stopImmediatePropagation();start('all')}},true);
+  const saveFile=(bytes,name)=>{const blob=bytes instanceof Blob?bytes:new Blob([bytes],{type:'application/zip'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);};
+  const packageOne=async(version,bytes)=>window.alokPackageDownload(bytes,version);
+
+  async function createLocked(packaged){
+    const zipBase64=bytesToBase64(packaged.bytes);
+    const r=await fetch(BACKEND+'/api/mod/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({zipBase64,filename:packaged.name})});
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok)throw Error(data.error||'Backend không tạo được MOD.');
+    if(!data.id||!data.shortUrl)throw Error('Backend chưa trả về Link4m.');
+    return {id:data.id,shortUrl:data.shortUrl,name:packaged.name,downloadUrl:data.downloadUrl||`${BACKEND}/api/mod/download/${encodeURIComponent(data.id)}`};
+  }
+
+  async function begin(packaged){
+    show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';getBtn.hidden=false;dlBtn.hidden=true;
+    $('mduy-lock-title').textContent='MOD đã sẵn sàng';
+    $('mduy-lock-text').textContent='ZIP đã được tạo. Bấm bên dưới để đi qua Link4m, sau đó tải file.';
+    setStatus('Đang tạo Link4m…');
+    try{
+      pendingJob=await createLocked(packaged);
+      setStatus('Đã sẵn sàng. Bấm “ĐI QUA LINK4M”.','ok');
+    }catch(e){setStatus(e.message||'Không tạo được MOD.','error');pendingJob=null;}
+  }
+
+  getBtn?.addEventListener('click',()=>{
+    if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
+    window.location.href=pendingJob.shortUrl;
+  });
+
+  dlBtn?.addEventListener('click',async()=>{
+    const url=dlBtn.dataset.url;if(!url||dlBtn.disabled)return;
+    dlBtn.disabled=true;setStatus('Đang tải ZIP…');
+    try{const r=await fetch(url);if(!r.ok)throw Error('Không tải được ZIP.');saveFile(await r.blob(),pendingName||'MDUY-MOD.zip');setStatus('Đã tải ZIP.','ok');}
+    catch(e){setStatus(e.message||'Không tải được ZIP.','error');}finally{dlBtn.disabled=false;}
+  });
+
+  async function makeAndLock(btn){
+    const version=$('version')?.value||'android-normal';
+    const progress=$('mod-progress'),bar=$('mod-progress-bar'),percent=$('mod-progress-percent'),step=$('mod-progress-step');
+    progress.hidden=false;bar.value=0;percent.textContent='0%';step.textContent='Đang chuẩn bị dữ liệu…';
+    try{
+      await window.alokEnsureExport(p=>{bar.value=p;percent.textContent=p+'%';step.textContent='Đang ghép dữ liệu MOD… '+p+'%';;document.querySelectorAll('.mod-progress-step-chip').forEach((el,i)=>el.classList.toggle('active',p>=((i+1)*33-8)));});
+      if(btn.id==='download-all'){
+        step.textContent='Đang dựng 4 phiên bản…';
+        const all=await window.alokExportAll(selectionFromForm(),p=>{bar.value=p;percent.textContent=p+'%';});
+        const bundle={};
+        const versionMap={'Android_FF_THUONG.zip':'android-normal','Android_FF_MAX.zip':'android-max','iOS_FF_THUONG.zip':'ios-normal','iOS_FF_MAX.zip':'ios-max'};
+        for(const [name,data] of Object.entries(all)){
+          const packaged=await packageOne(versionMap[name]||name.replace(/\.zip$/,''),data);
+          bundle[packaged.name]=packaged.bytes;
+        }
+        const outer=fflate.zipSync(bundle,{level:0});
+        await begin({bytes:outer,name:'MDUY MOD FF ALOK 4 PHIEN BAN.zip'});
+      }else{
+        step.textContent='Đang tạo MOD…';
+        const bytes=await window.alokExport(selectionFromForm(),version,p=>{bar.value=p;percent.textContent=p+'%';});
+        const packaged=await packageOne(version,bytes);
+        await begin(packaged);
+      }
+    }catch(err){if(err?.name!=='AbortError'){setStatus(err.message||'Không tạo được file.','error');}}
+    finally{progress.hidden=true;}
+  }
+
+  function install(){
+    document.addEventListener('click',async e=>{
+      const btn=e.target.closest?.('#download,#download-all');if(!btn||btn.disabled)return;
+      e.preventDefault();e.stopImmediatePropagation();
+      await makeAndLock(btn);
+    },true);
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
+  else install();
 })();
 </script>
-
-<style id="mduy-neon-redesign">
-/* =========================================================
-   MDUY MOD FF — NEON COMMAND CENTER
-   UI ONLY: no export/data/3D logic is changed.
-   ========================================================= */
-:root{
-  --mduy-bg:#05070b;
-  --mduy-panel:#0b1017;
-  --mduy-panel-2:#0e151e;
-  --mduy-line:#1c2935;
-  --mduy-line-2:#263746;
-  --mduy-text:#f3f7fa;
-  --mduy-muted:#82909c;
-  --mduy-cyan:#4de7ff;
-  --mduy-lime:#b9ff52;
-  --mduy-orange:#ff8a3d;
-  --mduy-shadow:0 24px 70px rgba(0,0,0,.42);
-}
-
-html,body{
-  background:
-    radial-gradient(circle at 12% 8%,rgba(77,231,255,.07),transparent 28%),
-    radial-gradient(circle at 88% 70%,rgba(185,255,82,.045),transparent 25%),
-    var(--mduy-bg)!important;
-  color:var(--mduy-text)!important;
-}
-
-body{
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
-  letter-spacing:.01em;
-}
-
-.shell{
-  width:min(1420px,calc(100% - 28px))!important;
-  margin:auto!important;
-}
-
-/* HEADER */
-.topbar{
-  height:72px!important;
-  border-bottom:1px solid var(--mduy-line)!important;
-  position:relative;
-}
-.topbar:after{
-  content:"";
-  position:absolute;
-  left:0;bottom:-1px;
-  width:180px;height:2px;
-  background:linear-gradient(90deg,var(--mduy-cyan),transparent);
-}
-.brand{
-  gap:10px!important;
-  font-size:12px!important;
-  letter-spacing:2.4px!important;
-}
-.brandmark{
-  width:38px!important;height:38px!important;
-  border-radius:8px!important;
-  background:linear-gradient(135deg,var(--mduy-cyan),#3979ff)!important;
-  color:#031018!important;
-  box-shadow:0 0 24px rgba(77,231,255,.18);
-}
-.platform{
-  padding:8px 12px;
-  border:1px solid var(--mduy-line-2);
-  border-radius:999px;
-  background:#0b1118;
-}
-.platform .dot{
-  background:var(--mduy-lime)!important;
-  box-shadow:0 0 9px var(--mduy-lime);
-}
-
-/* HERO / INTRO */
-.intro{
-  padding:32px 4px 24px!important;
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:24px;
-  position:relative;
-}
-.intro:before{
-  content:"MDUY // LOADOUT SYSTEM";
-  display:block;
-  position:absolute;
-  top:9px;left:4px;
-  color:var(--mduy-cyan);
-  font-size:9px;
-  letter-spacing:3px;
-  font-weight:800;
-  opacity:.72;
-}
-.intro > div:first-child{
-  padding-top:10px;
-}
-.intro .eyebrow{
-  color:var(--mduy-lime)!important;
-  letter-spacing:3px!important;
-  font-size:10px!important;
-}
-.intro h1{
-  font-size:clamp(32px,5vw,64px)!important;
-  line-height:.96!important;
-  letter-spacing:-2.5px!important;
-  margin:7px 0 0!important;
-  text-transform:uppercase;
-}
-.intro h1 span,
-.intro .platform-label{
-  color:var(--mduy-cyan)!important;
-}
-.intro:after{
-  content:"ALOK / 4 BUILDS / LIVE PREVIEW";
-  color:#52616d;
-  font-size:9px;
-  letter-spacing:2px;
-  white-space:nowrap;
-  padding-bottom:5px;
-}
-
-/* MAIN WORKSPACE */
-.workspace{
-  display:grid!important;
-  grid-template-columns:minmax(0,1.35fr) minmax(360px,.65fr)!important;
-  gap:14px!important;
-  align-items:start!important;
-}
-
-/* 3D STAGE */
-.stage{
-  min-width:0;
-  background:#070c12!important;
-  border:1px solid var(--mduy-line-2)!important;
-  border-radius:6px!important;
-  box-shadow:var(--mduy-shadow)!important;
-  overflow:hidden!important;
-  position:relative;
-}
-.stage:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:3;
-  border:1px solid rgba(77,231,255,.08);
-}
-.stage-head{
-  height:52px!important;
-  padding:0 16px!important;
-  background:#0a1017!important;
-  border-bottom:1px solid var(--mduy-line)!important;
-}
-.stage-head:before{
-  content:"● 3D PREVIEW";
-  color:var(--mduy-cyan);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:2px;
-  margin-right:auto;
-}
-.stage-head h2,
-.stage-head .stage-title{
-  font-size:11px!important;
-  letter-spacing:2px!important;
-  text-transform:uppercase;
-}
-#viewport{
-  height:min(700px,65vh)!important;
-  min-height:500px!important;
-  border-radius:0!important;
-  background:
-    radial-gradient(circle at 50% 42%,#1b3b56 0,#0b1724 40%,#05080d 78%)!important;
-}
-#viewport:after{
-  content:"MDUY 3D";
-  position:absolute;
-  left:16px;bottom:14px;
-  color:#ffffff24;
-  font-size:9px;
-  letter-spacing:3px;
-  pointer-events:none;
-}
-.stage-foot,
-.stage-controls{
-  background:#080d13!important;
-  border-top:1px solid var(--mduy-line)!important;
-}
-
-/* CONTROLS: compact console buttons */
-.stage button,
-.mduy-3d-btn{
-  border:1px solid var(--mduy-line-2)!important;
-  background:#0d151d!important;
-  border-radius:4px!important;
-}
-.stage button:hover,
-.mduy-3d-btn:hover{
-  border-color:var(--mduy-cyan)!important;
-  color:var(--mduy-cyan)!important;
-}
-
-/* RIGHT PANEL */
-.panel{
-  background:var(--mduy-panel)!important;
-  border:1px solid var(--mduy-line-2)!important;
-  border-radius:6px!important;
-  box-shadow:var(--mduy-shadow)!important;
-  overflow:hidden;
-}
-.panel-title{
-  margin:0!important;
-  padding:18px 18px 14px!important;
-  background:
-    linear-gradient(90deg,rgba(77,231,255,.07),transparent 55%),
-    #0a1017!important;
-  border-bottom:1px solid var(--mduy-line)!important;
-  font-size:12px!important;
-  text-transform:uppercase;
-  letter-spacing:2px!important;
-}
-.panel-title:after{
-  content:" / LOADOUT";
-  color:var(--mduy-cyan);
-}
-
-/* FORM */
-#wardrobe-form{
-  padding:14px!important;
-}
-#wardrobe-form > label,
-#wardrobe-form .field,
-#wardrobe-form .picker-field{
-  background:#0d141c!important;
-  border:1px solid var(--mduy-line)!important;
-  border-radius:5px!important;
-  margin-bottom:8px!important;
-  padding:10px 11px!important;
-  transition:.18s ease;
-}
-#wardrobe-form > label:hover,
-#wardrobe-form .field:hover,
-#wardrobe-form .picker-field:hover{
-  border-color:#355163!important;
-  background:#101922!important;
-}
-#wardrobe-form label{
-  color:#94a3ae!important;
-  font-size:10px!important;
-  letter-spacing:1px!important;
-  text-transform:uppercase;
-}
-#wardrobe-form select{
-  background:#080e14!important;
-  color:#f3f7fa!important;
-  border:1px solid #233543!important;
-  border-radius:4px!important;
-  min-height:42px!important;
-}
-#wardrobe-form select:focus{
-  border-color:var(--mduy-cyan)!important;
-  box-shadow:0 0 0 2px rgba(77,231,255,.08)!important;
-}
-
-/* Category icon / picker rows */
-.item-picker,
-.picker,
-.picker-wrap{
-  border-radius:4px!important;
-}
-.item-picker button,
-.picker button{
-  background:#0a1017!important;
-  border:1px solid #22313e!important;
-}
-.item-picker button:hover,
-.picker button:hover{
-  border-color:var(--mduy-cyan)!important;
-}
-
-/* Remove the old "soft purple card" feeling */
-.mix-tools{
-  margin:0 14px 14px!important;
-  padding:8px!important;
-  background:#080e14!important;
-  border:1px solid var(--mduy-line)!important;
-  border-radius:5px!important;
-  display:flex;
-  gap:8px;
-}
-.mix-tools button{
-  flex:1;
-  min-height:38px;
-  background:#0d151d!important;
-  border:1px solid #263845!important;
-  border-radius:4px!important;
-  color:#a8b5be!important;
-}
-.mix-tools button:hover{
-  color:var(--mduy-lime)!important;
-  border-color:var(--mduy-lime)!important;
-}
-
-/* DOWNLOAD AREA */
-.download-area{
-  margin:0!important;
-  padding:14px!important;
-  background:
-    linear-gradient(180deg,#0a1118,#080c11)!important;
-  border-top:1px solid var(--mduy-line-2)!important;
-}
-.download-area .selection-summary,
-#selection-summary{
-  color:#7f909d!important;
-  font-size:10px!important;
-  line-height:1.65!important;
-  padding:8px 10px!important;
-  border-left:2px solid var(--mduy-cyan)!important;
-  background:#080e14!important;
-  margin-bottom:10px!important;
-}
-.download-area button,
-#download,
-#download-all{
-  width:100%!important;
-  min-height:48px!important;
-  border-radius:4px!important;
-  border:1px solid #35505f!important;
-  background:#101a22!important;
-  color:#eef8fb!important;
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  font-size:11px!important;
-  font-weight:800;
-}
-.download-area button:hover,
-#download:hover,
-#download-all:hover{
-  background:linear-gradient(90deg,var(--mduy-cyan),#6aa7ff)!important;
-  color:#041018!important;
-  border-color:var(--mduy-cyan)!important;
-  box-shadow:0 0 28px rgba(77,231,255,.16);
-}
-#download-all{
-  background:linear-gradient(90deg,rgba(185,255,82,.13),rgba(77,231,255,.08))!important;
-  border-color:#526c42!important;
-}
-
-/* PROGRESS MODAL */
-#mod-progress{
-  background:rgba(2,5,8,.86)!important;
-  backdrop-filter:blur(14px);
-}
-.mod-progress-card{
-  width:min(560px,calc(100% - 28px))!important;
-  background:#0b1219!important;
-  border:1px solid #304552!important;
-  border-radius:7px!important;
-  box-shadow:0 30px 100px #000!important;
-}
-.mod-progress-heading{
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-}
-.mod-progress-card progress{
-  accent-color:var(--mduy-cyan)!important;
-}
-.mod-progress-card button{
-  background:#0f1820!important;
-  border-color:#304552!important;
-}
-
-/* FOOTER */
-footer{
-  color:#53616b!important;
-  border-top:1px solid var(--mduy-line)!important;
-  margin-top:14px!important;
-  padding:18px 4px 26px!important;
-  font-size:9px!important;
-  letter-spacing:1px!important;
-}
-
-/* Hide old random/default tools visually only if present.
-   Their JS remains untouched. */
-.mix-tools{
-  display:none!important;
-}
-
-/* MOBILE */
-@media(max-width:1024px){
-  .workspace{
-    grid-template-columns:1fr!important;
-  }
-  .panel{order:2}
-  .stage{order:1}
-  #viewport{
-    height:560px!important;
-    min-height:0!important;
-  }
-  .intro{
-    align-items:flex-start;
-    flex-direction:column;
-    gap:8px;
-  }
-  .intro:after{display:none}
-}
-@media(max-width:640px){
-  .shell{width:min(100% - 14px,1420px)!important}
-  .topbar{height:62px!important}
-  .brand{font-size:10px!important}
-  .platform{font-size:9px;padding:6px 9px}
-  .intro{padding:27px 2px 16px!important}
-  .intro h1{
-    font-size:34px!important;
-    letter-spacing:-1.8px!important;
-  }
-  #viewport{
-    height:470px!important;
-  }
-  .panel-title{padding:15px!important}
-  #wardrobe-form{padding:10px!important}
-}
-@media(max-width:440px){
-  #viewport{height:420px!important}
-  .brandmark{width:34px!important;height:34px!important}
-}
-
-/* Prevent the redesign from touching 3D canvas rendering. */
-#viewport canvas{
-  transform:none!important;
-  image-rendering:auto!important;
-}
-</style>
 
 </body>
 </html>
