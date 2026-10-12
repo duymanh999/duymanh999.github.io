@@ -295,11 +295,11 @@ THE SOFTWARE.
     <div id="mduy-lock" hidden role="dialog" aria-modal="true" aria-labelledby="mduy-lock-title">
       <div class="mduy-lock-card">
         <div class="mduy-lock-head"><div><p class="mduy-lock-kicker">MDUY MOD FF</p><h2 id="mduy-lock-title">MOD đã sẵn sàng</h2></div><button id="mduy-lock-close" type="button" aria-label="Đóng">×</button></div>
-        <p id="mduy-lock-text">File sẽ được khóa bằng mật khẩu riêng. Bấm bên dưới để lấy mật khẩu.</p>
-        <div class="mduy-lock-step"><span>1</span><div><strong>Đi qua Link4m</strong><small>Mở link kiếm tiền để nhận quyền lấy mật khẩu.</small></div></div>
-        <div class="mduy-lock-step"><span>2</span><div><strong>Nhận mật khẩu</strong><small>Mỗi file có mật khẩu ngẫu nhiên riêng.</small></div></div>
-        <button id="mduy-get-password" class="mduy-lock-primary" type="button">LẤY MẬT KHẨU</button>
-        <button id="mduy-download-locked" class="mduy-lock-secondary" type="button" hidden>TẢI ZIP ĐÃ KHÓA</button>
+        <p id="mduy-lock-text">ZIP đã được tạo. Bấm bên dưới để đi qua Link4m, sau đó tải file.</p>
+        <div class="mduy-lock-step"><span>1</span><div><strong>Đi qua Link4m</strong><small>Hoàn tất Link4m để tới trang tải ZIP.</small></div></div>
+        <div class="mduy-lock-step"><span>2</span><div><strong>Tải ZIP</strong><small>Không cần mật khẩu.</small></div></div>
+        <button id="mduy-get-password" class="mduy-lock-primary" type="button">ĐI QUA LINK4M</button>
+        <button id="mduy-download-locked" class="mduy-lock-secondary" type="button" hidden>TẢI ZIP</button>
         <p id="mduy-lock-status" class="mduy-lock-status" role="status" aria-live="polite"></p>
       </div>
     </div>
@@ -757,6 +757,7 @@ self.onmessage=async event=>{
   const $ = id => document.getElementById(id);
   const modal=$('mduy-lock'), getBtn=$('mduy-get-password'), dlBtn=$('mduy-download-locked'), closeBtn=$('mduy-lock-close'), status=$('mduy-lock-status');
   let pendingJob=null, pendingName='MDUY-MOD.zip';
+
   const show=(v=true)=>{if(!modal)return;modal.hidden=!v;if(v)status.textContent='';};
   const setStatus=(text,kind='')=>{if(!status)return;status.className='mduy-lock-status '+kind;status.textContent=text;};
   closeBtn?.addEventListener('click',()=>show(false));
@@ -777,31 +778,29 @@ self.onmessage=async event=>{
     const data=await r.json().catch(()=>({}));
     if(!r.ok)throw Error(data.error||'Backend không tạo được MOD.');
     if(!data.id||!data.shortUrl)throw Error('Backend chưa trả về Link4m.');
-    return {id:data.id,shortUrl:data.shortUrl,name:packaged.name,downloadUrl:`${BACKEND}/api/mod/download/${encodeURIComponent(data.id)}`};
+    return {id:data.id,shortUrl:data.shortUrl,name:packaged.name,downloadUrl:data.downloadUrl||`${BACKEND}/api/mod/download/${encodeURIComponent(data.id)}`};
   }
 
   async function begin(packaged){
     show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';getBtn.hidden=false;dlBtn.hidden=true;
     $('mduy-lock-title').textContent='MOD đã sẵn sàng';
-    $('mduy-lock-text').textContent='ZIP đã được khóa bằng mật khẩu riêng. Bấm bên dưới để đi qua Link4m và nhận mật khẩu.';
-    setStatus('Đang tạo ZIP khóa…');
+    $('mduy-lock-text').textContent='ZIP đã được tạo. Bấm bên dưới để đi qua Link4m, sau đó tải file.';
+    setStatus('Đang tạo Link4m…');
     try{
       pendingJob=await createLocked(packaged);
-      setStatus('Đã khóa ZIP. Bấm “LẤY MẬT KHẨU” để mở Link4m.','ok');
+      setStatus('Đã sẵn sàng. Bấm “ĐI QUA LINK4M”.','ok');
     }catch(e){setStatus(e.message||'Không tạo được MOD.','error');pendingJob=null;}
   }
 
   getBtn?.addEventListener('click',()=>{
     if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
-    sessionStorage.setItem('mduy_pending_job',pendingJob.id);
-    sessionStorage.setItem('mduy_pending_download',pendingJob.downloadUrl);
     window.location.href=pendingJob.shortUrl;
   });
 
   dlBtn?.addEventListener('click',async()=>{
     const url=dlBtn.dataset.url;if(!url||dlBtn.disabled)return;
-    dlBtn.disabled=true;setStatus('Đang tải ZIP đã khóa…');
-    try{const r=await fetch(url);if(!r.ok)throw Error('Không tải được ZIP.');saveFile(await r.blob(),pendingName||'MDUY-MOD.zip');setStatus('Đã tải ZIP. Mở bằng 7-Zip/WinRAR và nhập mật khẩu.','ok');}
+    dlBtn.disabled=true;setStatus('Đang tải ZIP…');
+    try{const r=await fetch(url);if(!r.ok)throw Error('Không tải được ZIP.');saveFile(await r.blob(),pendingName||'MDUY-MOD.zip');setStatus('Đã tải ZIP.','ok');}
     catch(e){setStatus(e.message||'Không tải được ZIP.','error');}finally{dlBtn.disabled=false;}
   });
 
@@ -840,16 +839,8 @@ self.onmessage=async event=>{
     },true);
   }
 
-  // The backend currently sends Link4m directly to /claim/:id.
-  // This helper lets the user reopen the generated ZIP after claiming the password.
-  function showReturnHint(){
-    const id=sessionStorage.getItem('mduy_pending_job');
-    if(!id)return;
-    pendingJob={id,downloadUrl:sessionStorage.getItem('mduy_pending_download')||`${BACKEND}/api/mod/download/${encodeURIComponent(id)}`};
-  }
-
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{install();showReturnHint();},{once:true});
-  else{install();showReturnHint();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
+  else install();
 })();
 </script>
 
