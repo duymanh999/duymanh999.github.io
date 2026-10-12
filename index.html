@@ -133,7 +133,7 @@ THE SOFTWARE.
 <style id="mduy-3d-sharp-clean-css">
 /* ===== MDUY 3D SHARP / CLEAN ===== */
 #viewport {
-  height: 580px !important;
+  height: 620px !important;
   overflow: hidden;
   isolation: isolate;
   background: radial-gradient(circle at 50% 34%, #314d83 0%, #18264c 30%, #0a1228 67%, #050816 100%) !important;
@@ -152,8 +152,21 @@ THE SOFTWARE.
 #mduy-3d-hud, #mduy-3d-grid, .mduy-3d-label { display: none !important; }
 .watermark { opacity: .035 !important; }
 .stage-head { z-index: 4; }
-@media(max-width:640px){ #viewport { height: 500px !important; } }
-@media(max-width:440px){ #viewport { height: 430px !important; } }
+@media(max-width:640px){ #viewport { height: 540px !important; } }
+@media(max-width:440px){ #viewport { height: 500px !important; } }
+/* ===== MDUY HERO POSE / RETINA SHARP ===== */
+#viewport{
+  background:radial-gradient(circle at 50% 34%,#3d5794 0%,#1c2b55 31%,#09132c 68%,#040714 100%) !important;
+  box-shadow:inset 0 0 90px #000c,inset 0 0 28px #4de7ff26 !important;
+}
+#viewport canvas{
+  image-rendering:auto !important;
+  filter:contrast(1.035) saturate(1.035) !important;
+  transform:none !important;
+}
+/* Clean hero composition: keep the model unobstructed and slightly lower in frame. */
+.stage-head{pointer-events:none}
+.watermark{opacity:.02 !important}
 </style>
 </head>
 <body>
@@ -616,82 +629,62 @@ self.onmessage=async event=>{
   const tune = () => {
     const canvas = document.querySelector('#viewport canvas');
     if (!canvas) return;
-    canvas.style.filter = 'none';
+    canvas.style.filter = 'contrast(1.035) saturate(1.035)';
     canvas.style.transform = 'none';
     canvas.style.imageRendering = 'auto';
     canvas.style.backfaceVisibility = 'hidden';
     canvas.style.webkitBackfaceVisibility = 'hidden';
+    canvas.style.display = 'block';
+    // Retina backing-store: only increase resolution when the renderer is not already doing it.
+    const dpr = Math.min(2.5, Math.max(1.5, window.devicePixelRatio || 1));
+    const w = Math.max(1, Math.round(canvas.clientWidth * dpr));
+    const h = Math.max(1, Math.round(canvas.clientHeight * dpr));
+    if (canvas.width < w * 0.92 || canvas.height < h * 0.92) {
+      try { canvas.width = w; canvas.height = h; } catch {}
+    }
   };
   const viewport = document.getElementById('viewport');
   if (viewport) {
-    new MutationObserver(tune).observe(viewport, {childList:true, subtree:true});
-    new ResizeObserver(tune).observe(viewport);
+    new MutationObserver(() => requestAnimationFrame(tune)).observe(viewport,{childList:true,subtree:true});
+    new ResizeObserver(() => requestAnimationFrame(tune)).observe(viewport);
   }
-  window.addEventListener('resize', tune, {passive:true});
-  window.addEventListener('orientationchange', () => setTimeout(tune, 250), {passive:true});
-  setTimeout(tune, 350);
+  window.addEventListener('resize', () => requestAnimationFrame(tune), {passive:true});
+  window.addEventListener('orientationchange', () => setTimeout(tune,250), {passive:true});
+  setTimeout(tune,350);
+  setTimeout(tune,1000);
 })();
 </script>
 <script id="mduy-3d-controls-js">
 (() => {
-  const init=()=>{
-    const viewport=document.getElementById('viewport');
-    const auto=document.getElementById('m3d-auto');
-    const zoomIn=document.getElementById('m3d-zoomin');
-    const zoomOut=document.getElementById('m3d-zoomout');
-    const light=document.getElementById('m3d-light');
-    const grid=document.getElementById('m3d-grid');
-    const gridLayer=document.getElementById('mduy-3d-grid');
-    const full=document.getElementById('m3d-full');
-    const shot=document.getElementById('m3d-shot');
-    const mode=document.getElementById('m3d-mode');
-    const rotate=document.getElementById('rotate');
-    const front=document.getElementById('front');
-    if(!viewport||!auto)return;
-    let scale=1, lightIndex=0;
-    const applyZoom=()=>{
-      const canvas=viewport.querySelector('canvas');
-      if(canvas){canvas.style.transform='none';canvas.style.transformOrigin='50% 53%';}
-      mode.textContent='3D LIVE';
-    };
-    auto.addEventListener('click',()=>{
-      rotate?.click();
-      const on=rotate?.getAttribute('aria-pressed')==='true';
-      auto.classList.toggle('active',on);auto.setAttribute('aria-pressed',String(on));
-      mode.textContent=on?'AUTO 360°':'3D LIVE';
-    });
-    zoomIn.addEventListener('click',()=>{scale=Math.min(1.18,+(scale+.04).toFixed(2));applyZoom();});
-    zoomOut.addEventListener('click',()=>{scale=Math.max(.90,+(scale-.04).toFixed(2));applyZoom();});
-    light.addEventListener('click',()=>{
-      viewport.classList.remove('mduy-light-1','mduy-light-2','mduy-light-3');
-      lightIndex=(lightIndex+1)%4;
-      if(lightIndex)viewport.classList.add('mduy-light-'+lightIndex);
-      mode.textContent=['3D LIVE','NEON','MAGENTA','CYAN'][lightIndex];
-    });
-    grid.addEventListener('click',()=>{
-      const on=gridLayer.classList.toggle('show');grid.classList.toggle('active',on);grid.setAttribute('aria-pressed',String(on));
-    });
-    full.addEventListener('click',async()=>{
-      try{if(document.fullscreenElement)await document.exitFullscreen();else await viewport.requestFullscreen?.();}catch{}
-    });
-    shot.addEventListener('click',()=>{
-      const canvas=viewport.querySelector('canvas');
-      if(!canvas){return;}
-      try{
-        const a=document.createElement('a');a.download='MDUY-MOD-FF-3D-PREVIEW.png';a.href=canvas.toDataURL('image/png');a.click();
-        mode.textContent='ĐÃ CHỤP 3D ✓';setTimeout(()=>mode.textContent='3D LIVE',1200);
-      }catch{mode.textContent='3D PREVIEW';}
-    });
-    front?.addEventListener('click',()=>{scale=1;applyZoom();auto.classList.remove('active');auto.setAttribute('aria-pressed','false');mode.textContent='3D LIVE';});
-    viewport.addEventListener('dblclick',()=>{front?.click();});
-    new MutationObserver(()=>{
-      const canvas=viewport.querySelector('canvas');if(canvas&&!canvas.dataset.mduyControls){canvas.dataset.mduyControls='1';canvas.style.willChange='transform';applyZoom();}
-    }).observe(viewport,{childList:true,subtree:true});
-    applyZoom();
-  };
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  // The 3D control bar is intentionally hidden on mobile: the character stays unobstructed.
+  // Keep the original Rotate/Reset buttons fully functional.
+  const viewport=document.getElementById('viewport');
+  const front=document.getElementById('front');
+  if(!viewport) return;
+  viewport.addEventListener('dblclick',()=>front?.click());
 })();
 </script>
 
+<script id="mduy-hero-pose-hook">
+(() => {
+  // Hero composition inspired by the supplied Free Fire reference: subtle 3/4 presentation,
+  // while avoiding changes to wardrobe/export data. If the preview exposes a camera API, use it.
+  const apply=()=>{
+    try{
+      const api=window.alokPreview||window.alok3D||window.preview3D||window.characterPreview;
+      if(!api) return;
+      const cam=api.camera||api.getCamera?.();
+      if(cam){
+        if('position' in cam){cam.position.x = Number(cam.position.x||0) + 0.05; cam.position.z = Number(cam.position.z||3) * 0.985;}
+        if(typeof cam.lookAt==='function' && api.target) cam.lookAt(api.target);
+        if('fov' in cam) cam.fov = Math.min(36, Number(cam.fov)||36);
+        cam.updateProjectionMatrix?.();
+      }
+    }catch{}
+  };
+  setTimeout(apply,1200);
+  setTimeout(apply,2500);
+})();
+</script>
 </body>
 </html>
