@@ -179,7 +179,7 @@ THE SOFTWARE.
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">MDUY MOD FF ✦ ALOK</h1></div>
+      <div><h1 id="fish-mod-turns" aria-live="polite">AOTU MOD</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
     <main class="workspace" id="wardrobe-workspace">
@@ -233,7 +233,7 @@ THE SOFTWARE.
         <div class="mix-tools"><button id="randomize" type="button">⇄ Phối ngẫu nhiên</button><button id="reset" type="button">Bộ mặc định</button></div>
         <div class="download-area">
           <p class="selection-caption">Bộ đang chọn</p><p class="selection-summary" id="selection-summary" aria-live="polite"></p>
-          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Đang tải dữ liệu…</span></button>
+          <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">TẠO FILE NGAY</span></button>
           <button class="download" id="download-all" type="button" disabled style="margin-top:10px"><span id="download-all-label">Tạo 4 phiên bản</span></button>
           <p id="status" class="status" role="status" aria-live="polite">Lựa chọn của bạn được lưu trên trình duyệt này.</p>
         </div>
@@ -1302,6 +1302,48 @@ footer{
   }
 }
 </style>
+
+
+<style id="aotu-text-ui-only">
+  #wardrobe-intro .count{margin-left:auto}
+  #fish-mod-turns{letter-spacing:.02em}
+  #selection-summary{white-space:pre-line!important;}
+</style>
+<script id="aotu-text-ui-only-script">
+(() => {
+  const labels = {hair:'Tóc',top:'Áo',bottom:'Quần',shoes:'Chân',mask:'Nạ',face:'Mặt',action:'Hành động'};
+  function formatSummary(){
+    const el=document.getElementById('selection-summary');
+    if(!el) return;
+    const values=[];
+    for(const key of Object.keys(labels)){
+      const select=document.getElementById(key);
+      if(!select) continue;
+      const option=select.options[select.selectedIndex];
+      const name=(option?.textContent||'').trim();
+      if(name) values.push(labels[key]+': '+name.replace(/\s+/g,' ').trim());
+    }
+    if(values.length){
+      const copyright='Bản Quyền Mạnh Duy';
+      el.textContent=values.join('\n')+'\n'+copyright;
+    }
+  }
+  function fixDownloadLabel(){
+    const el=document.getElementById('download-label');
+    if(!el) return;
+    const t=(el.textContent||'').trim();
+    if(t.includes('TẠO FILE MOD') || t.includes('Tạo file mod') || t.includes('Đang tải dữ liệu')) el.textContent='TẠO FILE NGAY';
+  }
+  function apply(){formatSummary();fixDownloadLabel();}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true}); else apply();
+  document.addEventListener('change', e => { if(e.target?.matches?.('#hair,#top,#bottom,#shoes,#mask,#face,#action')) setTimeout(formatSummary,0); });
+  const target=document.getElementById('selection-summary');
+  if(target) new MutationObserver(() => setTimeout(formatSummary,0)).observe(target,{childList:true,characterData:true,subtree:true});
+  const dl=document.getElementById('download-label');
+  if(dl) new MutationObserver(fixDownloadLabel).observe(dl,{childList:true,characterData:true,subtree:true});
+  setInterval(apply,500);
+})();
+</script>
 
 </body>
 </html>
