@@ -750,7 +750,7 @@ self.onmessage=async event=>{
     canvas.style.webkitBackfaceVisibility = 'hidden';
     canvas.style.display = 'block';
     // Retina backing-store: only increase resolution when the renderer is not already doing it.
-    const dpr = Math.min(2.5, Math.max(1.5, window.devicePixelRatio || 1));
+    const dpr = Math.min(window.innerWidth <= 768 ? 1.25 : 1.75, Math.max(1, window.devicePixelRatio || 1));
     const w = Math.max(1, Math.round(canvas.clientWidth * dpr));
     const h = Math.max(1, Math.round(canvas.clientHeight * dpr));
     if (canvas.width < w * 0.92 || canvas.height < h * 0.92) {
