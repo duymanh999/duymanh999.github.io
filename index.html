@@ -233,7 +233,7 @@ THE SOFTWARE.
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">MDUY MOD FF ✦ ALOK</h1></div>
+      <div><p class="eyebrow">Tuỳ chọn đồ</p><h1 id="fish-mod-turns" aria-live="polite">AOTU MOD SKIN</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
     <main class="workspace" id="wardrobe-workspace">
@@ -300,6 +300,7 @@ THE SOFTWARE.
         <div class="mduy-lock-step"><span>1</span><div><strong>Đi qua Link4m</strong><small>Hoàn tất Link4m để tới trang tải ZIP.</small></div></div>
         <div class="mduy-lock-step"><span>2</span><div><strong>Tải ZIP</strong><small>Không cần mật khẩu.</small></div></div>
         <button id="mduy-get-password" class="mduy-lock-primary" type="button">ĐI QUA LINK4M</button>
+        <button id="mduy-copy-link4m" class="mduy-lock-secondary" type="button" hidden>SAO CHÉP LINK4M</button>
         <button id="mduy-download-locked" class="mduy-lock-secondary" type="button" hidden>TẢI ZIP</button>
         <p id="mduy-lock-status" class="mduy-lock-status" role="status" aria-live="polite"></p>
       </div>
@@ -804,7 +805,7 @@ self.onmessage=async event=>{
 (() => {
   const BACKEND = 'https://mduy-mod-backend.onrender.com';
   const $ = id => document.getElementById(id);
-  const modal=$('mduy-lock'), getBtn=$('mduy-get-password'), dlBtn=$('mduy-download-locked'), closeBtn=$('mduy-lock-close'), status=$('mduy-lock-status');
+  const modal=$('mduy-lock'), getBtn=$('mduy-get-password'), copyBtn=$('mduy-copy-link4m'), dlBtn=$('mduy-download-locked'), closeBtn=$('mduy-lock-close'), status=$('mduy-lock-status');
   let pendingJob=null, pendingName='MDUY-MOD.zip';
 
   const show=(v=true)=>{if(!modal)return;modal.hidden=!v;if(v)status.textContent='';};
@@ -831,19 +832,41 @@ self.onmessage=async event=>{
   }
 
   async function begin(packaged){
-    show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';getBtn.hidden=false;dlBtn.hidden=true;
+    show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';getBtn.hidden=false;copyBtn.hidden=true;dlBtn.hidden=true;
     $('mduy-lock-title').textContent='MOD đã sẵn sàng';
     $('mduy-lock-text').textContent='ZIP đã được tạo. Bấm bên dưới để đi qua Link4m, sau đó tải file.';
     setStatus('Đang tạo Link4m…');
     try{
       pendingJob=await createLocked(packaged);
-      setStatus('Đã sẵn sàng. Bấm “ĐI QUA LINK4M”.','ok');
+      copyBtn.hidden=false;
+      setStatus('Đã sẵn sàng. Bạn có thể đi qua Link4m hoặc sao chép link.','ok');
     }catch(e){setStatus(e.message||'Không tạo được MOD.','error');pendingJob=null;}
   }
 
   getBtn?.addEventListener('click',()=>{
     if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
+    // Mở đúng shortUrl do backend Link4m trả về.
     window.location.href=pendingJob.shortUrl;
+  });
+
+  copyBtn?.addEventListener('click',async()=>{
+    if(!pendingJob?.shortUrl)return setStatus('Link4m chưa sẵn sàng. Hãy thử lại.','error');
+    const shortUrl=pendingJob.shortUrl;
+    try{
+      if(navigator.clipboard&&window.isSecureContext){
+        await navigator.clipboard.writeText(shortUrl);
+      }else{
+        const field=document.createElement('textarea');
+        field.value=shortUrl;field.setAttribute('readonly','');
+        field.style.position='fixed';field.style.opacity='0';field.style.pointerEvents='none';
+        document.body.appendChild(field);field.select();field.setSelectionRange(0,field.value.length);
+        const copied=document.execCommand('copy');field.remove();
+        if(!copied)throw Error('Trình duyệt không cho phép sao chép tự động.');
+      }
+      setStatus('Đã sao chép Link4m. Hãy dán vào thanh địa chỉ trình duyệt.','ok');
+    }catch(e){
+      setStatus('Không tự sao chép được. Hãy thử lại hoặc mở nút ĐI QUA LINK4M.','error');
+    }
   });
 
   dlBtn?.addEventListener('click',async()=>{
