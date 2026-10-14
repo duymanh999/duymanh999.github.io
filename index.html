@@ -1054,8 +1054,21 @@ self.onmessage=async event=>{
     pendingName=packaged.name||'MDUY-MOD.zip';pendingJob=null;
     if(activeKey){
       setKeyStatus('Đang tạo ZIP với key…','ok');
-      const job=await createJob(version,packaged);
-      await downloadDirect(job);
+      try{
+        const job=await createJob(version,packaged);
+        pendingJob=job;
+        // Telegram Mini App có thể chặn blob/fetch download. Luôn hiện phương án copy link tải trực tiếp.
+        show(true);
+        getBtn.hidden=false;
+        getBtn.textContent='SAO CHÉP LINK TẢI MOD';
+        dlBtn.hidden=true;
+        $('mduy-lock-title').textContent='MOD đã tạo xong';
+        $('mduy-lock-text').textContent='Key đã được xác nhận. Nếu Telegram không tải trực tiếp, hãy sao chép link và mở bằng trình duyệt để tải ZIP.';
+        setStatus('MOD đã sẵn sàng — bấm “SAO CHÉP LINK TẢI MOD”.','ok');
+      }catch(e){
+        setKeyStatus(e.message||'Không tạo được MOD.','error');
+        throw e;
+      }
       return;
     }
     show(true);getBtn.hidden=false;dlBtn.hidden=true;
@@ -1067,12 +1080,12 @@ self.onmessage=async event=>{
 
   getBtn?.addEventListener('click',async()=>{
     if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
-    const url=pendingJob.shortUrl;
-    if(!url)return setStatus('Backend chưa trả về link Link4m.','error');
+    const url=activeKey ? pendingJob.downloadUrl : pendingJob.shortUrl;
+    if(!url)return setStatus(activeKey?'Backend chưa trả về link tải MOD trực tiếp.':'Backend chưa trả về link Link4m.','error');
     try{
       await navigator.clipboard.writeText(url);
       getBtn.textContent='ĐÃ SAO CHÉP LINK ✓';
-      setStatus('Đã copy link. Mở bằng trình duyệt và vượt Link4m 1 lần để lấy file.','ok');
+      setStatus(activeKey?'Đã copy link tải MOD. Mở bằng Safari/Chrome để tải ZIP.':'Đã copy link. Mở bằng trình duyệt và vượt Link4m 1 lần để lấy file.','ok');
       setTimeout(()=>{getBtn.textContent='SAO CHÉP LINK';},2200);
     }catch(e){
       const ta=document.createElement('textarea');ta.value=url;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();
