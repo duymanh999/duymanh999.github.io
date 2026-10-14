@@ -237,6 +237,105 @@ select,.fixed-value{min-height:38px;padding-top:8px;padding-bottom:8px;font-size
 }
 </style>
 
+
+<style id="aotu-ui-only-v2">
+/* AOTU MOD — UI ONLY */
+.aotu-shop-collapsed{padding:0!important;overflow:hidden}
+.aotu-shop-toggle{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:0;background:transparent;color:#fff;text-align:left;cursor:pointer;
+  padding:12px 13px;border-radius:12px;
+}
+.aotu-shop-toggle-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.aotu-shop-toggle-copy strong{font-size:11px;letter-spacing:.35px;line-height:1.35}
+.aotu-shop-toggle-copy span{font-size:10px;color:#67eaff;font-weight:850}
+.aotu-shop-chevron{flex:0 0 auto;color:#ff6fd7;font-size:19px;line-height:1;transition:transform .2s ease}
+.aotu-shop-collapsed.open .aotu-shop-chevron{transform:rotate(180deg)}
+.aotu-shop-content{padding:0 11px 11px}
+.aotu-shop-content[hidden]{display:none}
+
+@media(max-width:860px){
+  .panel{padding:12px!important}
+  .panel-title{font-size:14px!important;margin-bottom:8px!important}
+  .form-row{grid-template-columns:62px minmax(0,1fr)!important;gap:7px!important;margin:5px 0!important}
+  .form-row label,.fixed-label{font-size:10px!important;white-space:nowrap}
+  .row-icon{width:20px!important;height:20px!important}
+  .select-wrap::after{right:11px!important;top:7px!important;font-size:14px}
+  select,.fixed-value{min-height:36px!important;height:36px!important;padding:6px 30px 6px 10px!important;font-size:11px!important;border-radius:9px!important}
+  .form-divider{margin:9px 0!important}
+  .mix-tools{margin-top:9px!important;gap:6px!important}
+  .mix-tools button{padding:6px 8px!important;font-size:10px!important}
+  .aotu-shop{margin:9px 0!important}
+}
+@media(max-width:440px){
+  .panel{padding:10px!important}
+  .form-row{grid-template-columns:56px minmax(0,1fr)!important;gap:6px!important;margin:4px 0!important}
+  .form-row label,.fixed-label{font-size:9px!important}
+  .row-icon{width:18px!important;height:18px!important}
+  select,.fixed-value{min-height:34px!important;height:34px!important;font-size:10px!important;padding:5px 27px 5px 9px!important}
+  .select-wrap::after{right:9px!important;top:6px!important;font-size:13px}
+  .form-divider{margin:7px 0!important}
+  .mix-tools button{padding:5px 6px!important;font-size:9px!important}
+  .aotu-shop-toggle{padding:10px 11px}
+  .aotu-shop-toggle-copy strong{font-size:9px}
+  .aotu-shop-toggle-copy span{font-size:9px}
+}
+</style>
+
+
+<style id="aotu-key-inside-shop">
+.aotu-shop-content .mduy-key-box{
+  margin:10px 0 0!important;
+  padding:10px!important;
+  border-radius:12px!important;
+}
+.aotu-shop-content .mduy-key-title{
+  margin:0 0 7px!important;
+  font-size:11px!important;
+}
+.aotu-shop-content .mduy-key-row{
+  gap:7px!important;
+}
+.aotu-shop-content .mduy-key-input,
+.aotu-shop-content .mduy-key-check{
+  min-height:36px!important;
+  height:36px!important;
+  font-size:10px!important;
+  border-radius:9px!important;
+}
+.aotu-shop-content .mduy-key-status{
+  margin:6px 0 0!important;
+  font-size:9px!important;
+  line-height:1.35!important;
+}
+@media(max-width:440px){
+  .aotu-shop-content .mduy-key-box{padding:8px!important}
+  .aotu-shop-content .mduy-key-input,
+  .aotu-shop-content .mduy-key-check{
+    min-height:34px!important;height:34px!important;font-size:9px!important;
+  }
+}
+</style>
+
+
+<style id="aotu-3d-square-ui">
+/* 3D PREVIEW — chỉ chỉnh bố cục hiển thị */
+.stage{overflow:hidden!important}
+#viewport{
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:1 / 1!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:hidden!important;
+  position:relative!important;
+}
+#viewport canvas{width:100%!important;height:100%!important;object-fit:contain!important}
+@media(max-width:640px){
+  #viewport{aspect-ratio:1 / 1!important;height:auto!important;min-height:0!important}
+}
+</style>
+
 </head>
 <body>
   <div class="shell">
@@ -248,7 +347,7 @@ select,.fixed-value{min-height:38px;padding-top:8px;padding-bottom:8px;font-size
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">AOTU MOD ✦ ALOK</h1></div>
+      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">AOTU MOD</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
     <main class="workspace" id="wardrobe-workspace">
@@ -302,15 +401,22 @@ select,.fixed-value{min-height:38px;padding-top:8px;padding-bottom:8px;font-size
         <div class="mix-tools"><button id="randomize" type="button">⇄ Phối ngẫu nhiên</button><button id="reset" type="button">Bộ mặc định</button></div>
 
 
-        <section class="aotu-shop" aria-label="Gói lượt MOD">
-          <div class="aotu-shop-head"><span class="aotu-shop-title">🎟️ GÓI LƯỢT MOD</span><span class="aotu-shop-note">Liên hệ để nhận key</span></div>
-          <div class="aotu-packages">
-            <div class="aotu-package"><strong>50 lượt</strong><span>50.000đ</span></div>
-            <div class="aotu-package"><strong>100 lượt</strong><span>100.000đ</span></div>
-            <div class="aotu-package"><strong>200 lượt</strong><span>150.000đ</span></div>
-          </div>
-          <div class="aotu-contact"><a href="https://t.me/manhduy981" target="_blank" rel="noopener">✈️ Liên hệ Telegram</a></div>
-        </section>
+        <section class="aotu-shop aotu-shop-collapsed" aria-label="Gói lượt MOD">
+          <button id="aotu-shop-toggle" class="aotu-shop-toggle" type="button" aria-expanded="false" aria-controls="aotu-shop-content">
+            <span class="aotu-shop-toggle-copy">
+              <strong>NẾU BẠN THẤY 3 LƯỢT / NGÀY KHÔNG ĐỦ</strong>
+              <span>HÃY MUA NGAY LƯỢT MOD</span>
+            </span>
+            <span class="aotu-shop-chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div id="aotu-shop-content" class="aotu-shop-content" hidden>
+            <div class="aotu-shop-head"><span class="aotu-shop-title">🎟️ GÓI LƯỢT MOD</span><span class="aotu-shop-note">Liên hệ để nhận key</span></div>
+            <div class="aotu-packages">
+              <div class="aotu-package"><strong>50 lượt</strong><span>50.000đ</span></div>
+              <div class="aotu-package"><strong>100 lượt</strong><span>100.000đ</span></div>
+              <div class="aotu-package"><strong>200 lượt</strong><span>150.000đ</span></div>
+            </div>
+            <div class="aotu-contact"><a href="https://t.me/manhduy981" target="_blank" rel="noopener">✈️ Liên hệ Telegram</a></div>
         <div class="mduy-key-box" aria-label="Key sử dụng MOD">
           <p class="mduy-key-title">🔑 KEY MOD <span id="mduy-key-badge" class="mduy-key-badge" hidden></span></p>
           <div class="mduy-key-row">
@@ -319,6 +425,8 @@ select,.fixed-value{min-height:38px;padding-top:8px;padding-bottom:8px;font-size
           </div>
           <p id="mduy-key-status" class="mduy-key-status" role="status" aria-live="polite">Không có key: vẫn dùng giới hạn 3 lượt/ngày + Link4m.</p>
         </div>
+          </div>
+        </section>
         <div class="download-area">
           <p class="selection-caption">Bộ đang chọn</p><p class="selection-summary" id="selection-summary" aria-live="polite"></p>
           <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Tạo MOD</span></button>
@@ -919,6 +1027,69 @@ self.onmessage=async event=>{
     },true);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{install();claimFromReturn();},{once:true});else{install();claimFromReturn();}
+})();
+</script>
+
+
+<script id="aotu-ui-only-v2-js">
+(() => {
+  const toggle=document.getElementById('aotu-shop-toggle');
+  const content=document.getElementById('aotu-shop-content');
+  const shop=toggle?.closest('.aotu-shop');
+  if(!toggle||!content||!shop)return;
+  toggle.addEventListener('click',()=>{
+    const open=toggle.getAttribute('aria-expanded')==='true';
+    toggle.setAttribute('aria-expanded',String(!open));
+    content.hidden=open;
+    shop.classList.toggle('open',!open);
+  });
+})();
+</script>
+
+
+<script id="aotu-3d-framing-ui">
+(() => {
+  const hideBases = (root) => {
+    if (!root) return;
+    const names = /^(base|platform|pedestal|stand|display[_ -]?stand|show[_ -]?base|plinth)$/i;
+    const walk = (obj) => {
+      if (!obj) return;
+      try {
+        if (obj.name && names.test(String(obj.name).trim())) {
+          obj.visible = false;
+        }
+        if (obj.children && obj.children.length) obj.children.forEach(walk);
+      } catch {}
+    };
+    walk(root);
+  };
+
+  const frame = () => {
+    try {
+      const api = window.alokPreview || window.alok3D || window.preview3D || window.characterPreview;
+      if (!api) return;
+
+      const cam = api.camera || api.getCamera?.();
+      if (cam) {
+        /* Khung vuông + nhân vật nhỏ hơn, nằm giữa */
+        if ('fov' in cam) cam.fov = 46;
+        if (cam.position && typeof cam.position.z === 'number') {
+          cam.position.z = Math.max(cam.position.z, 3.55);
+        }
+        cam.updateProjectionMatrix?.();
+      }
+
+      /* Bệ nếu preview cung cấp scene/model riêng */
+      hideBases(api.scene);
+      hideBases(api.model);
+      hideBases(api.object3D);
+      hideBases(api.root);
+      hideBases(api.character);
+    } catch {}
+  };
+
+  [900,1600,2800].forEach(t => setTimeout(frame,t));
+  window.addEventListener('resize', () => setTimeout(frame,120), {passive:true});
 })();
 </script>
 
