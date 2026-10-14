@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#111116">
-  <title>MDUY MOD FF — PHỐI ĐỒ 3D</title>
+  <title>AOTU MOD — PHỐI ĐỒ 3D</title>
   <style>
     :root{color-scheme:dark;--bg:#111116;--panel:#1b1b23;--line:#30303a;--muted:#a1a1b0;--text:#f1f1f6;--accent:#b29aff;--green:#c5ee87}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -187,18 +187,68 @@ THE SOFTWARE.
 #mduy-lock[hidden]{display:none}.mduy-lock-card{width:min(460px,100%);border:1px solid #5967a5;border-radius:22px;padding:22px;background:linear-gradient(145deg,#111833,#28122f);box-shadow:0 25px 90px #000b,0 0 45px #8f6bff35;color:#fff}.mduy-lock-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.mduy-lock-head h2{margin:0;font-size:24px}.mduy-lock-kicker{margin:0 0 5px;color:#62eaff;font-size:10px;font-weight:900;letter-spacing:2px}.mduy-lock-head button{border:1px solid #4a5790;background:#151b37;color:#fff;border-radius:10px;width:36px;height:36px;font-size:24px;line-height:1}.mduy-lock-card>p{color:#bfc8e8;font-size:13px;line-height:1.65}.mduy-lock-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #343f70;background:#0d1430aa;border-radius:13px;margin-top:9px}.mduy-lock-step>span{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#ff5fcf,#716cff);font-weight:900}.mduy-lock-step strong,.mduy-lock-step small{display:block}.mduy-lock-step small{color:#929dc5;margin-top:3px;font-size:11px}.mduy-lock-primary,.mduy-lock-secondary{width:100%;margin-top:15px;border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}.mduy-lock-primary{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);color:#07101d;box-shadow:0 0 25px #45e7ff44}.mduy-lock-secondary{background:#202846;border:1px solid #56649c;color:#fff}.mduy-lock-status{text-align:center;min-height:18px;margin-bottom:0!important}.mduy-lock-status.error{color:#ff8da9}.mduy-lock-status.ok{color:#8dffd7}.mduy-lock-password{margin:13px 0 0;padding:12px;border:1px dashed #5cecff;border-radius:11px;text-align:center;font:900 20px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:2px;color:#fff;background:#071526}
 </style>
 
+
+<style id="aotu-compact-ui">
+/* ===== AOTU MOD compact UI layer — visual/UI only ===== */
+:root{--aotu-cyan:#45e7ff;--aotu-pink:#ff5fcf;--aotu-card:#10162b;--aotu-line:#43518b}
+html,body{overflow-x:hidden}
+body{overscroll-behavior-x:none}
+.topbar{min-height:62px;height:62px}
+.brand{font-size:12px;letter-spacing:1.4px}
+.brandmark{width:30px;height:30px;border-radius:9px;font-size:18px}
+.intro{padding:20px 0 16px}.eyebrow{font-size:10px;margin-bottom:5px}.intro h1{font-size:clamp(27px,5vw,34px);margin-bottom:5px}.sub{font-size:12px}
+.workspace{gap:14px}
+.stage,.panel,.version-card{border-radius:16px}
+.stage{top:10px}
+#viewport{height:430px}
+.stage-head{top:15px;left:17px;right:17px}.character-name{font-size:17px;letter-spacing:2.5px}
+.stage-footer{padding:10px 14px}.small-button{padding:6px 9px;font-size:11px}
+.panel{padding:14px}
+.panel-title{font-size:15px;margin-bottom:11px}
+.form-row{grid-template-columns:82px 1fr;gap:8px;margin:8px 0}.form-row label,.fixed-label{font-size:11px}
+select,.fixed-value{min-height:38px;padding-top:8px;padding-bottom:8px;font-size:12px}
+.form-divider{margin:13px 0}.action-note{margin-left:90px;font-size:10px}
+.mix-tools{margin-top:12px}.mix-tools button{padding:7px 9px;font-size:11px}
+.mduy-key-box{margin:12px 0 10px;padding:11px;border-radius:12px}.mduy-key-title{font-size:11px;margin-bottom:6px}.mduy-key-input{padding:9px 10px;font-size:11px}.mduy-key-check{padding:0 11px;font-size:11px}.mduy-key-status{font-size:10px;margin-top:6px;min-height:15px}
+.download-area{margin-top:12px;padding-top:12px}.selection-caption{font-size:9px}.selection-summary{font-size:11px;min-height:30px;margin-bottom:10px}.download{padding:11px 12px;font-size:12px;border-radius:10px}
+/* Compact package/contact strip */
+.aotu-shop{margin:0 0 12px;padding:11px;border:1px solid #43518b;border-radius:13px;background:linear-gradient(145deg,#11182fdd,#1c1230dd);box-shadow:0 10px 28px #0005}
+.aotu-shop-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.aotu-shop-title{font-size:12px;font-weight:900;letter-spacing:.2px}.aotu-shop-note{font-size:9px;color:#aeb7dc}
+.aotu-packages{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.aotu-package{min-width:0;padding:8px 5px;text-align:center;border:1px solid #3e4b83;border-radius:10px;background:#0d1329}.aotu-package strong{display:block;font-size:11px}.aotu-package span{display:block;margin-top:2px;font-size:10px;color:#67eaff}
+.aotu-contact{display:flex;gap:6px;margin-top:7px}.aotu-contact a{flex:1;text-align:center;padding:8px 9px;border-radius:9px;border:1px solid #45e7ff66;background:#10253a;color:#bdf8ff;font-size:10px;font-weight:850;transition:transform .18s,box-shadow .18s}.aotu-contact a:hover{transform:translateY(-1px);box-shadow:0 0 18px #45e7ff33}
+/* Prevent the old sticky/absolute visual layers from stacking over each other on scroll. */
+.stage:before,.panel:before,.version-card:before{z-index:-1}.stage,.panel,.version-card{isolation:isolate}
+@media(max-width:860px){
+  .shell{width:calc(100% - 24px)}
+  .workspace{display:block}
+  .stage{position:relative!important;top:auto!important;z-index:1;margin-bottom:10px;transform:none!important}
+  .panel{position:relative!important;z-index:2;transform:none!important}
+  #viewport{height:340px}
+  .stage-head{z-index:3}
+  .mduy-3d-hud{z-index:4}
+  .aotu-shop{margin-top:10px}
+}
+@media(max-width:440px){
+  .topbar{height:56px;min-height:56px}.brand{font-size:10px}.brandmark{width:27px;height:27px;font-size:16px}
+  .intro{padding:14px 0 11px}.intro h1{font-size:26px}.eyebrow{font-size:9px}
+  #viewport{height:300px}.panel{padding:11px}.stage-footer{padding:8px 10px}
+  .form-row{grid-template-columns:70px 1fr;gap:6px;margin:6px 0}.action-note{margin-left:76px}
+  .aotu-shop{padding:9px}.aotu-package{padding:7px 3px}.aotu-package strong{font-size:10px}.aotu-package span{font-size:9px}.aotu-contact a{padding:7px 5px;font-size:9px}
+}
+</style>
+
 </head>
 <body>
   <div class="shell">
     <header class="topbar">
-      <a class="brand" href="#" aria-label="Trang chủ MDUY MOD FF"><span class="brandmark">M</span> MDUY MOD FF / WARDROBE</a>
+      <a class="brand" href="#" aria-label="Trang chủ AOTU MOD"><span class="brandmark">A</span> AOTU MOD</a>
       <div class="fish-top-actions"><div class="platform"><span class="dot"></span> <span id="platform-label">Chọn phiên bản</span></div><div class="fish-nav"><button id="fish-menu-toggle" class="fish-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="fish-menu"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav id="fish-menu" class="fish-menu" aria-label="Menu chính" hidden><a href="https://t.me/modskinff0">Báo lỗi</a></nav></div></div>
     </header>
 
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">MDUY MOD FF ✦ ALOK</h1></div>
+      <div><p class="eyebrow">PHỐI ĐỒ NHÂN VẬT</p><h1 id="fish-mod-turns" aria-live="polite">AOTU MOD ✦ ALOK</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
     <main class="workspace" id="wardrobe-workspace">
@@ -217,7 +267,7 @@ THE SOFTWARE.
           </div>
           <div class="mduy-3d-label"><span class="mduy-live-dot"></span><span id="m3d-mode">3D LIVE</span></div>
           <div class="mduy-3d-grid" id="mduy-3d-grid" aria-hidden="true"></div>
-          <span class="watermark" aria-hidden="true">MDUY MOD FF</span>
+          <span class="watermark" aria-hidden="true">AOTU MOD</span>
           <img id="fallback" alt="Alok mặc bộ trang phục đang chọn">
           <div id="preview-message" class="preview-message" role="status">Đang mở Alok… Nếu khung xem trước không chạy, hãy tải file xuống và mở bằng Chrome hoặc Edge.</div>
         </div>
@@ -251,6 +301,16 @@ THE SOFTWARE.
         </form>
         <div class="mix-tools"><button id="randomize" type="button">⇄ Phối ngẫu nhiên</button><button id="reset" type="button">Bộ mặc định</button></div>
 
+
+        <section class="aotu-shop" aria-label="Gói lượt MOD">
+          <div class="aotu-shop-head"><span class="aotu-shop-title">🎟️ GÓI LƯỢT MOD</span><span class="aotu-shop-note">Liên hệ để nhận key</span></div>
+          <div class="aotu-packages">
+            <div class="aotu-package"><strong>50 lượt</strong><span>50.000đ</span></div>
+            <div class="aotu-package"><strong>100 lượt</strong><span>100.000đ</span></div>
+            <div class="aotu-package"><strong>200 lượt</strong><span>150.000đ</span></div>
+          </div>
+          <div class="aotu-contact"><a href="https://t.me/manhduy981" target="_blank" rel="noopener">✈️ Liên hệ Telegram</a></div>
+        </section>
         <div class="mduy-key-box" aria-label="Key sử dụng MOD">
           <p class="mduy-key-title">🔑 KEY MOD <span id="mduy-key-badge" class="mduy-key-badge" hidden></span></p>
           <div class="mduy-key-row">
@@ -269,7 +329,7 @@ THE SOFTWARE.
     </main>
     <div id="mduy-lock" hidden role="dialog" aria-modal="true" aria-labelledby="mduy-lock-title">
       <div class="mduy-lock-card">
-        <div class="mduy-lock-head"><div><p class="mduy-lock-kicker">MDUY MOD FF</p><h2 id="mduy-lock-title">MOD đã sẵn sàng</h2></div><button id="mduy-lock-close" type="button" aria-label="Đóng">×</button></div>
+        <div class="mduy-lock-head"><div><p class="mduy-lock-kicker">AOTU MOD</p><h2 id="mduy-lock-title">MOD đã sẵn sàng</h2></div><button id="mduy-lock-close" type="button" aria-label="Đóng">×</button></div>
         <p id="mduy-lock-text">File sẽ được khóa bằng mật khẩu riêng. Bấm bên dưới để lấy mật khẩu.</p>
         <div class="mduy-lock-step"><span>1</span><div><strong>Đi qua Link4m</strong><small>Mở link kiếm tiền để nhận quyền lấy mật khẩu.</small></div></div>
         <div class="mduy-lock-step"><span>2</span><div><strong>Nhận mật khẩu</strong><small>Mỗi file có mật khẩu ngẫu nhiên riêng.</small></div></div>
@@ -279,7 +339,7 @@ THE SOFTWARE.
       </div>
     </div>
     <noscript><p class="noscript">Bật JavaScript để chọn trang phục và tải file.</p></noscript>
-    <footer><span>Dữ liệu Alok cho Android và iOS · Free Fire thường / MAX.</span><span>MDUY MOD FF · 4 phiên bản.</span></footer>
+    <footer><span>Dữ liệu Alok cho Android và iOS · Free Fire thường / MAX.</span><span>AOTU MOD · 4 phiên bản.</span></footer>
   </div>
 
 <script>
@@ -735,6 +795,7 @@ self.onmessage=async event=>{
   let pendingJob=null, pendingName='MDUY-MOD.zip';
   let activeKey='';
   let keyUses=0;
+  const KEY_STORAGE='aotu-mod-active-key-v1';
 
   const show=(v=true)=>{if(!modal)return;modal.hidden=!v;if(v)status.textContent='';};
   const setStatus=(text,kind='')=>{if(!status)return;status.className='mduy-lock-status '+kind;status.textContent=text;};
@@ -752,6 +813,7 @@ self.onmessage=async event=>{
     const key=String(raw||'').trim();
     if(!key){
       activeKey='';keyUses=0;keyBadge.hidden=true;
+      try{localStorage.removeItem(KEY_STORAGE);}catch{}
       setKeyStatus('Không có key: vẫn dùng giới hạn 3 lượt/ngày + Link4m.');
       return false;
     }
@@ -761,17 +823,25 @@ self.onmessage=async event=>{
       const data=await r.json().catch(()=>({}));
       if(!r.ok||!data.valid)throw Error(data.error||'Key không hợp lệ.');
       activeKey=key;keyUses=Number(data.usesRemaining)||0;
+      try{localStorage.setItem(KEY_STORAGE,activeKey);}catch{}
       keyBadge.textContent=keyUses+' lượt';keyBadge.hidden=false;
       setKeyStatus('Key hợp lệ — còn '+keyUses+' lượt. Tạo MOD sẽ tải ZIP trực tiếp, không qua Link4m.','ok');
       return true;
     }catch(e){
       activeKey='';keyUses=0;keyBadge.hidden=true;
+      try{localStorage.removeItem(KEY_STORAGE);}catch{}
       setKeyStatus(e.message||'Không kiểm tra được key.','error');
       return false;
     }finally{keyCheck.disabled=false;}
   }
   keyCheck?.addEventListener('click',()=>validateKey(keyInput?.value));
   keyInput?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();validateKey(keyInput.value);}});
+
+  // Keep the last valid key across reloads/reopening the site. It is revalidated server-side.
+  (async()=>{
+    let saved='';try{saved=localStorage.getItem(KEY_STORAGE)||'';}catch{}
+    if(saved && keyInput){keyInput.value=saved;await validateKey(saved);}
+  })();
 
   async function createJob(version,packaged){
     const body={zipBase64:bytesToBase64(packaged.bytes),filename:packaged.name};
