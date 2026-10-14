@@ -77,7 +77,7 @@ select,.fixed-value{background:linear-gradient(135deg,#11172f,#251a3c);border-co
 .download{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);background-size:220% 100%;color:#08101e;box-shadow:0 0 22px #45e7ff55,0 0 45px #ff5fcf22;animation:mduyButton 4s ease infinite}.download:hover{background-position:100% 0;filter:brightness(1.12);box-shadow:0 0 28px #45e7ff77,0 0 55px #ff5fcf44;transform:translateY(-2px)}.download:disabled{background:#313852;color:#8790ad;box-shadow:none;animation:none}.download-all{background:linear-gradient(100deg,#ffe66d,#ff9d5c,#ff5fcf,#9b7cff)!important;color:#17101e!important}
 .download-area{border-top-color:#45518b}.selection-caption{color:#63eaff}.selection-summary{color:#dce3ff}.status{color:#9ba8d7}.status.error{color:#ff8eac}
 .version-card{background:linear-gradient(145deg,#121733,#1b1230)}.version-card h2{background:linear-gradient(90deg,#fff,#ff7adf,#65ecff);-webkit-background-clip:text;background-clip:text;color:transparent}.choice-card,.package-card{background:linear-gradient(135deg,#12182f,#211535);border-color:#354274;box-shadow:0 8px 25px #0005}.choice-card:hover,.package-card:hover{border-color:#45e7ff;box-shadow:0 0 20px #45e7ff2b,0 12px 28px #0007}.choice-card.active{border-color:#ff70d8;background:linear-gradient(135deg,#26204d,#173d4a);box-shadow:0 0 22px #ff5fcf3b,inset 0 0 0 1px #fff6}.step-number{background:linear-gradient(135deg,#ff5fcf,#716cff);box-shadow:0 0 15px #8f6bff66}.back-version{color:#8defff}
-#mod-progress{background:#030513cc;backdrop-filter:blur(10px)}.mod-progress-card{background:linear-gradient(145deg,#171c3a,#281331);border-color:#ff5fcf;box-shadow:0 0 40px #8f6bff55,0 0 80px #ff5fcf22}.mod-progress-card progress{accent-color:#45e7ff}.mod-progress-card button{background:linear-gradient(135deg,#292347,#152f45);border-color:#5967a5}
+#mod-progress{background:#030513cc;backdrop-filter:blur(10px)}.mod-progress-card{background:linear-gradient(145deg,#171c3a,#281331);border-color:#ff5fcf;box-shadow:0 0 40px #8f6bff55,0 0 80px #ff5fcf22;animation:modCardPulse 1.6s ease-in-out infinite}.mod-progress-card:before{content:"";display:block;width:38px;height:38px;margin:0 auto 12px;border:3px solid #ffffff22;border-top-color:#45e7ff;border-right-color:#ff5fcf;border-radius:50%;animation:modSpin .8s linear infinite}.mod-progress-card progress{accent-color:#45e7ff}.mod-progress-card button{background:linear-gradient(135deg,#292347,#152f45);border-color:#5967a5}@keyframes modSpin{to{transform:rotate(360deg)}}@keyframes modCardPulse{0%,100%{box-shadow:0 0 35px #8f6bff44,0 0 70px #ff5fcf18}50%{box-shadow:0 0 55px #45e7ff55,0 0 100px #ff5fcf30}}
 footer{color:#7f8bb8}footer a:hover{color:#63eaff}
 @media(prefers-reduced-motion:reduce){body:before,.brandmark,.stage:before,.watermark,.download{animation:none!important}}
 </style>
@@ -184,7 +184,7 @@ THE SOFTWARE.
 
 <style id="mduy-lock-css">
 #mduy-lock{position:fixed;inset:0;z-index:20000;background:#030513d9;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:grid;place-items:center;padding:18px}
-#mduy-lock[hidden]{display:none}.mduy-lock-card{width:min(460px,100%);border:1px solid #5967a5;border-radius:22px;padding:22px;background:linear-gradient(145deg,#111833,#28122f);box-shadow:0 25px 90px #000b,0 0 45px #8f6bff35;color:#fff}.mduy-lock-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.mduy-lock-head h2{margin:0;font-size:24px}.mduy-lock-kicker{margin:0 0 5px;color:#62eaff;font-size:10px;font-weight:900;letter-spacing:2px}.mduy-lock-head button{border:1px solid #4a5790;background:#151b37;color:#fff;border-radius:10px;width:36px;height:36px;font-size:24px;line-height:1}.mduy-lock-card>p{color:#bfc8e8;font-size:13px;line-height:1.65}.mduy-lock-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #343f70;background:#0d1430aa;border-radius:13px;margin-top:9px}.mduy-lock-step>span{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#ff5fcf,#716cff);font-weight:900}.mduy-lock-step strong,.mduy-lock-step small{display:block}.mduy-lock-step small{color:#929dc5;margin-top:3px;font-size:11px}.mduy-lock-primary,.mduy-lock-secondary{width:100%;margin-top:15px;border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}.mduy-lock-primary{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);color:#07101d;box-shadow:0 0 25px #45e7ff44}.mduy-lock-secondary{background:#202846;border:1px solid #56649c;color:#fff}.mduy-lock-status{text-align:center;min-height:18px;margin-bottom:0!important}.mduy-lock-status.error{color:#ff8da9}.mduy-lock-status.ok{color:#8dffd7}.mduy-lock-password{margin:13px 0 0;padding:12px;border:1px dashed #5cecff;border-radius:11px;text-align:center;font:900 20px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:2px;color:#fff;background:#071526}
+#mduy-lock[hidden]{display:none}.mduy-lock-card{width:min(460px,100%);border:1px solid #5967a5;border-radius:22px;padding:22px;background:linear-gradient(145deg,#111833,#28122f);box-shadow:0 25px 90px #000b,0 0 45px #8f6bff35;color:#fff}.mduy-lock-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.mduy-lock-head h2{margin:0;font-size:24px}.mduy-lock-kicker{margin:0 0 5px;color:#62eaff;font-size:10px;font-weight:900;letter-spacing:2px}.mduy-lock-head button{border:1px solid #4a5790;background:#151b37;color:#fff;border-radius:10px;width:36px;height:36px;font-size:24px;line-height:1}.mduy-lock-card>p{color:#bfc8e8;font-size:13px;line-height:1.65}.mduy-lock-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #343f70;background:#0d1430aa;border-radius:13px;margin-top:9px}.mduy-lock-step>span{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#ff5fcf,#716cff);font-weight:900}.mduy-lock-step strong,.mduy-lock-step small{display:block}.mduy-lock-step small{color:#929dc5;margin-top:3px;font-size:11px}.mduy-lock-primary,.mduy-lock-secondary{width:100%;margin-top:15px;border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}.mduy-lock-primary{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);color:#07101d;box-shadow:0 0 25px #45e7ff44}.mduy-lock-secondary{background:#202846;border:1px solid #56649c;color:#fff}.mduy-copy-hint{text-align:center!important;color:#67eaff!important;font-size:11px!important;margin:9px 0 0!important;line-height:1.5!important}.mduy-lock-status{text-align:center;min-height:18px;margin-bottom:0!important}.mduy-lock-status.error{color:#ff8da9}.mduy-lock-status.ok{color:#8dffd7}.mduy-lock-password{margin:13px 0 0;padding:12px;border:1px dashed #5cecff;border-radius:11px;text-align:center;font:900 20px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:2px;color:#fff;background:#071526}
 </style>
 
 
@@ -512,10 +512,11 @@ select,.fixed-value{min-height:38px;padding-top:8px;padding-bottom:8px;font-size
     <div id="mduy-lock" hidden role="dialog" aria-modal="true" aria-labelledby="mduy-lock-title">
       <div class="mduy-lock-card">
         <div class="mduy-lock-head"><div><p class="mduy-lock-kicker">AUTO MOD</p><h2 id="mduy-lock-title">MOD đã sẵn sàng</h2></div><button id="mduy-lock-close" type="button" aria-label="Đóng">×</button></div>
-        <p id="mduy-lock-text">File sẽ được khóa bằng mật khẩu riêng. Bấm bên dưới để lấy mật khẩu.</p>
-        <div class="mduy-lock-step"><span>1</span><div><strong>Đi qua Link4m</strong><small>Mở link kiếm tiền để nhận quyền lấy mật khẩu.</small></div></div>
-        <div class="mduy-lock-step"><span>2</span><div><strong>Nhận mật khẩu</strong><small>Mỗi file có mật khẩu ngẫu nhiên riêng.</small></div></div>
-        <button id="mduy-get-password" class="mduy-lock-primary" type="button">LẤY MẬT KHẨU</button>
+        <p id="mduy-lock-text">MOD đã tạo xong. Hãy sao chép link và mở bằng trình duyệt để vượt Link4m 1 lần, sau đó lấy file.</p>
+        <div class="mduy-lock-step"><span>1</span><div><strong>Sao chép link</strong><small>Copy link rồi mở bằng trình duyệt.</small></div></div>
+        <div class="mduy-lock-step"><span>2</span><div><strong>Vượt 1 lần để lấy file</strong><small>Sau khi vượt Link4m, bạn sẽ lấy được file MOD.</small></div></div>
+        <button id="mduy-get-password" class="mduy-lock-primary" type="button">SAO CHÉP LINK</button>
+        <p class="mduy-copy-hint">Copy link → mở bằng trình duyệt → vượt 1 lần để lấy file.</p>
         <button id="mduy-download-locked" class="mduy-lock-secondary" type="button" hidden>TẢI ZIP ĐÃ KHÓA</button>
         <p id="mduy-lock-status" class="mduy-lock-status" role="status" aria-live="polite"></p>
       </div>
@@ -1058,20 +1059,27 @@ self.onmessage=async event=>{
       return;
     }
     show(true);getBtn.hidden=false;dlBtn.hidden=true;
-    $('mduy-lock-title').textContent='MOD đã sẵn sàng';$('mduy-lock-text').textContent='File sẽ được khóa bằng mật khẩu riêng. Bấm bên dưới để lấy mật khẩu.';
+    $('mduy-lock-title').textContent='MOD đã sẵn sàng';$('mduy-lock-text').textContent='MOD đã tạo xong. Hãy sao chép link và mở bằng trình duyệt để vượt Link4m 1 lần, sau đó lấy file.';
     setStatus('Đang gửi MOD lên máy chủ…');
-    try{pendingJob=await createJob(version,packaged);setStatus('Đã tạo file khóa. Bấm “LẤY MẬT KHẨU”.','ok');}
+    try{pendingJob=await createJob(version,packaged);setStatus('Đã tạo file. Bấm “SAO CHÉP LINK”, rồi mở link bằng trình duyệt để vượt 1 lần.','ok');}
     catch(e){setStatus(e.message||'Không tạo được MOD.','error');pendingJob=null;throw e;}
   }
 
   getBtn?.addEventListener('click',async()=>{
     if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
-    getBtn.disabled=true;setStatus('Đang mở Link4m…');
+    const url=pendingJob.shortUrl;
+    if(!url)return setStatus('Backend chưa trả về link Link4m.','error');
     try{
-      const url=pendingJob.shortUrl;
-      if(!url)throw Error('Backend chưa trả về Link4m.');
-      window.location.href=url;
-    }catch(e){setStatus(e.message||'Không mở được Link4m.','error');getBtn.disabled=false;}
+      await navigator.clipboard.writeText(url);
+      getBtn.textContent='ĐÃ SAO CHÉP LINK ✓';
+      setStatus('Đã copy link. Mở bằng trình duyệt và vượt Link4m 1 lần để lấy file.','ok');
+      setTimeout(()=>{getBtn.textContent='SAO CHÉP LINK';},2200);
+    }catch(e){
+      const ta=document.createElement('textarea');ta.value=url;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();
+      let ok=false;try{ok=document.execCommand('copy')}catch{} ta.remove();
+      if(ok){getBtn.textContent='ĐÃ SAO CHÉP LINK ✓';setStatus('Đã copy link. Mở bằng trình duyệt và vượt Link4m 1 lần để lấy file.','ok');setTimeout(()=>{getBtn.textContent='SAO CHÉP LINK';},2200);}
+      else setStatus('Không thể tự copy. Hãy giữ link và sao chép thủ công.','error');
+    }
   });
   dlBtn?.addEventListener('click',async()=>{const url=dlBtn.dataset.url;if(!url)return;if(dlBtn.disabled)return;dlBtn.disabled=true;setStatus('Đang tải ZIP đã khóa…');try{const r=await fetch(url);if(!r.ok)throw Error('Không tải được ZIP.');saveFile(await r.blob(),pendingName||'MDUY-MOD.zip');setStatus('Đã tải ZIP.','ok');}catch(e){setStatus(e.message||'Không tải được ZIP.','error');}finally{dlBtn.disabled=false;}});
 
