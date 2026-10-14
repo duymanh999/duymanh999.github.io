@@ -858,30 +858,38 @@ self.onmessage=async event=>{
     if(!r.ok)throw Error(data.error||'Backend không tạo được MOD.');
     if(!data.id||!data.downloadUrl)throw Error('Backend chưa trả về link tải file.');
     if(Number.isFinite(Number(data.usesRemaining))) updateKeyStatus(Number(data.usesRemaining));
-    return {id:data.id,shortUrl:data.shortUrl||'',name:packaged.name,downloadUrl:data.downloadUrl};
+    return {id:data.id,shortUrl:data.shortUrl||'',directDownload:!!data.directDownload,name:packaged.name,downloadUrl:data.downloadUrl};
   }
 
   async function begin(packaged){
     show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';
     getBtn.hidden=true;copyBtn.hidden=true;dlBtn.hidden=true;
     $('mduy-lock-title').textContent='MOD đã sẵn sàng';
-    $('mduy-lock-text').textContent='Tạo MOD thành công. Bạn có thể tải ZIP trực tiếp, không cần qua Link4m.';
     setStatus('Đang lưu file MOD…');
     try{
       pendingJob=await createLocked(packaged);
       dlBtn.dataset.url=pendingJob.downloadUrl;
-      dlBtn.hidden=false;
-      setStatus('Đã tạo MOD thành công. Nhấn TẢI ZIP để tải trực tiếp.','ok');
+      if(pendingJob.directDownload){
+        $('mduy-lock-text').textContent='Key hợp lệ. Bạn có thể tải ZIP trực tiếp, không cần qua Link4m.';
+        getBtn.hidden=true;copyBtn.hidden=true;dlBtn.hidden=false;
+        setStatus('Đã tạo MOD thành công. Nhấn TẢI ZIP TRỰC TIẾP.','ok');
+      }else{
+        $('mduy-lock-text').textContent='MOD đã tạo xong. Bấm nút bên dưới để đi qua Link4m rồi tải ZIP.';
+        getBtn.hidden=false;copyBtn.hidden=false;dlBtn.hidden=true;
+        setStatus('Đã tạo MOD thành công. Tiếp tục qua Link4m để tải.','ok');
+      }
     }catch(e){setStatus(e.message||'Không tạo được MOD.','error');pendingJob=null;}
   }
 
   getBtn?.addEventListener('click',()=>{
     if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
-    // Mở đúng shortUrl do backend Link4m trả về.
+    if(pendingJob.directDownload)return setStatus('Key của bạn được tải ZIP trực tiếp bằng nút TẢI ZIP.','ok');
+    if(!pendingJob.shortUrl)return setStatus('Link4m chưa sẵn sàng. Hãy thử lại.','error');
     window.location.href=pendingJob.shortUrl;
   });
 
   copyBtn?.addEventListener('click',async()=>{
+    if(pendingJob?.directDownload)return setStatus('Key hợp lệ: không cần Link4m. Hãy dùng nút TẢI ZIP TRỰC TIẾP.','ok');
     if(!pendingJob?.shortUrl)return setStatus('Link4m chưa sẵn sàng. Hãy thử lại.','error');
     const shortUrl=pendingJob.shortUrl;
     try{
