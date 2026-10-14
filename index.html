@@ -256,7 +256,7 @@ THE SOFTWARE.
   <h2 style="font-size:17px">🔑 KÍCH HOẠT KEY</h2>
   <p class="mp-muted">Nhập key bạn đã nhận sau khi mua.</p>
   <form id="mduy-key-form">
-    <div class="mp-keyrow"><input id="mduy-key-input" type="text" autocomplete="off" placeholder="Nhập key của bạn..." aria-label="Nhập key" required><button class="mp-btn" type="submit">Kiểm tra key</button></div>
+    <div class="mp-keyrow"><input id="mduy-key-input" type="text" autocomplete="off" placeholder="Nhập key của bạn..." aria-label="Nhập key" required><button class="mp-btn" id="mduy-check-key-button" type="button">Kiểm tra key</button></div>
   </form>
   <p class="mp-note" id="mduy-key-status" role="status">Hệ thống xác minh key chưa được kết nối. Vui lòng hoàn tất backend trước khi sử dụng key thật.</p>
   <p class="mp-note">Mỗi gói được liên hệ qua Telegram hoặc Zalo để nhận key. Không nhập thông tin thanh toán nhạy cảm tại đây.</p>
@@ -1021,41 +1021,63 @@ self.onmessage=async event=>{
 </div>
 <script id="mduy-purchase-added-js">
 (() => {
-  const telegram = 'https://t.me/manhduy981';
+  const BACKEND = 'https://mduy-mod-backend.onrender.com';
+  const $ = id => document.getElementById(id);
+  const showQr = $('mduy-show-zalo-qr');
+  const closeQr = $('mduy-close-zalo-qr');
+  const modal = $('mduy-qr-modal');
+  showQr?.addEventListener('click', () => { if (modal) modal.hidden = false; });
+  closeQr?.addEventListener('click', () => { if (modal) modal.hidden = true; });
+  modal?.addEventListener('click', event => { if (event.target === modal) modal.hidden = true; });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && modal) modal.hidden = true; });
+
   document.querySelectorAll('[data-mp-package]').forEach(button => {
-    button.addEventListener('click', () => {
-      const packageName = button.getAttribute('data-mp-package') || 'Gói mua lượt MOD';
-      const message = 'Xin chào, tôi muốn mua ' + packageName + '.';
-      window.open(telegram, '_blank', 'noopener');
-    });
+    button.addEventListener('click', () => { window.open('https://t.me/manhduy981', '_blank', 'noopener'); });
   });
-  const modal = document.getElementById('mduy-qr-modal');
-  document.getElementById('mduy-show-zalo-qr').addEventListener('click', () => { modal.hidden = false; });
-  document.getElementById('mduy-close-zalo-qr').addEventListener('click', () => { modal.hidden = true; });
-  modal.addEventListener('click', event => { if (event.target === modal) modal.hidden = true; });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape') modal.hidden = true; });
-  document.getElementById('mduy-key-form').addEventListener('submit', async event => {
-    event.preventDefault();
-    const status = document.getElementById('mduy-key-status');
-    const key = document.getElementById('mduy-key-input').value.trim();
-    if (!key) { status.textContent = 'Vui lòng nhập key.'; return; }
-    status.textContent = 'Đang kiểm tra key...';
+
+  const checkButton = $('mduy-check-key-button');
+  const input = $('mduy-key-input');
+  const status = $('mduy-key-status');
+  async function checkKey() {
+    const key = (input?.value || '').trim();
+    if (!status) return;
+    if (!key) { status.textContent = 'Vui lòng nhập key.'; status.style.color = '#ff8eac'; return; }
+    checkButton && (checkButton.disabled = true);
+    status.textContent = 'Đang kiểm tra key…';
+    status.style.color = '#ffffff';
     try {
-      const response = await fetch('https://mduy-mod-backend.onrender.com/api/keys/validate', {
+      const response = await fetch(BACKEND + '/api/keys/validate', {
         method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({key})
       });
       const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data.valid) throw new Error(data.error || 'Key không hợp lệ.');
+      if (!response.ok || !data.valid) throw new Error(data.error || `Lỗi kiểm tra key (HTTP ${response.status}).`);
       localStorage.setItem('mduy-access-key', key);
-      status.textContent = `✅ Key hợp lệ! Bạn còn ${data.usesRemaining} lượt MOD. Có thể tạo MOD.`;
+      status.textContent = `✅ Key hợp lệ! Bạn còn ${data.usesRemaining} lượt MOD.`;
       status.style.color = '#65ffd0';
-    } catch (error) { localStorage.removeItem('mduy-access-key'); status.textContent = error.message || 'Không kiểm tra được key.'; status.style.color = '#ff8eac'; }
-  });
+    } catch (error) {
+      localStorage.removeItem('mduy-access-key');
+      status.textContent = error.message || 'Không kết nối được máy chủ kiểm tra key.';
+      status.style.color = '#ff8eac';
+    } finally { if (checkButton) checkButton.disabled = false; }
+  }
+  checkButton?.addEventListener('click', checkKey);
+  // Keep Enter-key submission from reloading the page if browser event handling changes.
+  $('mduy-key-form')?.addEventListener('submit', event => { event.preventDefault(); checkKey(); });
+
   const savedKey = localStorage.getItem('mduy-access-key');
-  if (savedKey) {
-    fetch('https://mduy-mod-backend.onrender.com/api/keys/validate', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:savedKey})})
-      .then(async r => { const d = await r.json().catch(()=>({})); if(!r.ok || !d.valid) throw new Error(d.error || 'Key không hợp lệ.'); const status=document.getElementById('mduy-key-status'); if(status){status.textContent=`✅ Key hợp lệ! Bạn còn ${d.usesRemaining} lượt MOD.`;status.style.color='#65ffd0';} })
-      .catch(e => { localStorage.removeItem('mduy-access-key'); const status=document.getElementById('mduy-key-status'); if(status){status.textContent=e.message || 'Key không hợp lệ.';status.style.color='#ff8eac';} });
+  if (savedKey && status) {
+    fetch(BACKEND + '/api/keys/validate', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({key:savedKey})})
+      .then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.valid) throw new Error(data.error || `Key không hợp lệ (HTTP ${response.status}).`);
+        status.textContent = `✅ Key hợp lệ! Bạn còn ${data.usesRemaining} lượt MOD.`;
+        status.style.color = '#65ffd0';
+      })
+      .catch(error => {
+        localStorage.removeItem('mduy-access-key');
+        status.textContent = error.message || 'Không kiểm tra được key.';
+        status.style.color = '#ff8eac';
+      });
   }
 })();
 </script>
