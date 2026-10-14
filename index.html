@@ -236,6 +236,33 @@ THE SOFTWARE.
       <div><p class="eyebrow">Tuỳ chọn đồ</p><h1 id="fish-mod-turns" aria-live="polite">AUTO MOD</h1></div>
       <span class="count">Android · Free Fire thường</span>
     </div>
+    <section id="mduy-purchase" class="shell" aria-label="Mua lượt MOD bằng key">
+  <p class="mduy-extra-turns-note">Nếu bạn thấy 1 ngày 3 lượt MOD không đủ</p>
+  <details id="mduy-purchase-details">
+    <summary class="mduy-purchase-summary"><span class="mduy-summary-title">🎟️ BẠN CÓ THỂ MUA LƯỢT MOD</span><span class="mduy-summary-action">Ấn vào đây <span aria-hidden="true">⌄</span></span></summary>
+    <div class="mduy-purchase-content">
+  <h2>🎟️ MUA LƯỢT MOD</h2>
+  <p class="mp-muted">Chọn gói lượt bạn muốn mua, sau đó nhắn tin để nhận key.</p>
+  <div class="mp-packages">
+    <div class="mp-package"><strong>50 lượt MOD</strong><span>50.000đ</span><button class="mp-btn" type="button" data-mp-package="50 lượt MOD - 50.000đ">MUA GÓI</button></div>
+    <div class="mp-package"><strong>100 lượt MOD</strong><span>100.000đ</span><button class="mp-btn" type="button" data-mp-package="100 lượt MOD - 100.000đ">MUA GÓI</button></div>
+    <div class="mp-package"><strong>200 lượt MOD</strong><span>150.000đ</span><button class="mp-btn" type="button" data-mp-package="200 lượt MOD - 150.000đ">MUA GÓI</button></div>
+  </div>
+  <div class="mp-contact">
+    <button class="mp-btn" id="mduy-show-zalo-qr" type="button">💬 Liên hệ Zalo (mã QR)</button>
+    <a class="mp-btn" id="mduy-telegram-buy" href="https://t.me/manhduy981" target="_blank" rel="noopener noreferrer">✈️ Mua key qua Telegram</a>
+  </div>
+  <div style="height:1px;background:#343b68;margin:20px 0"></div>
+  <h2 style="font-size:17px">🔑 KÍCH HOẠT KEY</h2>
+  <p class="mp-muted">Nhập key bạn đã nhận sau khi mua.</p>
+  <form id="mduy-key-form">
+    <div class="mp-keyrow"><input id="mduy-key-input" type="text" autocomplete="off" placeholder="Nhập key của bạn..." aria-label="Nhập key" required><button class="mp-btn" type="submit">Kiểm tra key</button></div>
+  </form>
+  <p class="mp-note" id="mduy-key-status" role="status">Hệ thống xác minh key chưa được kết nối. Vui lòng hoàn tất backend trước khi sử dụng key thật.</p>
+  <p class="mp-note">Mỗi gói được liên hệ qua Telegram hoặc Zalo để nhận key. Không nhập thông tin thanh toán nhạy cảm tại đây.</p>
+    </div>
+  </details>
+</section>
     <main class="workspace" id="wardrobe-workspace">
       
       <section class="stage" aria-label="Xem trước nhân vật Alok">
@@ -934,28 +961,44 @@ self.onmessage=async event=>{
 #mduy-qr-modal[hidden]{display:none}.mduy-qr-card{width:min(380px,100%);padding:20px;border:1px solid #5967a5;border-radius:18px;background:#11152a;text-align:center;color:#fff}
 .mduy-qr-card img{display:block;width:min(100%,300px);height:auto;margin:14px auto;border-radius:8px;background:#fff}.mduy-qr-card p{color:#aeb7dc;font-size:12px}.mduy-qr-card button{border:1px solid #515b9b;border-radius:10px;padding:10px 16px;background:#202846;color:#fff}
 @media(max-width:600px){#mduy-purchase{padding:16px}#mduy-purchase .mp-packages{grid-template-columns:1fr}#mduy-purchase .mp-package{display:grid;grid-template-columns:1fr auto;align-items:center;text-align:left;gap:2px 10px}#mduy-purchase .mp-package strong,#mduy-purchase .mp-package span{grid-column:1}#mduy-purchase .mp-package .mp-btn{grid-column:2;grid-row:1/3;width:auto}#mduy-purchase .mp-keyrow{flex-direction:column}}
-</style>
-<section id="mduy-purchase" class="shell" aria-label="Mua lượt MOD bằng key">
-  <h2>🎟️ MUA LƯỢT MOD</h2>
-  <p class="mp-muted">Chọn gói lượt bạn muốn mua, sau đó nhắn tin để nhận key.</p>
-  <div class="mp-packages">
-    <div class="mp-package"><strong>50 lượt MOD</strong><span>50.000đ</span><button class="mp-btn" type="button" data-mp-package="50 lượt MOD - 50.000đ">MUA GÓI</button></div>
-    <div class="mp-package"><strong>100 lượt MOD</strong><span>100.000đ</span><button class="mp-btn" type="button" data-mp-package="100 lượt MOD - 100.000đ">MUA GÓI</button></div>
-    <div class="mp-package"><strong>200 lượt MOD</strong><span>150.000đ</span><button class="mp-btn" type="button" data-mp-package="200 lượt MOD - 150.000đ">MUA GÓI</button></div>
-  </div>
-  <div class="mp-contact">
-    <button class="mp-btn" id="mduy-show-zalo-qr" type="button">💬 Liên hệ Zalo (mã QR)</button>
-    <a class="mp-btn" id="mduy-telegram-buy" href="https://t.me/manhduy981" target="_blank" rel="noopener noreferrer">✈️ Mua key qua Telegram</a>
-  </div>
-  <div style="height:1px;background:#343b68;margin:20px 0"></div>
-  <h2 style="font-size:17px">🔑 KÍCH HOẠT KEY</h2>
-  <p class="mp-muted">Nhập key bạn đã nhận sau khi mua.</p>
-  <form id="mduy-key-form">
-    <div class="mp-keyrow"><input id="mduy-key-input" type="text" autocomplete="off" placeholder="Nhập key của bạn..." aria-label="Nhập key" required><button class="mp-btn" type="submit">Kiểm tra key</button></div>
-  </form>
-  <p class="mp-note" id="mduy-key-status" role="status">Hệ thống xác minh key chưa được kết nối. Vui lòng hoàn tất backend trước khi sử dụng key thật.</p>
-  <p class="mp-note">Mỗi gói được liên hệ qua Telegram hoặc Zalo để nhận key. Không nhập thông tin thanh toán nhạy cảm tại đây.</p>
-</section>
+
+/* Compact purchase/key panel placed directly under AUTO MOD */
+#mduy-purchase{margin:10px 0 14px;padding:12px;border-radius:14px;box-shadow:0 8px 24px #0006}
+#mduy-purchase h2{font-size:15px;margin:0 0 8px}
+#mduy-purchase .mp-muted{font-size:11px;line-height:1.4;margin:0 0 9px}
+#mduy-purchase .mp-packages{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+#mduy-purchase .mp-package{padding:8px 5px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-width:0}
+#mduy-purchase .mp-package strong{font-size:11px;line-height:1.25}
+#mduy-purchase .mp-package span{font-size:11px;margin:0 0 3px}
+#mduy-purchase .mp-package .mp-btn{width:100%;font-size:10px;padding:7px 2px;border-radius:8px}
+#mduy-purchase .mp-contact{gap:6px;margin-top:8px}
+#mduy-purchase .mp-contact .mp-btn{flex:1;min-width:0;padding:8px 6px;font-size:11px}
+#mduy-purchase .mp-keyrow{gap:6px;margin-top:6px;align-items:stretch}
+#mduy-purchase input{padding:10px 9px;font-size:12px;border-radius:9px}
+#mduy-purchase #mduy-key-form .mp-btn{padding:8px 9px;font-size:11px;white-space:nowrap}
+#mduy-purchase .mp-note{font-size:10px;line-height:1.35;margin-top:6px}
+#mduy-purchase .mp-key-divider{height:1px;background:#343b68;margin:10px 0}
+@media(max-width:600px){
+ #mduy-purchase{padding:10px;margin:8px 0 12px}
+ #mduy-purchase .mp-packages{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ #mduy-purchase .mp-package{display:flex;gap:4px;padding:7px 4px;text-align:center}
+ #mduy-purchase .mp-package strong,#mduy-purchase .mp-package span{grid-column:auto}
+ #mduy-purchase .mp-package .mp-btn{grid-column:auto;grid-row:auto;width:100%}
+ #mduy-purchase .mp-keyrow{flex-direction:row}
+}
+@media(max-width:360px){#mduy-purchase .mp-contact .mp-btn{font-size:10px;padding:7px 3px}#mduy-purchase .mp-package strong{font-size:10px}#mduy-purchase #mduy-key-form .mp-btn{font-size:10px;padding:7px 6px}}
+/* Collapsed purchase panel: only one compact invitation is visible initially. */
+#mduy-purchase{padding:0!important;border-radius:13px!important;overflow:hidden}
+#mduy-purchase #mduy-purchase-details{width:100%}
+#mduy-purchase .mduy-purchase-summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:linear-gradient(110deg,#192044,#301640);color:#fff;font-weight:800;border:1px solid #4b5794;border-radius:12px;min-height:46px}
+#mduy-purchase .mduy-purchase-summary::-webkit-details-marker{display:none}
+#mduy-purchase .mduy-summary-title{font-size:12px;line-height:1.3}
+#mduy-purchase .mduy-summary-action{font-size:11px;color:#65ecff;white-space:nowrap}
+#mduy-purchase details[open] .mduy-purchase-summary{border-radius:12px 12px 0 0;border-bottom-color:#343b68}
+#mduy-purchase .mduy-purchase-content{padding:12px}
+.mduy-extra-turns-note{font-size:11px;line-height:1.45;color:#65ecff;background:#101a34;border:1px solid #3e5485;border-radius:9px;padding:8px 10px;margin:0 0 10px;text-align:center}
+
+
 <div id="mduy-qr-modal" hidden role="dialog" aria-modal="true" aria-labelledby="mduy-qr-title">
   <div class="mduy-qr-card"><h2 id="mduy-qr-title">Zalo — Hoàng Mạnh Duy</h2>
     <p>Quét mã QR bằng ứng dụng Zalo để liên hệ.</p>
