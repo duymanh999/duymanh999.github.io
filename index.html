@@ -833,6 +833,7 @@ self.onmessage=async event=>{
   const BACKEND = 'https://mduy-mod-backend.onrender.com';
   const $ = id => document.getElementById(id);
   const modal=$('mduy-lock'), getBtn=$('mduy-get-password'), copyBtn=$('mduy-copy-link4m'), dlBtn=$('mduy-download-locked'), closeBtn=$('mduy-lock-close'), status=$('mduy-lock-status');
+  if(dlBtn) dlBtn.textContent='TẢI ZIP TRỰC TIẾP';
   let pendingJob=null, pendingName='MDUY-MOD.zip';
 
   const show=(v=true)=>{if(!modal)return;modal.hidden=!v;if(v)status.textContent='';};
@@ -848,25 +849,29 @@ self.onmessage=async event=>{
   };
   const saveFile=(bytes,name)=>{const blob=bytes instanceof Blob?bytes:new Blob([bytes],{type:'application/zip'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);};
   const packageOne=async(version,bytes)=>window.alokPackageDownload(bytes,version);
+  function updateKeyStatus(uses){const el=document.getElementById('mduy-key-status');if(el)el.textContent=uses>0?`Key hợp lệ! Bạn còn ${uses} lượt MOD.`:'Key đã hết lượt MOD.';}
 
   async function createLocked(packaged){
     const zipBase64=bytesToBase64(packaged.bytes);
     const r=await fetch(BACKEND+'/api/mod/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({zipBase64,filename:packaged.name,key:(localStorage.getItem('mduy-access-key')||'')})});
     const data=await r.json().catch(()=>({}));
     if(!r.ok)throw Error(data.error||'Backend không tạo được MOD.');
-    if(!data.id||!data.shortUrl)throw Error('Backend chưa trả về Link4m.');
-    return {id:data.id,shortUrl:data.shortUrl,name:packaged.name,downloadUrl:data.downloadUrl||`${BACKEND}/api/mod/download/${encodeURIComponent(data.id)}`};
+    if(!data.id||!data.downloadUrl)throw Error('Backend chưa trả về link tải file.');
+    if(Number.isFinite(Number(data.usesRemaining))) updateKeyStatus(Number(data.usesRemaining));
+    return {id:data.id,shortUrl:data.shortUrl||'',name:packaged.name,downloadUrl:data.downloadUrl};
   }
 
   async function begin(packaged){
-    show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';getBtn.hidden=false;copyBtn.hidden=true;dlBtn.hidden=true;
+    show(true);pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';
+    getBtn.hidden=true;copyBtn.hidden=true;dlBtn.hidden=true;
     $('mduy-lock-title').textContent='MOD đã sẵn sàng';
-    $('mduy-lock-text').textContent='ZIP đã được tạo. Bấm bên dưới để đi qua Link4m, sau đó tải file.';
-    setStatus('Đang tạo Link4m…');
+    $('mduy-lock-text').textContent='Tạo MOD thành công. Bạn có thể tải ZIP trực tiếp, không cần qua Link4m.';
+    setStatus('Đang lưu file MOD…');
     try{
       pendingJob=await createLocked(packaged);
-      copyBtn.hidden=false;
-      setStatus('Đã sẵn sàng. Bạn có thể đi qua Link4m hoặc sao chép link.','ok');
+      dlBtn.dataset.url=pendingJob.downloadUrl;
+      dlBtn.hidden=false;
+      setStatus('Đã tạo MOD thành công. Nhấn TẢI ZIP để tải trực tiếp.','ok');
     }catch(e){setStatus(e.message||'Không tạo được MOD.','error');pendingJob=null;}
   }
 
@@ -1034,9 +1039,16 @@ self.onmessage=async event=>{
       const data = await response.json().catch(() => ({}));
       if (!response.ok || !data.valid) throw new Error(data.error || 'Key không hợp lệ.');
       localStorage.setItem('mduy-access-key', key);
-      status.textContent = `Key hợp lệ! Bạn còn ${data.usesRemaining} lượt. Có thể tạo MOD.`;
-    } catch (error) { localStorage.removeItem('mduy-access-key'); status.textContent = error.message || 'Không kiểm tra được key.'; }
+      status.textContent = `✅ Key hợp lệ! Bạn còn ${data.usesRemaining} lượt MOD. Có thể tạo MOD.`;
+      status.style.color = '#65ffd0';
+    } catch (error) { localStorage.removeItem('mduy-access-key'); status.textContent = error.message || 'Không kiểm tra được key.'; status.style.color = '#ff8eac'; }
   });
+  const savedKey = localStorage.getItem('mduy-access-key');
+  if (savedKey) {
+    fetch('https://mduy-mod-backend.onrender.com/api/keys/validate', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:savedKey})})
+      .then(async r => { const d = await r.json().catch(()=>({})); if(!r.ok || !d.valid) throw new Error(d.error || 'Key không hợp lệ.'); const status=document.getElementById('mduy-key-status'); if(status){status.textContent=`✅ Key hợp lệ! Bạn còn ${d.usesRemaining} lượt MOD.`;status.style.color='#65ffd0';} })
+      .catch(e => { localStorage.removeItem('mduy-access-key'); const status=document.getElementById('mduy-key-status'); if(status){status.textContent=e.message || 'Key không hợp lệ.';status.style.color='#ff8eac';} });
+  }
 })();
 </script>
 <!-- ===== END added purchase feature ===== -->
